@@ -7,6 +7,8 @@
 (load! +bindings)
 (load! +functions)
 (load! +latex)
+(load! +modeline)
+(load! +popups)
 
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
@@ -36,3 +38,24 @@
   :config
   (setq www-synonyms-key boy--synonyms-key))
 
+(def-package! ag
+  :defer t
+  :init
+  (setq ag-highlight-search t
+        ag-reuse-buffers t))
+
+(after! ibuffer
+  ;; nearly all of this is the default layout
+  (setq ibuffer-formats
+        '((mark modified read-only " "
+                (name 50 50 :left :elide) ; change: 30s were originally 18s
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename))))
+
+(set! :ein-notebook-dir "~/Documents/CASED/Development")

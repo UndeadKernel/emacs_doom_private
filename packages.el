@@ -4,4 +4,4 @@
 (package! goto-last-change)
 (package! resize-window)
 (package! www-synonyms)
-
+(package! ag)

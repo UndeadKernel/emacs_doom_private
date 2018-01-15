@@ -1,7 +1,23 @@
 ;;; modules/private/boy/+latex.el -*- lexical-binding: t; -*-
 
-(set! :latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
-(set! :latex-bibtex-dir "/home/boy/Documents/CASED/Papers")
+(after! latex
+  (set! :latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
+  (set! :latex-bibtex-dir "/home/boy/Documents/CASED/Papers"))
+
+  ;; Load the org table package
+(defvar +orgtbl-templates-dir
+  (expand-file-name "templates/" (file-name-directory load-file-name))
+  "The path to a directory of yasnippet folders to use for table templates.")
+(def-package! org-table ;; internal package
+  :commands (orgtbl-mode)
+  :init
+  (add-hook! LaTeX-mode #'orgtbl-mode)
+  :config
+  (when (featurep! :feature snippets)
+    (require 'yasnippet)
+    (map! :map orgtbl-mode-map
+          "C-c o s"  #'+boy/print-table-send-cmd
+          "C-c o r"  #'+boy/print-table-rcv-cmd)))
 
 ;; Change some fonts from the doom-one theme for the sections in LaTeX.
 (add-hook! LaTeX-mode

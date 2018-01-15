@@ -2,31 +2,38 @@
 
 (map!
  "M-x" 'execute-extended-command
+ "C-x C-b" 'ibuffer-list-buffers
  ;; My (boy) function bindings
  "M-n"           '+boy/down-scroll
  "M-p"           '+boy/up-scroll
  "M-d"           '+boy/delete-word
  "<M-backspace>" '+boy/backward-delete-word
+ "C-M-q"         '+boy/unfill-paragraph
  ;; Editor related bindings
- "C-a" '+boy/move-to-bol
+ ;"C-a" '+boy/move-to-bol
+ "C-a" #'doom/backward-to-bol-or-indent
+ "C-e" #'doom/forward-to-last-non-comment-or-eol
+ "SPC"                          #'doom/inflate-space-maybe
+ [remap delete-backward-char]   #'doom/deflate-space-maybe
+ [remap newline]                #'doom/newline-and-indent
  "C-s" 'swiper
  "C-r" 'swiper
  ;; Buffer related bindings
  "C-x b" 'persp-switch-to-buffer
  "C-x B" 'switch-to-buffer
- "C-x k" 'doom/kill-this-buffer
+ "C-x k" 'doom/kill-this-buffer-in-all-windows
  "C-S-<left>"  '+boy/window-move-left
  "C-S-<right>" '+boy/window-move-right
  "C-S-<up>"    '+boy/window-move-up
  "C-S-<down>"  '+boy/window-move-down
  ;; Switching windows
- "C-x p"   'doom/other-popup
+ "C-x p"   '+popup/other
  "C-x C-o" '+boy/switch-to-last-window
  "C-x O"   'switch-window-then-swap-buffer
  ;; Doom emacs bindings
  "C-c C-s" 'doom/open-scratch-buffer
- "C-`"     'doom/popup-toggle
- "C-~"     'doom/popup-raise
+ "C-`"     '+popup/toggle
+ "C-~"     '+popup/raise
  ;; Misc plugins
  "<f9>" '+neotree/toggle
  "C-=" 'er/expand-region
@@ -54,10 +61,9 @@
    "s" 'magit-status
    "i" '+vcs/git-browse-issues
    "b" '+vcs/git-browse)
-;; Bury popup buffers with only C-g
- (:after core-popups
-   (:map doom-popup-mode-map
-     "C-g" 'doom/popup-close-maybe))
+ ;; Bury popup buffers with only C-g
+ ;; (:map +popup-buffer-mode-map
+ ;;   "C-g" '+popup/close)
  ;; Working with windows, workgroups and stuff.
  ;;"<pause>" (λ! (doom/workgroup-load (concat wg-workgroup-directory doom-wg-perpetual)))
  (:prefix "C-c w"
@@ -85,6 +91,16 @@
    "8" (λ! (+workspace/switch-to 7))
    "9" (λ! (+workspace/switch-to 8))
    "0" '+workspace/switch-to-last)
+ ;; Restore common editing keys (and ESC) in minibuffer
+ (:map (minibuffer-local-map
+        minibuffer-local-ns-map
+        minibuffer-local-completion-map
+        minibuffer-local-must-match-map
+        minibuffer-local-isearch-map
+        read-expression-map)
+   "C-g" #'abort-recursive-edit
+   "C-a" #'move-beginning-of-line
+   "M-z" #'doom/minibuffer-undo)
  ;; Company mode and the like
  (:after company
    (:map company-active-map
@@ -134,8 +150,8 @@
    (:map c-mode-map
      "M-RET" 'srefactor-refactor-at-point))
  (:after help-mode
-   (:map help-map
-     "e" 'doom/popup-toggle-messages)
+   ;; (:map help-map
+   ;;   "e" 'doom/popup-toggle-messages)
    (:map help-mode-map
      "o" 'ace-link-help
      ">" 'help-go-forward
