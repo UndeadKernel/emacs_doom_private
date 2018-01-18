@@ -5,9 +5,6 @@
   (set! :latex-bibtex-dir "/home/boy/Documents/CASED/Papers"))
 
   ;; Load the org table package
-(defvar +orgtbl-templates-dir
-  (expand-file-name "templates/" (file-name-directory load-file-name))
-  "The path to a directory of yasnippet folders to use for table templates.")
 (def-package! org-table ;; internal package
   :commands (orgtbl-mode)
   :init
