@@ -77,4 +77,10 @@
   (sp-pair "[" nil :post-handlers '(("| " " "))
            :unless '(sp-point-before-word-p sp-point-before-same-p)))
 
+;; EIN config
 (set! :ein-notebook-dir "~/Documents/CASED/Development")
+(add-hook! ein:notebook-multilang-mode
+  (map! :map ein:notebook-mode-map
+        "M-p" #'+boy/up-scroll
+        "M-n" #'+boy/down-scroll))
+
