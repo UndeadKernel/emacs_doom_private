@@ -17,7 +17,8 @@
       scroll-step 1)
 
 ;; Backups
-(setq backup-by-copying t      ; No symbolic links
+(setq make-backup-files t
+      backup-by-copying t
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
