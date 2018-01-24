@@ -85,3 +85,8 @@
         "M-p" #'+boy/up-scroll
         "M-n" #'+boy/down-scroll))
 
+;; Magit config
+(after! magit
+  ;; Show differences at the word level when a hunk is selected.
+  (setq magit-diff-refine-hunk t))
+(add-hook! magit-mode (visual-line-mode +1))
