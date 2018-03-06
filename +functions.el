@@ -47,3 +47,18 @@ With argument, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
   (+boy/delete-word (- arg)))
+
+; Functions to easily toggle the recording of macros.
+(defun +boy/macro-on ()
+  "One-key keyboard macros: turn recording on."
+  (interactive)
+  (define-key global-map (this-command-keys)
+    '+boy/macro-off)
+  (start-kbd-macro nil))
+
+(defun +boy/macro-off ()
+  "One-key keyboard macros: turn recording off."
+  (interactive)
+  (define-key global-map (this-command-keys)
+    '+boy/macro-on)
+  (end-kbd-macro))

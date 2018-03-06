@@ -9,6 +9,8 @@
  "M-d"           '+boy/delete-word
  "<M-backspace>" '+boy/backward-delete-word
  "C-M-q"         '+boy/unfill-paragraph
+ "S-<f1>"        '+boy/macro-on
+ "<f1>"          'call-last-kbd-macro
  ;; Editor related bindings
  ;"C-a" '+boy/move-to-bol
  "C-a" #'doom/backward-to-bol-or-indent
