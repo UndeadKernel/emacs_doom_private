@@ -73,11 +73,9 @@
    "r" '+workspace/rename
    "c" '+workspace/new
    "k" '+workspace/delete
-   "s" '+workspace/save
-   "S" '+workspace/save-session
-   "l" '+workspace/load
-   "L" '+workspace/load-session
-   "o" 'doom/tab-kill-others
+   "s" '+workspace/save-session
+   "l" '+workspace/load-session
+   "o" 'doom/kill-other-buffers
    "u" 'winner-undo
    "U" 'winner-redo
    "p" '+workspace/switch-left
