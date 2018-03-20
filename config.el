@@ -39,7 +39,7 @@
 
 ;; Latex synonyms
 (def-package! www-synonyms
-  :if (s-present? boy--synonyms-key)
+  :if (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
   :commands (www-synonyms-insert-synonym www-synonyms-change-language)
   :config
   (setq www-synonyms-key boy--synonyms-key))
