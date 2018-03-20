@@ -12,12 +12,9 @@
  "S-<f1>"        '+boy/macro-on
  "<f1>"          'call-last-kbd-macro
  ;; Editor related bindings
- ;"C-a" '+boy/move-to-bol
- "C-a" #'doom/backward-to-bol-or-indent
- "C-e" #'doom/forward-to-last-non-comment-or-eol
- "SPC"                          #'doom/inflate-space-maybe
- [remap delete-backward-char]   #'doom/deflate-space-maybe
- [remap newline]                #'doom/newline-and-indent
+  "C-a" #'doom/backward-to-bol-or-indent
+ ;"C-e" #'doom/forward-to-last-non-comment-or-eol
+ [remap newline]                #'newline-and-indent
  "C-s" 'swiper
  "C-r" 'swiper
  ;; Buffer related bindings
@@ -188,7 +185,7 @@
      ;; Don't let Tab binding in my-bindings conflict with Tab in magit
      "<tab>" 'magit-section-toggle))
  (:after latex
-   (:when (s-present? boy--synonyms-key)
+   (:when (or (null boy--synonyms-key) (string= "" boy--synonyms-key))
      ("C-c s" 'www-synonyms-insert-synonym)))
  ;; (:after ein-notebooklist
  ;;   (:map ein:notebooklist-mode-map
