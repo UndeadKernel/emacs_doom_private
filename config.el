@@ -135,3 +135,9 @@
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ↴ "))
+
+(after! ivy
+  ;; Add a kill action to Ivy's buffer switching
+  (ivy-set-actions 'ivy-switch-buffer '(("k" kill-buffer "kill")))
+  ;; Add a kill action to DOOM's buffer switching
+  (ivy-set-actions '+ivy/switch-workspace-buffer '(("k" kill-buffer "kill"))))
