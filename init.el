@@ -7,10 +7,6 @@
       doom-font (font-spec :family "Fira Mono" :size 14)
       doom-variable-pitch-font (font-spec :family "Fira Sans")
       doom-unicode-font (font-spec :family "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "Fira Mono" :size 19)
+      doom-big-font (font-spec :family "Fira Mono" :size 19))
 
-      org-ellipsis " ▼ "
-      +org-dir "~/Documents/org/")
-
-
-
+(setq +org-dir "~/Documents/org/")
