@@ -29,6 +29,9 @@
 (add-hook! '(minibuffer-setup-hook doom-popup-mode-hook)
   (setq-local show-trailing-whitespace nil))
 
+;; Change the default key of persp-mode to avoid conflicts with projectile.
+(setq persp-keymap-prefix (kbd "C-c e"))
+
 ;; Show me where I made the last change in a document.
 (def-package! goto-last-change
   :commands goto-last-change)
