@@ -3,7 +3,7 @@
 (map!
  "M-x" 'execute-extended-command
  "C-x C-b" 'ibuffer-list-buffers
- ;; My (boy) function bindings
+ ;; My function bindings (requires my autoloads files)
  "M-n"           '+boy/down-scroll
  "M-p"           '+boy/up-scroll
  "M-d"           '+boy/delete-word
@@ -36,8 +36,11 @@
  ;; Misc plugins
  "<f9>" '+neotree/toggle
  "C-=" 'er/expand-region
- "C-c ." 'goto-last-change
+ "C-c ." 'goto-last-change ; requires package 'goto-last-change'
  "C-'" 'imenu-list-minor-mode
+ ;; Org capture
+ "C-c c" 'org-capture
+ "C-c C" 'org-capture-goto-target
  ;; Smart-forward
  "M-<up>" 'smart-up
  "M-<down>" 'smart-down
@@ -51,9 +54,9 @@
  "C-M-d" 'sp-splice-sexp
  ;; Company mode
  "<C-tab>" '+company/complete
-  ;; Counsel Bindings
+ ;; Counsel Bindings
  "C-h b" 'counsel-descbinds
-;; Repl Toggle
+ ;; Repl Toggle
  "C-c C-z" '+eval/open-repl
 ;; Magit/git bindings
  (:prefix "C-c m"
@@ -77,7 +80,7 @@
    "U" 'winner-redo
    "p" '+workspace/switch-left
    "n" '+workspace/switch-right
-   "h" 'resize-window
+   "h" 'resize-window ; requires package 'resize-window'
    "1" (λ! (+workspace/switch-to 0))
    "2" (λ! (+workspace/switch-to 1))
    "3" (λ! (+workspace/switch-to 2))
