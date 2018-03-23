@@ -8,5 +8,3 @@
       doom-variable-pitch-font (font-spec :family "Fira Sans")
       doom-unicode-font (font-spec :family "DejaVu Sans Mono")
       doom-big-font (font-spec :family "Fira Mono" :size 19))
-
-(setq +org-dir "~/Documents/org/")

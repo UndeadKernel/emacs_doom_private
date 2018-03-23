@@ -121,23 +121,9 @@
   (setq magit-diff-refine-hunk t))
 (add-hook! magit-mode (visual-line-mode +1))
 
-;; ORG config
-(after! org
-  ;; Face of keyword DONE (Green like strings)
-  (set-face-attribute 'org-done nil :foreground "#98be65")
-  ; Face of keyword TODO or [ ] (Purple like keywords)
-  (set-face-attribute 'org-todo nil :foreground "#c678dd")
-  ; Face of ellipsis symbol (Purple like keywords)
-  (set-face-attribute 'org-ellipsis nil :foreground "#c678dd")
-  ; Face of the entire headline of a DONE line
-  (set-face-attribute 'org-headline-done nil :foreground nil)
-  (setq org-tags-column -100 ; the column to the right to align tags
-        org-log-done 'time ; record the time when an element was marked done/checked
-        org-fontify-done-headline nil ; do not change the font of DONE items
-        org-ellipsis " ↴ "))
-
 (after! ivy
   ;; Add a kill action to Ivy's buffer switching
   (ivy-set-actions 'ivy-switch-buffer '(("k" kill-buffer "kill")))
   ;; Add a kill action to DOOM's buffer switching
   (ivy-set-actions '+ivy/switch-workspace-buffer '(("k" kill-buffer "kill"))))
+
