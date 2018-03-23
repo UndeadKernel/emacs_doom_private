@@ -3,6 +3,7 @@
 (defvar boy--synonyms-key ""
   "API key from http://thesaurus.altervista.org that gives us synonyms.")
 
+(load! +org)
 (load! +windows)
 (load! +bindings)
 (load! +functions)

@@ -19,10 +19,17 @@
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
-               '("p" "Pages"
+               '("P" "Check-out Pages"
                  table-line  ; type
                  (file "thesis.org") ; target
-                 "|%U|%^{pages}|%^{comment}|" ; template
-                 :prepend t ))) ; properties
+                 "|%U||XXXXXXXX|%^{pages}|%^{comment}|" ; template
+                 :prepend t )) ; properties
+
+    (add-to-list 'org-capture-templates
+               '("p" "Check-in Pages"
+                 table-line  ; type
+                 (file "thesis.org") ; target
+                 "|%U|XXXXXXXX||%^{pages}|%^{comment}|" ; template
+                 :prepend t )))
 
 
