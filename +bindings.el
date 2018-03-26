@@ -34,7 +34,7 @@
  "C-`"     '+popup/toggle
  "C-~"     '+popup/raise
  ;; Misc plugins
- "<f9>" '+neotree/toggle
+ "<f9>" '+neotree/open
  "C-=" 'er/expand-region
  "C-c ." 'goto-last-change ; requires package 'goto-last-change'
  "C-'" 'imenu-list-minor-mode
