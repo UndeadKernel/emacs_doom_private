@@ -40,7 +40,7 @@
  "C-'" 'imenu-list-minor-mode
  ;; Org capture
  "C-c c" 'org-capture
- "C-c C" 'org-capture-goto-target
+ "C-c C" (λ! (require 'org-capture) (call-interactively 'org-capture-goto-target))
  ;; Smart-forward
  "M-<up>" 'smart-up
  "M-<down>" 'smart-down

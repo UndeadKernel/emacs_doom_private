@@ -19,17 +19,34 @@
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
-               '("P" "Check-out Pages"
+               '("P" "Thesis Check-out Pages"
                  table-line  ; type
                  (file "thesis.org") ; target
                  "|%U||XXXXXXXX|%^{pages}|%^{comment}|" ; template
                  :prepend t )) ; properties
-
-    (add-to-list 'org-capture-templates
-               '("p" "Check-in Pages"
+  (add-to-list 'org-capture-templates
+               '("p" "Thesis Check-in Pages"
                  table-line  ; type
                  (file "thesis.org") ; target
                  "|%U|XXXXXXXX||%^{pages}|%^{comment}|" ; template
-                 :prepend t )))
+                 :prepend t )) ; properties
+  (add-to-list 'org-capture-templates
+               '("o" "Thesis TODO"
+                 entry  ; type
+                 (file+headline "thesis.org" "TODOs") ; target
+                 "* [ ] %?\n%i" ; template
+                 :prepend t :kill-buffer)) ; properties
+  (add-to-list 'org-capture-templates
+               '("f" "Thesis FIXME"
+                 entry  ; type
+                 (file+headline "thesis.org" "FIXMEs") ; target
+                 "* [ ] %?\n%i" ; template
+                 :prepend t :kill-buffer)) ; properties
+  (add-to-list 'org-capture-templates
+               '("e" "Thesis Note"
+                 entry  ; type
+                 (file+headline "thesis.org" "NOTEs") ; target
+                 "* %u %?\n%i" ; template
+                 :prepend t :kill-buffer)))
 
 
