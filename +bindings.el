@@ -188,7 +188,7 @@
      ;; Don't let Tab binding in my-bindings conflict with Tab in magit
      "<tab>" 'magit-section-toggle))
  (:after latex
-   (:when (or (null boy--synonyms-key) (string= "" boy--synonyms-key))
+   (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
      ("C-c s" 'www-synonyms-insert-synonym)))
  ;; (:after ein-notebooklist
  ;;   (:map ein:notebooklist-mode-map
