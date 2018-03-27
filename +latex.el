@@ -2,7 +2,11 @@
 
 (after! latex
   (set! :latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
-  (set! :latex-bibtex-dir "/home/boy/Documents/CASED/Papers"))
+  (set! :latex-bibtex-dir "/home/boy/Documents/CASED/Papers")
+  ;; if the babel language is german, set the quotes as if english
+  (add-hook 'TeX-language-de-hook
+            (lambda ()
+              (setq TeX-quote-language `("ngerman" "``" "''" ,TeX-quote-after-quote)))))
 
   ;; Load the org table package
 (def-package! org-table ;; internal package
