@@ -8,6 +8,9 @@
             (lambda ()
               (setq TeX-quote-language `("ngerman" "``" "''" ,TeX-quote-after-quote)))))
 
+;; Set the fill column to something large so that we can fold without problems.
+(add-hook! LaTeX-mode (set-fill-column 99999))
+
   ;; Load the org table package
 (def-package! org-table ;; internal package
   :commands (orgtbl-mode)
@@ -42,10 +45,15 @@
   (add-to-list 'TeX-fold-macro-spec-list '("[authors]" ("author")))
   (add-to-list 'TeX-fold-macro-spec-list '("[command {1}]" ("newcommand")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
-  (add-to-list 'TeX-fold-macro-spec-list '("[c]" ("citep" "citet")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[c]" ("citep" "citet" "parencite")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[side-note]" ("graffito")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[sbox {1}]" ("sbox")))
   ;; Custom folds for Environments
   (add-to-list 'TeX-fold-env-spec-list '("[figure]" ("figure")))
   (add-to-list 'TeX-fold-env-spec-list '("[table]" ("table")))
   (add-to-list 'TeX-fold-env-spec-list '("[acronyms]" ("acronym"))))
 
+;; Custom fontifications for commands that might appear in my LaTeX files
+(after! latex
+  (add-to-list 'font-latex-match-reference-keywords '("graffito" "{")))
