@@ -185,7 +185,7 @@
  ;; magit stuff
  (:after magit
    (:map magit-mode-map
-     ;; Don't let Tab binding in my-bindings conflict with Tab in magit
+     ;; Don't let Tab binding in my bindings conflict with Tab in magit
      "<tab>" 'magit-section-toggle))
  (:after latex
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))

@@ -132,3 +132,6 @@
   ;; Add a kill action to DOOM's buffer switching
   (ivy-set-actions '+ivy/switch-workspace-buffer '(("k" kill-buffer "kill"))))
 
+
+;; Reuse dired buffers
+(put 'dired-find-alternate-file 'disabled nil)
