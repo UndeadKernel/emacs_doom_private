@@ -42,6 +42,8 @@
   (add-to-list 'TeX-fold-macro-spec-list '("[authors]" ("author")))
   (add-to-list 'TeX-fold-macro-spec-list '("[command {1}]" ("newcommand")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[c]" ("citep" "citet")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
   ;; Custom folds for Environments
   (add-to-list 'TeX-fold-env-spec-list '("[figure]" ("figure")))
   (add-to-list 'TeX-fold-env-spec-list '("[table]" ("table")))
