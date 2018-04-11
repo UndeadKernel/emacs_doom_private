@@ -71,6 +71,7 @@
 ;; disable :unless predicates with (sp-pair "'" nil :unless nil)
 ;; disable :post-handlers with (sp-pair "{" nil :post-handlers nil)
 ;; ...or specific :post-handlers with (sp-pair "{" nil :post-handlers '(:rem ("| " "SPC")))
+
 (after! smartparens
   ;; Autopair quotes more conservatively; if I'm next to a word/before another
   ;; quote, I likely don't want another pair.
