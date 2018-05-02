@@ -48,6 +48,14 @@ This command does not push text to `kill-ring'."
   (interactive "p")
   (+boy/delete-word (- arg)))
 
+(defun +boy/delete-line ()
+  "Delete (not kill) the current line."
+  (interactive)
+  (save-excursion
+    (delete-region
+     (progn (forward-visible-line 0) (point))
+     (progn (forward-visible-line 1) (point)))))
+
 ; Functions to easily toggle the recording of macros.
 (defun +boy/macro-on ()
   "One-key keyboard macros: turn recording on."

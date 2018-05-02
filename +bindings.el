@@ -8,6 +8,7 @@
  "M-p"           '+boy/up-scroll
  "M-d"           '+boy/delete-word
  "<M-backspace>" '+boy/backward-delete-word
+ "C-k"           '+boy/delete-line
  "C-M-q"         '+boy/unfill-paragraph
  "S-<f1>"        '+boy/macro-on
  "<f1>"          'call-last-kbd-macro
