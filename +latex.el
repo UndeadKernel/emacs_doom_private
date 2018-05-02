@@ -38,6 +38,11 @@
   ;; In LaTeX mode, insert \( \) instead of $$ when pressing "$"
   (set (make-variable-buffer-local 'TeX-electric-math) (cons "\\(" "\\)")))
 
+(after! smartparens
+  ;; Smartparens for whatever reason treats the insertion of dollar signs and quotes as single characters.
+  (setq sp--special-self-insert-commands (delete `TeX-insert-dollar sp--special-self-insert-commands))
+  (setq sp--special-self-insert-commands (delete `TeX-insert-quote sp--special-self-insert-commands)))
+
 ;; Custom folding of some macros and commands I normally use
 (after! tex-fold
   ;; Set custom folds for Macros
@@ -47,6 +52,7 @@
   (add-to-list 'TeX-fold-macro-spec-list '("[command {1}]" ("newcommand")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
   (add-to-list 'TeX-fold-macro-spec-list '("[c]" ("citep" "citet" "parencite")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[{1}]" ("citeauthor")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
   (add-to-list 'TeX-fold-macro-spec-list '("[side-note]" ("graffito")))
   (add-to-list 'TeX-fold-macro-spec-list '("[sbox {1}]" ("sbox")))
@@ -58,3 +64,14 @@
 ;; Custom fontifications for commands that might appear in my LaTeX files
 (after! latex
   (add-to-list 'font-latex-match-reference-keywords '("graffito" "{")))
+
+(after! latex
+  ;; Macro to replace $$ with \(\)
+  (fset '+boy/replace-tex-math-sym
+   (lambda (&optional arg)
+     "Macro to replace $$ with \(\)."
+     (interactive "p")
+     (kmacro-exec-ring-item
+      (quote ([134217848 105 115 101 97 114 99 104 32 102 111 114 return
+               36 return 2 4 92 40 67108896 6 6 23 134217848 105 115 101 return
+               36 return backspace 25] 0 "%d")) arg))))
