@@ -15,9 +15,8 @@
  ;; Editor related bindings
   "C-a" #'doom/backward-to-bol-or-indent
  ;"C-e" #'doom/forward-to-last-non-comment-or-eol
- [remap newline]                #'newline-and-indent
- "C-s" 'swiper
- "C-r" 'swiper
+ [remap newline] #'newline-and-indent
+ "C-S-s" 'swiper
  ;; Buffer related bindings
  "C-x b" 'persp-switch-to-buffer
  "C-x B" 'switch-to-buffer
@@ -37,8 +36,8 @@
  ;; Misc plugins
  "<f9>" '+neotree/open
  "C-=" 'er/expand-region
- "C-c ." 'goto-last-change ; requires package 'goto-last-change'
- "C-'" 'imenu-list-minor-mode
+ "C-c ." 'goto-last-change ; requires private package 'goto-last-change'
+ "C-'" 'imenu-list-smart-toggle
  ;; Org capture
  "C-c c" 'org-capture
  "C-c C" (λ! (require 'org-capture) (call-interactively 'org-capture-goto-target))
@@ -81,7 +80,7 @@
    "U" 'winner-redo
    "p" '+workspace/switch-left
    "n" '+workspace/switch-right
-   "h" 'resize-window ; requires package 'resize-window'
+   "h" 'resize-window ; requires private package 'resize-window'
    "1" (λ! (+workspace/switch-to 0))
    "2" (λ! (+workspace/switch-to 1))
    "3" (λ! (+workspace/switch-to 2))
