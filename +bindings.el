@@ -190,8 +190,8 @@
  (:after latex
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
      ("C-c s" 'www-synonyms-insert-synonym)))
- ;; (:after ein-notebooklist
- ;;   (:map ein:notebooklist-mode-map
- ;;     "o" 'doom/ace-link-ein))
+ (:after ein:notebook-multilang
+   (:map ein:notebook-multilang-mode-map
+     "C-c h" #'+ein/hydra/body))
  )
 
