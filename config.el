@@ -1,18 +1,20 @@
 ;;; config.el --- The Configuration of the Boy
 
-(defvar boy--synonyms-key ""
+(defvar boy--synonyms-key "Hx7SZWK6jKOUKdh3M9zC"
   "API key from http://thesaurus.altervista.org that gives us synonyms.")
 
-(load! "+org")
-(load! "+windows")
 (load! "+bindings")
 (load! "+functions")
-(load! "+latex")
-(load! "+modeline")
+
 (load! "+popups")
 
+;; Configuration of DOOM lang
+(load! "+latex")
+(load! "+org")
 ;; Configuration of DOOM tools
 (load! "+tools")
+;; Configuration of DOOM ui
+(load! "+ui")
 
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
@@ -115,19 +117,6 @@
 
   ;; Makes `newline-and-indent' smarter when dealing with comments
   (advice-add #'newline-and-indent :around #'doom*newline-and-indent))
-
-;; EIN config
-(set! :ein-notebook-dir "~/Documents/CASED/Development")
-(add-hook! ein:notebook-multilang-mode
-  (map! :map ein:notebook-mode-map
-        "M-p" #'+boy/up-scroll
-        "M-n" #'+boy/down-scroll))
-
-;; Magit config
-(after! magit
-  ;; Show differences at the word level when a hunk is selected.
-  (setq magit-diff-refine-hunk t))
-(add-hook! magit-mode (visual-line-mode +1))
 
 (after! ivy
   ;; Add a kill action to Ivy's buffer switching
