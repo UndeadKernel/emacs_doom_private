@@ -56,8 +56,8 @@
 ;; Custom folding of some macros and commands I normally use
 (after! tex-fold
   ;; Set custom folds for Macros
-  (add-to-list 'TeX-fold-macro-spec-list '("{1}" ("ac" "acf" "title")))
-  (add-to-list 'TeX-fold-macro-spec-list '("{1}s" ("acp" "acfp")))
+  (add-to-list 'TeX-fold-macro-spec-list '("{1}" ("ac" "acf" "Ac" "Acf" "title")))
+  (add-to-list 'TeX-fold-macro-spec-list '("{1}s" ("acp" "acfp" "Acp" "Acfp")))
   (add-to-list 'TeX-fold-macro-spec-list '("[authors]" ("author")))
   (add-to-list 'TeX-fold-macro-spec-list '("[command {1}]" ("newcommand")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
