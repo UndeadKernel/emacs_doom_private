@@ -3,13 +3,16 @@
 (defvar boy--synonyms-key ""
   "API key from http://thesaurus.altervista.org that gives us synonyms.")
 
-(load! +org)
-(load! +windows)
-(load! +bindings)
-(load! +functions)
-(load! +latex)
-(load! +modeline)
-(load! +popups)
+(load! "+org")
+(load! "+windows")
+(load! "+bindings")
+(load! "+functions")
+(load! "+latex")
+(load! "+modeline")
+(load! "+popups")
+
+;; Configuration of DOOM tools
+(load! "+tools")
 
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
