@@ -8,6 +8,13 @@
             (lambda ()
               (setq TeX-quote-language `("ngerman" "``" "''" ,TeX-quote-after-quote)))))
 
+;; Do not spellcheck latex documents when opened, this takes a lot of time.
+(setq-hook! 'LaTeX-mode-hook +spellcheck-immediately nil)
+;; (add-hook! 'LaTeX-mode-hook
+;;   (require 'flyspell)
+;;   (set (make-variable-buffer-local 'flyspell-mode-hook)
+;;        (delq '+spellcheck|automatically flyspell-mode-hook)))
+
   ;; Load the org table package
 (def-package! org-table ;; internal package
   :commands (orgtbl-mode)
