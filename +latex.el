@@ -48,7 +48,10 @@
 (after! smartparens
   ;; Smartparens for whatever reason treats the insertion of dollar signs and quotes as single characters.
   (setq sp--special-self-insert-commands (delete `TeX-insert-dollar sp--special-self-insert-commands))
-  (setq sp--special-self-insert-commands (delete `TeX-insert-quote sp--special-self-insert-commands)))
+  (setq sp--special-self-insert-commands (delete `TeX-insert-quote sp--special-self-insert-commands))
+  ;; After selecting a region, we can wrap it in parenthesis or quotes.
+  (setq sp-autowrap-region t))
+
 
 ;; Custom folding of some macros and commands I normally use
 (after! tex-fold
