@@ -8,7 +8,7 @@
  "M-p"           '+boy/up-scroll
  "M-d"           '+boy/delete-word
  "<M-backspace>" '+boy/backward-delete-word
- "C-k"           '+boy/delete-line
+ "C-k"           '+boy/kill-line
  "C-M-q"         '+boy/unfill-paragraph
  "S-<f1>"        '+boy/macro-on
  "<f1>"          'call-last-kbd-macro
@@ -21,10 +21,14 @@
  "C-x b" 'persp-switch-to-buffer
  "C-x B" 'switch-to-buffer
  "C-x k" 'doom/kill-this-buffer-in-all-windows
- "C-S-<left>"  '+boy/window-move-left
- "C-S-<right>" '+boy/window-move-right
- "C-S-<up>"    '+boy/window-move-up
- "C-S-<down>"  '+boy/window-move-down
+ "C-<left>"  '+boy/window-move-left
+ "C-<right>" '+boy/window-move-right
+ "C-<up>"    '+boy/window-move-up
+ "C-<down>"  '+boy/window-move-down
+ "C-S-<left>"  '+boy/window-move-far-left
+ "C-S-<right>" '+boy/window-move-far-right
+ "C-S-<up>"    '+boy/window-move-very-top
+ "C-S-<down>"  '+boy/window-move-very-bottom
  ;; Switching windows
  "C-x p"   '+popup/other
  "C-x C-o" '+boy/switch-to-last-window
