@@ -12,9 +12,6 @@
 (setq-default mode-line-format nil)
 
 (doom! :feature
-       (popup            ; tame sudden yet inevitable temporary windows
-        +all             ; catch all popups that start with an asterix
-        +defaults)       ; default popup rules
       ;debugger          ; FIXME stepping through code, to help you add bugs
        eval              ; run code, run (also, repls)
       ;evil              ; come to the dark side, we have cookies
@@ -42,29 +39,35 @@
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        nav-flash         ; blink the current line after jumping
+       neotree           ; a project drawer, like NERDTree for vim
       ;evil-goggles      ; display visual hints when editing in evil
       ;unicode           ; extended unicode support for various languages
       ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
+       (popup            ; tame sudden yet inevitable temporary windows
+        +all             ; catch all popups that start with an asterix
+        +defaults)       ; default popup rules
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       (window-select +ace-window)  ; visually switch windows
+       (window-select +switch-window)  ; visually switch windows
+
+       :emacs
+       dired             ; making dired pretty [functional]
+       ediff             ; comparing files in Emacs
+       electric-indent   ; smarter, keyword-based electric-indent
+       eshell            ; a consistent, cross-platform shell (WIP)
+       imenu             ; an imenu sidebar and searchable code index
+       term              ; terminals in Emacs
 
        :tools
        ein
-       dired             ; making dired pretty [functional]
-       electric-indent   ; smarter, keyword-based electric-indent
-       eshell            ; a consistent, cross-platform shell (WIP)
        gist              ; interacting with github gists
-       imenu             ; an imenu sidebar and searchable code index
        impatient-mode    ; show off code over HTTP
       ;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        magit
-       neotree           ; a project drawer, like NERDTree for vim
        password-store    ; password manager for nerds
        pdf               ; pdf enhancements
       ;rgb
        rotate-text       ; cycle region at point between text candidates
-       term              ; terminals in Emacs
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
 
