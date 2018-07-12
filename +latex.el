@@ -56,6 +56,13 @@
 
 ;; Custom folding of some macros and commands I normally use
 (after! tex-fold
+  ;; Custom macro transformation functions
+  (defun +boy//latex-fold-autoref (arg)
+    "Extract text from ARG up until the first `:', capitalize, format and return it."
+    (let ((word (car (split-string arg ":" t))))
+      (if word
+          (concat (capitalize word) ". XX")
+        "Ref. XX")))
   ;; Set custom folds for Macros
   (add-to-list 'TeX-fold-macro-spec-list '("{1}" ("ac" "acf" "Ac" "Acf" "title")))
   (add-to-list 'TeX-fold-macro-spec-list '("{1}s" ("acp" "acfp" "Acp" "Acfp")))
@@ -63,10 +70,11 @@
   (add-to-list 'TeX-fold-macro-spec-list '("[command {1}]" ("newcommand")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
   (add-to-list 'TeX-fold-macro-spec-list '("[c]" ("citep" "citet" "parencite")))
-  (add-to-list 'TeX-fold-macro-spec-list '("[{1}]" ("citeauthor")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[{1}]" ("citeauthor" "textcite")))
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
   (add-to-list 'TeX-fold-macro-spec-list '("[side-note]" ("graffito")))
-  (add-to-list 'TeX-fold-macro-spec-list '("[sbox {1}]" ("sbox")))
+  (add-to-list 'TeX-fold-macro-spec-list '("[SBOX {1}]" ("sbox")))
+  (add-to-list 'TeX-fold-macro-spec-list '(+boy//latex-fold-autoref ("autoref" "Autoref")))
   ;; Custom folds for Environments
   (add-to-list 'TeX-fold-env-spec-list '("[figure]" ("figure")))
   (add-to-list 'TeX-fold-env-spec-list '("[table]" ("table")))
