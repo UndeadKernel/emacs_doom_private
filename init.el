@@ -7,7 +7,6 @@
       doom-unicode-font (font-spec :family "DejaVu Sans Mono")
       doom-big-font (font-spec :family "Fira Mono" :size 19))
 
-
 ;; Prevents the unstyled mode-line flash at startup
 (setq-default mode-line-format nil)
 
@@ -19,11 +18,9 @@
        (lookup           ; helps you navigate your code and documentation
         +devdocs         ; ...on devdocs.io online
         +docsets)        ; ...or in Dash docsets locally
-       services          ; TODO managing external services & code builders
        snippets          ; my elves. They type so I don't have to
        spellcheck        ; tasing you for misspelling mispelling
        syntax-checker    ; tasing you for every semicolon you forget
-       version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
@@ -42,32 +39,37 @@
        neotree           ; a project drawer, like NERDTree for vim
       ;evil-goggles      ; display visual hints when editing in evil
       ;unicode           ; extended unicode support for various languages
+      ;pretty-code       ; replace bits of code with pretty symbols
       ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
+       vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +switch-window)  ; visually switch windows
+
+       :editor
+      ;parinfer          ; turn lisp into python, sort of
+       rotate-text       ; cycle region at point between text candidates
 
        :emacs
        dired             ; making dired pretty [functional]
        ediff             ; comparing files in Emacs
-       electric-indent   ; smarter, keyword-based electric-indent
+       electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
+       vc                ; version-control and Emacs, sitting in a tree
 
        :tools
        ein
        gist              ; interacting with github gists
-       impatient-mode    ; show off code over HTTP
       ;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        magit
        password-store    ; password manager for nerds
        pdf               ; pdf enhancements
       ;rgb
-       rotate-text       ; cycle region at point between text candidates
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
 
@@ -100,7 +102,9 @@
         +capture         ; org-capture in and outside of Emacs
         +export          ; Exporting org to whatever you want
         +present         ; Emacs for presentations
-        +publish)        ; Emacs+Org as a static site generator
+        +publish
+        +right-popup
+        +ipython)        ; Emacs+Org as a static site generator
        ;; perl              ; write code no one else can comprehend
        ;; php               ; make php less awful to work with
        ;; plantuml          ; diagrams for confusing people more
@@ -124,4 +128,10 @@
       ;rss               ; emacs as an RSS reader
       ;twitter           ; twitter client https://twitter.com/vnought
       ;write             ; emacs as a word processor (latex + org + markdown)
-      )
+      ;pacmanfiles
+      pacfiles
+
+       :collab
+      ;floobits          ; peer programming for a price
+      ;impatient-mode    ; show off code over HTTP
+       )

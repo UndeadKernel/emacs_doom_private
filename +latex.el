@@ -1,14 +1,15 @@
 ;;; modules/private/boy/+latex.el -*- lexical-binding: t; -*-
 
 (after! latex
-  (set! :latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
-  (set! :latex-bibtex-dir "/home/boy/Documents/CASED/Papers")
+  (setq +latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
+  (setq +latex-bibtex-dir "/home/boy/Documents/CASED/Papers")
   ;; if the babel language is german, set the quotes as if english
   (add-hook 'TeX-language-de-hook
             (lambda ()
               (setq TeX-quote-language `("ngerman" "``" "''" ,TeX-quote-after-quote)))))
 
 ;; Do not spellcheck latex documents when opened, this takes a lot of time.
+;;(remove-hook 'flyspell-mode-hook #'+spellcheck|immediately)
 (setq-hook! 'LaTeX-mode-hook +spellcheck-immediately nil)
 ;; (add-hook! 'LaTeX-mode-hook
 ;;   (require 'flyspell)

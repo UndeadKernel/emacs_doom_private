@@ -127,3 +127,4 @@
 
 ;; Reuse dired buffers
 (put 'dired-find-alternate-file 'disabled nil)
+
