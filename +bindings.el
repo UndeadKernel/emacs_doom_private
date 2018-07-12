@@ -183,6 +183,7 @@
  ;; ivy stuff
  (:after ivy
    (:map ivy-minibuffer-map
+     "TAB" #'ivy-alt-done
      "C-g" #'keyboard-escape-quit))
  ;; magit stuff
  (:after magit
