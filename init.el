@@ -10,6 +10,10 @@
 ;; Prevents the unstyled mode-line flash at startup
 (setq-default mode-line-format nil)
 
+
+;; Select popup buffers by default
+(plist-put +popup-defaults :select t)
+
 (doom! :feature
       ;debugger          ; FIXME stepping through code, to help you add bugs
        eval              ; run code, run (also, repls)
