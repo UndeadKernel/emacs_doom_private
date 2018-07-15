@@ -15,6 +15,10 @@
 (load! "+tools")
 ;; Configuration of DOOM ui
 (load! "+ui")
+;; Config of DOOM feature
+(load! "+feature")
+;; Config of DOOM completion
+(load! "+completion")
 
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
@@ -118,13 +122,12 @@
   ;; Makes `newline-and-indent' smarter when dealing with comments
   (advice-add #'newline-and-indent :around #'doom*newline-and-indent))
 
-(after! ivy
-  ;; Add a kill action to Ivy's buffer switching
-  (ivy-set-actions 'ivy-switch-buffer '(("k" kill-buffer "kill")))
-  ;; Add a kill action to DOOM's buffer switching
-  (ivy-set-actions '+ivy/switch-workspace-buffer '(("k" kill-buffer "kill"))))
-
 
 ;; Reuse dired buffers
 (put 'dired-find-alternate-file 'disabled nil)
+
+(def-package! pacfiles-mode
+  :load-path "~/development/pacfiles-mode"
+  :init
+  (set-popup-rule! "\\*pacfiles.*" :ignore t))
 
