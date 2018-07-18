@@ -25,48 +25,48 @@
                  table-line  ; type
                  (file "thesis.org") ; target
                  "|%U||XXXXXXXX|%^{pages}|%^{comment}|" ; template
-                 :prepend t )) ; properties
+                 :prepend)) ; properties
   (add-to-list 'org-capture-templates
                '("hp" "Thesis Check-in Pages"
                  table-line  ; type
                  (file "thesis.org") ; target
                  "|%U|XXXXXXXX||%^{pages}|%^{comment}|" ; template
-                 :prepend t )) ; properties
+                 :prepend)) ; properties
   (add-to-list 'org-capture-templates
                '("ht" "Thesis TODO"
                  entry  ; type
                  (file+headline "thesis.org" "TODOs") ; target
                  "* [ ] %?\n%i" ; template
-                 :prepend t :kill-buffer)) ; properties
+                 :prepend :kill-buffer)) ; properties
   (add-to-list 'org-capture-templates
                '("hT" "Thesis TODO w/link"
                  entry  ; type
                  (file+headline "thesis.org" "TODOs") ; target
                  "* [ ] %?\nLINK: %l\n%i" ; template
-                 :prepend t :kill-buffer)) ; properties
+                 :prepend :kill-buffer)) ; properties
   (add-to-list 'org-capture-templates
                '("hf" "Thesis FIXME"
                  entry  ; type
                  (file+headline "thesis.org" "FIXMEs") ; target
                  "* [ ] %?\n%i" ; template
-                 :prepend t :kill-buffer)) ; properties
+                 :prepend :kill-buffer)) ; properties
   (add-to-list 'org-capture-templates
                '("hF" "Thesis FIXME w/link"
                  entry  ; type
                  (file+headline "thesis.org" "FIXMEs") ; target
                  "* [ ] %?\nLINK: %l\n%i" ; template
-                 :prepend t :kill-buffer)) ; properties
+                 :prepend :kill-buffer)) ; properties
   (add-to-list 'org-capture-templates
                '("hn" "Thesis Note"
                  entry  ; type
                  (file+headline "thesis.org" "NOTEs") ; target
                  "* %u %?\n%i" ; template
-                 :prepend t :kill-buffer))
+                 :prepend :kill-buffer))
   (add-to-list 'org-capture-templates
                '("hN" "Thesis Note w/link"
                  entry  ; type
                  (file+headline "thesis.org" "NOTEs") ; target
                  "* %u %?\nLINK: %l\n%i" ; template
-                 :prepend t :kill-buffer)))
+                 :prepend :kill-buffer)))
 
 
