@@ -12,14 +12,13 @@
 
 
 ;; Select popup buffers by default
-(defvar +popup-defaults
+(setq +popup-defaults
   (list :side   'bottom
         :height 0.16
         :width  40
         :quit   t
         :select t
-        :ttl    5)
-  "Default properties for popup rules defined with `set-popup-rule!'.")
+        :ttl    5))
 
 (doom! :feature
       ;debugger          ; FIXME stepping through code, to help you add bugs
