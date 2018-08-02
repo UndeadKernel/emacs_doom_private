@@ -1,8 +1,12 @@
 ;;; modules/private/boy/+latex.el -*- lexical-binding: t; -*-
 
+  ;; Choose pdf-tools as the first viewer to choose if available
+(setq +latex-viewers '(pdf-tools okular))
+(setq +latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
+
 (after! latex
-  (setq +latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
-  (setq +latex-bibtex-dir "/home/boy/Documents/CASED/Papers")
+  ;; Save without asking when invoking TeX commands
+  (setq TeX-save-query nil)
   ;; if the babel language is german, set the quotes as if english
   (add-hook 'TeX-language-de-hook
             (lambda ()
@@ -10,11 +14,7 @@
 
 ;; Do not spellcheck latex documents when opened, this takes a lot of time.
 ;;(remove-hook 'flyspell-mode-hook #'+spellcheck|immediately)
-(setq-hook! 'LaTeX-mode-hook +spellcheck-immediately nil)
-;; (add-hook! 'LaTeX-mode-hook
-;;   (require 'flyspell)
-;;   (set (make-variable-buffer-local 'flyspell-mode-hook)
-;;        (delq '+spellcheck|automatically flyspell-mode-hook)))
+(setq-hook! 'TeX-mode-hook +spellcheck-immediately nil)
 
   ;; Load the org table package
 (def-package! org-table ;; internal package
