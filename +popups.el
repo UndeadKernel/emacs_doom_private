@@ -2,6 +2,11 @@
 
 ;; Popup settings
 
+;; Select the IList buffer when it is shown
+(after! imenu-list
+  (set-popup-rule! "^\\*Ilist"
+    :side 'right :size 35 :quit nil :select t :ttl 0))
+
 ;; (set-popup-rule! "^\\*Ibuffer\\*"  :select t)
 
 ;; (after! magit
