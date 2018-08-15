@@ -1,5 +1,13 @@
 ;;; private/boy/+bindings.el -*- lexical-binding: t; -*-
 
+
+;; Set the projectile prefix
+(after! projectile
+  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
+
+;; Change the default key of persp-mode to avoid conflicts with projectile.
+(setq persp-keymap-prefix (kbd "C-c e"))
+
 (map!
  "M-x"           #'execute-extended-command
  "C-x C-b"       #'ibuffer-list-buffers
