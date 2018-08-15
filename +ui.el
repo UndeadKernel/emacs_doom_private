@@ -1,5 +1,12 @@
 ;;; +ui.el -*- lexical-binding: t; -*-
 
+;; Show trailing white spaces
+(setq show-trailing-whitespace t)
+
+;; Disable trailing whitespaces in the minibuffer
+(add-hook! '(minibuffer-setup-hook doom-popup-mode-hook)
+  (setq-local show-trailing-whitespace nil))
+
 ;; ;; From bitwalker's private config
 ;; (after! neotree
 ;;   ;; When switching to a file in the current project, expand the directory
