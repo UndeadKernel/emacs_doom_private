@@ -16,6 +16,9 @@
 ;;(remove-hook 'flyspell-mode-hook #'+spellcheck|immediately)
 (setq-hook! 'TeX-mode-hook +spellcheck-immediately nil)
 
+;; Enable whitespace mode with latex
+;(add-hook 'LaTeX-mode-hook #'whitespace-mode)
+
   ;; Load the org table package
 (def-package! org-table ;; internal package
   :commands (orgtbl-mode)
