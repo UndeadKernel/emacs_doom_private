@@ -3,9 +3,13 @@
 (defvar boy--synonyms-key ""
   "API key from http://thesaurus.altervista.org that gives us synonyms.")
 
+;; Private things others should not see ;D
+(load! "+private")
+;; Load personalized bindings
 (load! "+bindings")
+;; Personalized functions
 (load! "+functions")
-
+;; Anything that modifies the way popups spawn
 (load! "+popups")
 
 ;; Configuration of DOOM lang
@@ -19,9 +23,6 @@
 (load! "+feature")
 ;; Config of DOOM completion
 (load! "+completion")
-
-;; Private things others should not see ;D
-(load! "+private" :noerror t)
 
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
