@@ -1,6 +1,6 @@
 ;;; config.el --- The Configuration of the Boy
 
-(defvar boy--synonyms-key "Hx7SZWK6jKOUKdh3M9zC"
+(defvar boy--synonyms-key ""
   "API key from http://thesaurus.altervista.org that gives us synonyms.")
 
 (load! "+bindings")
