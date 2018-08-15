@@ -131,8 +131,4 @@
 ;; Reuse dired buffers
 (put 'dired-find-alternate-file 'disabled nil)
 
-(def-package! pacfiles-mode
-  :load-path "~/development/pacfiles-mode"
-  :init
-  (set-popup-rule! "\\*pacfiles.*" :ignore t))
 
