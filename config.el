@@ -34,13 +34,14 @@
       kept-old-versions 2
       version-control t)
 
+
+;; Choose hunspell as our spell checker
+(setq ispell-program-name "hunspell")
+
 ;; Show trailing white spaces
 (setq show-trailing-whitespace t)
 (add-hook! '(minibuffer-setup-hook doom-popup-mode-hook)
   (setq-local show-trailing-whitespace nil))
-
-;; Change the default key of persp-mode to avoid conflicts with projectile.
-(setq persp-keymap-prefix (kbd "C-c C-e"))
 
 ;; Show me where I made the last change in a document.
 (def-package! goto-last-change
