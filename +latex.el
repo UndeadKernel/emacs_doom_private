@@ -45,7 +45,8 @@
   '(font-latex-sectioning-5-face ((t (:inherit 'font-latex-sectioning-4-face
                                                :foreground "white" :height 1.0)))))
   ;; Set the fill column to something large so that we can fold without problems
-  (set-fill-column 99999)
+  ;; whitespace-mode builds wrong regexps if this value is too big
+  (set-fill-column 2000)
   ;; In LaTeX mode, insert \( \) instead of $$ when pressing "$"
   (set (make-variable-buffer-local 'TeX-electric-math) (cons "\\(" "\\)")))
 
