@@ -119,7 +119,3 @@
   (advice-add #'newline-and-indent :around #'doom*newline-and-indent))
 
 
-;; Reuse dired buffers
-(put 'dired-find-alternate-file 'disabled nil)
-
-

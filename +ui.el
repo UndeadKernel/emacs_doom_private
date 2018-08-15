@@ -7,6 +7,10 @@
 (add-hook! '(minibuffer-setup-hook doom-popup-mode-hook)
   (setq-local show-trailing-whitespace nil))
 
+;; Reuse dired buffers
+(put 'dired-find-alternate-file 'disabled nil)
+
+
 ;; ;; From bitwalker's private config
 ;; (after! neotree
 ;;   ;; When switching to a file in the current project, expand the directory
