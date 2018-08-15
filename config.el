@@ -20,6 +20,9 @@
 ;; Config of DOOM completion
 (load! "+completion")
 
+;; Private things others should not see ;D
+(load! "+private" :noerror t)
+
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
       mouse-wheel-progressive-speed nil             ; don't accelerate scrolling
