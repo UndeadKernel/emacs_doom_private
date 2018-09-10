@@ -1,12 +1,8 @@
 ;;; private/boy/+bindings.el -*- lexical-binding: t; -*-
 
-
-;; Set the projectile prefix
-(after! projectile
-  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
-
 ;; Change the default key of persp-mode to avoid conflicts with projectile.
-(setq persp-keymap-prefix (kbd "C-c e"))
+(setq persp-keymap-prefix (kbd "C-c e")
+      projectile-keymap-prefix (kbd "C-c p"))
 
 (map!
  "M-x"           #'execute-extended-command
@@ -20,9 +16,9 @@
  "S-<f1>"        #'+boy/macro-on
  "<f1>"          #'call-last-kbd-macro
  ;; Editor related bindings
-  "C-a"           #'doom/backward-to-bol-or-indent
- [remap newline]  #'newline-and-indent
- "C-S-s"          #'swiper
+ "C-a"           #'doom/backward-to-bol-or-indent
+ [remap newline] #'newline-and-indent
+ "C-S-s"         #'swiper
  ;; Buffer related bindings
  "C-x b"       #'persp-switch-to-buffer
  "C-x B"       #'switch-to-buffer
@@ -39,45 +35,53 @@
  "C-x p"   #'+popup/other
  "C-x C-o" #'+boy/switch-to-last-window
  "C-x O"   #'switch-window-then-swap-buffer
- ;; Doom emacs bindings
- "C-c C-s" #'doom/open-scratch-buffer
- "C-`"     #'+popup/toggle
- "C-~"     #'+popup/raise
- ;; Misc plugins
- "<f9>"  #'+neotree/open
- "C-="   #'er/expand-region
- "C-c ." #'goto-last-change ; requires private package 'goto-last-change'
- "C-'"   #'imenu-list-smart-toggle
- ;; Org capture
- "C-c c" #'org-capture
- "C-c C" (λ! (require 'org-capture) (call-interactively 'org-capture-goto-target))
  ;; Smart-forward
  "M-<up>"    #'smart-up
  "M-<down>"  #'smart-down
  "M-<left>"  #'smart-backward
  "M-<right>" #'smart-forward
- ;; smartparens
- "C-M-a" #'sp-beginning-of-sexp
- "C-M-e" #'sp-end-of-sexp
- "C-M-f" #'sp-forward-sexp
- "C-M-b" #'sp-backward-sexp
- "C-M-d" #'sp-splice-sexp
- ;; Company mode
- "<C-tab>" #'+company/complete
- ;; Counsel Bindings
- "C-h b" #'counsel-descbinds
- ;; Repl Toggle
- "C-c C-z" #'+eval/open-repl
-;; Magit/git bindings
- (:prefix "C-c m"
+ ;; Restore common editing keys in minibuffer
+ (:map (minibuffer-local-map
+        minibuffer-local-ns-map
+        minibuffer-local-completion-map
+        minibuffer-local-must-match-map
+        minibuffer-local-isearch-map
+        read-expression-map)
+   "C-g" #'abort-recursive-edit
+   "C-a" #'move-beginning-of-line)
+ ;; Doom emacs bindings
+ (:prefix "C-c d"
+   "d" #'+doom-dashboard/open
+   "f" #'recentf-open-files
+   "n" #'+neotree/open
+   "o" #'+popup/other
+   "t" #'+popup/toggle
+   "c" #'+popup/close
+   "C" #'+popup/close-all
+   "r" #'+popup/raise
+   "R" #'+popup/restore
+   "s" #'doom/open-scratch-buffer)
+ "C-`" #'+popup/toggle
+ ;; Org related bindings
+ (:prefix "C-c o"
+   "s"     #'org-caldav-sync
+   "a a"   #'org-agenda
+   "a t"   #'org-todo-list
+   "a m"   #'org-tags-view
+   "a v"   #'org-search-view
+   "c"     #'org-capture
+   "C"     (λ! (require 'org-capture) (call-interactively #'org-capture-goto-target))
+   "b"     #'org-iswitchb
+   "e l b" #'org-beamer-export-to-latex
+   "e l B" #'org-beamer-export-as-latex
+   "e l P" #'org-beamer-export-to-pdf
+   "l"     #'org-store-link)
+ ;; Version control bindings
+ (:prefix "C-c v"
    "s" #'magit-status
    "i" #'+vcs/git-browse-issues
    "b" #'+vcs/git-browse)
- ;; Bury popup buffers with only C-g
- ;; (:map +popup-buffer-mode-map
- ;;   "C-g" '+popup/close)
  ;; Working with windows, workgroups and stuff.
- ;;"<pause>" (λ! (doom/workgroup-load (concat wg-workgroup-directory doom-wg-perpetual)))
  (:prefix "C-c w"
    "d" #'+workspace/display
    "r" #'+workspace/rename
@@ -85,6 +89,7 @@
    "k" #'+workspace/delete
    "s" #'+workspace/save-session
    "l" #'+workspace/load-session
+   "L" #'+workspace/load-last-session
    "o" #'doom/kill-other-buffers
    "u" #'winner-undo
    "U" #'winner-redo
@@ -101,16 +106,37 @@
    "8" (λ! (+workspace/switch-to 7))
    "9" (λ! (+workspace/switch-to 8))
    "0" #'+workspace/switch-to-last)
- ;; Restore common editing keys (and ESC) in minibuffer
- (:map (minibuffer-local-map
-        minibuffer-local-ns-map
-        minibuffer-local-completion-map
-        minibuffer-local-must-match-map
-        minibuffer-local-isearch-map
-        read-expression-map)
-   "C-g" #'abort-recursive-edit
-   "C-a" #'move-beginning-of-line
-   "M-z" #'doom/minibuffer-undo)
+
+
+ ;; Plugins
+
+
+ ;; Misc plugins
+ "<f9>"    #'+neotree/open
+ "C-="     #'er/expand-region
+ "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
+ "C-'"     #'imenu-list-smart-toggle
+ "C-c p p" #'projectile-switch-project
+ ;; Smartparens
+ (:after smartparens
+   (:map smartparens-mode-map
+     "C-M-a"     #'sp-beginning-of-sexp
+     "C-M-e"     #'sp-end-of-sexp
+     "C-M-f"     #'sp-forward-sexp
+     "C-M-b"     #'sp-backward-sexp
+     "C-M-d"     #'sp-splice-sexp
+     "C-M-k"     #'sp-kill-sexp
+     "C-M-t"     #'sp-transpose-sexp
+     "C-<right>" #'sp-forward-slurp-sexp
+     "M-<right>" #'sp-forward-barf-sexp
+     "C-<left>"  #'sp-backward-slurp-sexp
+     "M-<left>"  #'sp-backward-barf-sexp))
+ ;; Company mode
+ "<C-tab>" #'+company/complete
+ ;; Counsel Bindings
+ "C-h b" #'counsel-descbinds
+ ;; Repl Toggle
+ "C-c C-z" #'+eval/open-repl
  ;; Company mode and the like
  (:after company
    (:map company-active-map
@@ -126,11 +152,11 @@
      [backtab]    #'company-select-previous
      "C-g"        (λ! (company-abort))
      [C-return]   #'counsel-company)
- (:map company-search-map
-   "C-n"        #'company-search-repeat-forward
-   "C-p"        #'company-search-repeat-backward
-   "C-s"        (λ! (company-search-abort) (company-filter-candidates))
-   "C-g"        #'company-search-abort))
+   (:map company-search-map
+     "C-n"        #'company-search-repeat-forward
+     "C-p"        #'company-search-repeat-backward
+     "C-s"        (λ! (company-search-abort) (company-filter-candidates))
+     "C-g"        #'company-search-abort))
  ;; NeoTree bindings
  (:after neotree
    :map neotree-mode-map
@@ -169,7 +195,7 @@
  (:after info
    (:map Info-mode-map
      "o" #'ace-link-info))
- ;; Yasnippet
+ ;; yasnippet
  (:after yasnippet
    ;; keymap while yasnippet is active
    (:map yas-minor-mode-map
@@ -182,27 +208,41 @@
      "<M-backspace>" #'+snippets/delete-to-start-of-field
      [backspace]     #'+snippets/delete-backward-char
      [delete]        #'+snippets/delete-forward-char-or-field))
- ;; Flycheck
+ ;; flycheck
  (:after flycheck
    (:map flycheck-error-list-mode-map
      "C-n" #'flycheck-error-list-next-error
      "C-p" #'flycheck-error-list-previous-error
      "RET" #'flycheck-error-list-goto-error))
- ;; ivy stuff
+ ;; ivy
  (:after ivy
    (:map ivy-minibuffer-map
      "TAB" #'ivy-alt-done
      "C-g" #'keyboard-escape-quit))
- ;; magit stuff
+ ;; magit
  (:after magit
    (:map magit-mode-map
      ;; Don't let Tab binding in my bindings conflict with Tab in magit
      "<tab>" #'magit-section-toggle))
+ ;; www-synonyms bindings
  (:after latex
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
      ("C-c s" #'www-synonyms-insert-synonym)))
+ ;; ein notebokks
  (:after ein:notebook-multilang
    (:map ein:notebook-multilang-mode-map
      "C-c h" #'+ein/hydra/body))
  )
 
+
+(which-key-add-key-based-replacements "C-c !"   "checking")
+(which-key-add-key-based-replacements "C-c d p" "doom popups")
+(which-key-add-key-based-replacements "C-c d"   "doom")
+(which-key-add-key-based-replacements "C-c e"   "perspective")
+(which-key-add-key-based-replacements "C-c m"   "mail")
+(which-key-add-key-based-replacements "C-c o a" "org agenda")
+(which-key-add-key-based-replacements "C-c o e" "org export")
+(which-key-add-key-based-replacements "C-c o"   "org")
+(which-key-add-key-based-replacements "C-c p"   "projectile")
+(which-key-add-key-based-replacements "C-c v"   "versioning")
+(which-key-add-key-based-replacements "C-c w"   "workspace")
