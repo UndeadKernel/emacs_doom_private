@@ -53,7 +53,12 @@
  (:prefix "C-c d"
    "d" #'+doom-dashboard/open
    "f" #'recentf-open-files
-   "n" #'+neotree/open
+   (:when (featurep! :ui neotree)
+     "n" #'+neotree/open
+     "N" #'neotree/find-this-file)
+   (:when (featurep! :ui treemacs)
+     "n" #'+treemacs/toggle
+     "N" #'+treemacs/find-file)
    "o" #'+popup/other
    "t" #'+popup/toggle
    "c" #'+popup/close
@@ -61,7 +66,10 @@
    "r" #'+popup/raise
    "R" #'+popup/restore
    "s" #'doom/open-scratch-buffer
-   "S" #'doom/sudo-this-file)
+   "S" #'doom/switch-to-scratch-buffer
+   "u" #'doom/sudo-this-file
+   "e" #'+eshell/open-popup
+   "E" #'+eshell/open)
  "C-`" #'+popup/toggle
  ;; Org related bindings
  (:prefix "C-c o"
@@ -126,7 +134,6 @@
  "<f9>"    #'+neotree/open
  "C-="     #'er/expand-region
  "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
- "C-'"     #'imenu-list-smart-toggle
  "C-c p p" #'projectile-switch-project
  ;; Smartparens
  (:after smartparens
@@ -143,31 +150,39 @@
      "C-<left>"  #'sp-backward-slurp-sexp
      "M-<left>"  #'sp-backward-barf-sexp))
  ;; Company mode
- "<C-tab>" #'+company/complete
- ;; Counsel Bindings
+ "C-;" #'+company/complete
+ ;; Counsel
+ (:when (featurep! :completion ivy)
+   (:after counsel
+     (:map counsel-ag-map
+       [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
+       "C-SPC"    #'ivy-call-and-recenter ; preview
+       "M-RET"    (+ivy-do-action! #'+ivy-git-grep-other-window-action))))
  "C-h b" #'counsel-descbinds
+ "C-M-y" #'counsel-yank-pop
+ "C-h F" #'counsel-faces
+ "C-h p" #'counsel-package
+ "C-h a" #'counsel-apropos
+ "C-'"   #'counsel-imenu
  ;; Repl Toggle
  "C-c C-z" #'+eval/open-repl
  ;; Company mode and the like
  (:after company
    (:map company-active-map
-     "C-o"        #'company-search-kill-others
-     "C-n"        #'company-select-next
-     "C-p"        #'company-select-previous
-     "C-h"        #'company-quickhelp-manual-begin
-     "C-S-h"      #'company-show-doc-buffer
-     "C-S-s"      #'company-search-candidates
-     "C-s"        #'company-filter-candidates
-     "<C-tab>"    #'company-complete-common-or-cycle
-     [tab]        #'company-complete-common-or-cycle
-     [backtab]    #'company-select-previous
-     "C-g"        (λ! (company-abort))
-     [C-return]   #'counsel-company)
+     "C-o"      #'company-search-kill-others
+     "C-n"      #'company-select-next
+     "C-p"      #'company-select-previous
+     "C-h"      #'company-show-doc-buffer
+     "C-s"      #'company-search-candidates
+     "M-s"      #'company-filter-candidates
+     "C-;"      #'company-complete-common-or-cycle
+     "TAB"      #'company-complete-common-or-cycle
+     [backtab]  #'company-select-previous
+     "C-RET"    #'counsel-company)
    (:map company-search-map
      "C-n"        #'company-search-repeat-forward
      "C-p"        #'company-search-repeat-backward
-     "C-s"        (λ! (company-search-abort) (company-filter-candidates))
-     "C-g"        #'company-search-abort))
+     "C-s"        (λ! (company-search-abort) (company-filter-candidates))))
  ;; NeoTree bindings
  (:after neotree
    :map neotree-mode-map
@@ -210,7 +225,7 @@
  (:after yasnippet
    ;; keymap while yasnippet is active
    (:map yas-minor-mode-map
-     "C-c TAB" #'yas-insert-snippet)
+     "<C-tab>" #'yas-insert-snippet)
    ;; keymap while editing an inserted snippet
    (:map yas-keymap
      "C-e"           #'+snippets/goto-end-of-field
@@ -226,6 +241,11 @@
      "C-n" #'flycheck-error-list-next-error
      "C-p" #'flycheck-error-list-previous-error
      "RET" #'flycheck-error-list-goto-error))
+ ;; flyspell
+ (:after flyspell
+   (:map flyspell-mode-map
+     "C-;" nil ; Do not override
+     "C-M-i" #'flyspell-auto-correct-previous-word))
  ;; ivy
  (:after ivy
    (:map ivy-minibuffer-map
@@ -236,10 +256,12 @@
    (:map magit-mode-map
      ;; Don't let Tab binding in my bindings conflict with Tab in magit
      "<tab>" #'magit-section-toggle))
- ;; www-synonyms bindings
+ ;; latex
  (:after latex
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
-     ("C-c y" #'www-synonyms-insert-synonym)))
+     ("C-c y" #'www-synonyms-insert-synonym))
+   (:map LaTeX-mode-map
+     "C-c ." nil)) ; Do not overwrite my goto-last-change
  ;; ein notebokks
  (:after ein:notebook-multilang
    (:map ein:notebook-multilang-mode-map
