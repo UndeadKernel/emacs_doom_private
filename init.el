@@ -139,7 +139,7 @@
       ;twitter           ; twitter client https://twitter.com/vnought
       ;write             ; emacs as a word processor (latex + org + markdown)
       ;pacmanfiles
-      pacfiles
+      ;pacfiles
 
        :collab
       ;floobits          ; peer programming for a price
