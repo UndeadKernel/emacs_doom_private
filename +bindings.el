@@ -60,7 +60,8 @@
    "C" #'+popup/close-all
    "r" #'+popup/raise
    "R" #'+popup/restore
-   "s" #'doom/open-scratch-buffer)
+   "s" #'doom/open-scratch-buffer
+   "S" #'doom/sudo-this-file)
  "C-`" #'+popup/toggle
  ;; Org related bindings
  (:prefix "C-c o"
@@ -76,6 +77,16 @@
    "e l B" #'org-beamer-export-as-latex
    "e l P" #'org-beamer-export-to-pdf
    "l"     #'org-store-link)
+ ;; Snippets
+ (:prefix "C-c s"
+   "n" #'yas-new-snippet
+   "i" #'yas-insert-snippet
+   "s" #'+default/find-in-snippets
+   "S" #'+default/browse-snippets
+   "/" #'yas-visit-snippet-file
+   "r" #'yas-reload-all
+   "c" #'aya-create
+   "e" #'aya-expand)
  ;; Version control bindings
  (:prefix "C-c v"
    "s" #'magit-status
@@ -199,12 +210,13 @@
  (:after yasnippet
    ;; keymap while yasnippet is active
    (:map yas-minor-mode-map
-     "C-c TAB" #'doom/yas-expand-or-insert)
+     "C-c TAB" #'yas-insert-snippet)
    ;; keymap while editing an inserted snippet
    (:map yas-keymap
-     "C-e"           #'snippets/goto-end-of-field
-     "C-a"           #'snippets/goto-start-of-field
-     "<S-tab>"       #'yas-prev-field
+     "C-e"           #'+snippets/goto-end-of-field
+     "C-a"           #'+snippets/goto-start-of-field
+     "<M-right>"     #'+snippets/goto-end-of-field
+     "<M-left>"      #'+snippets/goto-start-of-field
      "<M-backspace>" #'+snippets/delete-to-start-of-field
      [backspace]     #'+snippets/delete-backward-char
      [delete]        #'+snippets/delete-forward-char-or-field))
@@ -227,7 +239,7 @@
  ;; www-synonyms bindings
  (:after latex
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
-     ("C-c s" #'www-synonyms-insert-synonym)))
+     ("C-c y" #'www-synonyms-insert-synonym)))
  ;; ein notebokks
  (:after ein:notebook-multilang
    (:map ein:notebook-multilang-mode-map
@@ -244,5 +256,6 @@
 (which-key-add-key-based-replacements "C-c o e" "org export")
 (which-key-add-key-based-replacements "C-c o"   "org")
 (which-key-add-key-based-replacements "C-c p"   "projectile")
+(which-key-add-key-based-replacements "C-c s"   "snippets")
 (which-key-add-key-based-replacements "C-c v"   "versioning")
 (which-key-add-key-based-replacements "C-c w"   "workspace")
