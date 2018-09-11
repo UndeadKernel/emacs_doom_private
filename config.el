@@ -4,7 +4,7 @@
   "API key from http://thesaurus.altervista.org that gives us synonyms.")
 
 ;; Private things others should not see ;D
-(load! "+private" :noerror t)
+(load! "+private" nil t) ; do not complain if file does not exist
 ;; Load personalized bindings
 (load! "+bindings")
 ;; Personalized functions
