@@ -82,7 +82,7 @@
   (add-to-list 'TeX-fold-macro-spec-list '("[SBOX {1}]" ("sbox")))
   (add-to-list 'TeX-fold-macro-spec-list '(+boy//latex-fold-autoref ("autoref" "Autoref")))
   ;; Custom folds for Environments
-  (add-to-list 'TeX-fold-env-spec-list '("[figure]" ("figure")))
+  (add-to-list 'TeX-fold-env-spec-list '("[figure]" ("figure" "figure*")))
   (add-to-list 'TeX-fold-env-spec-list '("[table]" ("table")))
   (add-to-list 'TeX-fold-env-spec-list '("[acronyms]" ("acronym"))))
 
