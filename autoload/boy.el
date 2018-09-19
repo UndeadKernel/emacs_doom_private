@@ -24,3 +24,11 @@
   (interactive)
   (let ((fill-column (point-max)))
     (fill-paragraph nil t)))
+
+;;;###autoload
+(defun +boy/new-buffer ()
+  (interactive)
+  (let ((buffer (generate-new-buffer "*new*")))
+    (set-window-buffer nil buffer)
+    (with-current-buffer buffer
+      (funcall (default-value 'major-mode)))))
