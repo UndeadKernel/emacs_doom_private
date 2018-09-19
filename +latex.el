@@ -7,6 +7,8 @@
 (after! latex
   ;; Save without asking when invoking TeX commands
   (setq TeX-save-query nil)
+  ;; While inserting commands in comment sections, do not be intelligent and comment the command
+  (setq LaTeX-insert-into-comments nil)
   ;; if the babel language is german, set the quotes as if english
   (add-hook 'TeX-language-de-hook
             (lambda ()
