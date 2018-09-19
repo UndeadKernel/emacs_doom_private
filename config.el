@@ -11,6 +11,8 @@
 (load! "+functions")
 ;; Anything that modifies the way popups spawn
 (load! "+popups")
+;; Theme related things
+(load! "+themes")
 
 ;; Configuration of DOOM lang
 (load! "+latex")

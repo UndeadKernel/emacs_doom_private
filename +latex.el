@@ -34,18 +34,6 @@
           "C-c o r"  #'+boy/print-table-rcv-cmd)))
 
 (add-hook! LaTeX-mode
-  ;; Change some fonts from the doom-one theme for the sections in LaTeX
-  (custom-theme-set-faces 'doom-one
-  '(font-latex-sectioning-1-face ((t (:background "#23272e" :foreground "#a9a1e1" :weight bold
-                                      :bold bold :height 1.6))))
-  '(font-latex-sectioning-2-face ((t (:inherit 'font-latex-sectioning-1-face
-                                               :foreground "#51afef" :height 0.9))))
-  '(font-latex-sectioning-3-face ((t (:inherit 'font-latex-sectioning-2-face
-                                               :foreground "#a9a1e1" :height 0.9))))
-  '(font-latex-sectioning-4-face ((t (:inherit 'font-latex-sectioning-3-face
-                                               :foreground "violet" :height 0.9))))
-  '(font-latex-sectioning-5-face ((t (:inherit 'font-latex-sectioning-4-face
-                                               :foreground "white" :height 1.0)))))
   ;; Set the fill column to something large so that we can fold without problems
   ;; whitespace-mode builds wrong regexps if this value is too big
   (set-fill-column 2000)
