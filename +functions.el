@@ -104,3 +104,9 @@ the line."
   (define-key global-map (this-command-keys)
     '+boy/macro-on)
   (end-kbd-macro))
+
+(defun +boy/latex-section (arg)
+  "Call LaTeX-section temporarily changing TeX-grcl to add '%' after the section macro."
+  (interactive "*P")
+  (let ((TeX-grcl "}%"))
+    (LaTeX-section arg)))

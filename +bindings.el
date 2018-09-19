@@ -18,6 +18,7 @@
  ;; Editor related bindings
  "C-a"           #'doom/backward-to-bol-or-indent
  [remap newline] #'newline-and-indent
+ "C-j"           #'+default/newline
  "C-S-s"         #'swiper
  ;; Buffer related bindings
  "C-x b"       #'persp-switch-to-buffer
@@ -69,7 +70,8 @@
    "S" #'doom/switch-to-scratch-buffer
    "u" #'doom/sudo-this-file
    "e" #'+eshell/open-popup
-   "E" #'+eshell/open)
+   "E" #'+eshell/open
+   :desc "Reload Private Config" "R" #'doom/reload)
  "C-`" #'+popup/toggle
  ;; Org related bindings
  (:prefix "C-c o"
@@ -84,22 +86,35 @@
    "e l b" #'org-beamer-export-to-latex
    "e l B" #'org-beamer-export-as-latex
    "e l P" #'org-beamer-export-to-pdf
-   "l"     #'org-store-link)
+   "l"     #'org-store-link
+   "b"     #'+boy/org-babel-hydra/body)
  ;; Snippets
  (:prefix "C-c s"
-   "n" #'yas-new-snippet
-   "i" #'yas-insert-snippet
-   "s" #'+default/find-in-snippets
-   "S" #'+default/browse-snippets
-   "/" #'yas-visit-snippet-file
-   "r" #'yas-reload-all
-   "c" #'aya-create
-   "e" #'aya-expand)
+   :desc "New snippet"           "n" #'yas-new-snippet
+   :desc "Insert snippet"        "i" #'yas-insert-snippet
+   :desc "Find snippet"          "s" #'+default/find-in-snippets
+   :desc "Find snippet for mode" "S" #'+default/browse-snippets
+   :desc "Find global snippet"   "/" #'yas-visit-snippet-file
+   :desc "Reload snippets"       "r" #'yas-reload-all
+   :desc "Create Temp Template"  "c" #'aya-create
+   :desc "Use Temp Template"     "e" #'aya-expand)
  ;; Version control bindings
  (:prefix "C-c v"
-   "s" #'magit-status
-   "i" #'+vcs/git-browse-issues
-   "b" #'+vcs/git-browse)
+   :desc "Magit status"          "g" #'magit-status
+   :desc "Browse issues tracker" "i" #'+vc/git-browse-issues
+   :desc "Browse remote"         "o" #'+vc/git-browse
+   :desc "Magit commit"          "c" #'magit-commit
+   :desc "Magit blame"           "b" #'magit-blame
+   :desc "Initialize repo"       "I" #'magit-init
+   :desc "Magit buffer log"      "l" #'magit-log-buffer-file
+   :desc "List repositories"     "L" #'magit-list-repositories
+   :desc "Git revert hunk"       "r" #'git-gutter:revert-hunk
+   :desc "Git stage hunk"        "s" #'git-gutter:stage-hunk
+   :desc "Git stage file"        "S" #'magit-stage-file
+   :desc "Git time machine"      "t" #'git-timemachine-toggle
+   :desc "Git unstage file"      "U" #'magit-unstage-file
+   :desc "Next hunk"             "]" #'git-gutter:next-hunk
+   :desc "Previous hunk"         "[" #'git-gutter:previous-hunk)
  ;; Working with windows, workgroups and stuff.
  (:prefix "C-c w"
    "d" #'+workspace/display
@@ -163,6 +178,7 @@
  "C-h F" #'counsel-faces
  "C-h p" #'counsel-package
  "C-h a" #'counsel-apropos
+ "C-h V" #'counsel-set-variable
  "C-'"   #'counsel-imenu
  ;; Repl Toggle
  "C-c C-z" #'+eval/open-repl
@@ -261,7 +277,10 @@
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
      ("C-c y" #'www-synonyms-insert-synonym))
    (:map LaTeX-mode-map
-     "C-c ." nil)) ; Do not overwrite my goto-last-change
+     ;; Do not overwrite my goto-last-change
+     "C-c ."   nil
+     ;; Replace LaTeX-section with a version that inserts '%' after the section macro
+     "C-c C-s" #'+boy/latex-section))
  ;; ein notebokks
  (:after ein:notebook-multilang
    (:map ein:notebook-multilang-mode-map
