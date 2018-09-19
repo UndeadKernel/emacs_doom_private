@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: condition-case
+# key: cc
+# --
+(condition-case ex
+    $>${0:`%`}
+  (error $0))

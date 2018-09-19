@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: struct
+# uuid: struct
+# key: struct
+# condition: (%bolp)
+# --
+struct ${1:Name} {
+    `%`$0
+}

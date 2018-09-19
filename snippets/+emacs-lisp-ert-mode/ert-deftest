@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ert-deftest
+# key: deftest
+# --
+(ert-deftest $1 ()`(!%)`$0)

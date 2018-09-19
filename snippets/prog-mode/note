@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: note
+# --
+`(yas-with-comment "NOTE: ")`

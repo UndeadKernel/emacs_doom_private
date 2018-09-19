@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: assertRaises
+# group: testing
+# --
+assertRaises(${1:Exception}, ${2:fun})

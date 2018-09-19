@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: cli-id2t
+# key: cli-id2t
+# --
+\begin{lstlisting}[style=cli-id2t]
+    $ id2t
+\end{lstlisting}

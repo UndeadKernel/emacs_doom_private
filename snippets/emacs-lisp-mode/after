@@ -1,0 +1,4 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: after
+# --
+(after! ${1:feature-name} `(!%)`$0)`(%$)`

@@ -1,0 +1,3 @@
+#name: <a href="mailto:...@...">...</a>
+# --
+<a href="mailto:${1:john@doe.com}">`(!%!)`$0</a>

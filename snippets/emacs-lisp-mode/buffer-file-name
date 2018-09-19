@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: buffer-file-name
+# key: bfn
+# --
+buffer-file-name

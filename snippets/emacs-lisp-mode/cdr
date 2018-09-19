@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: cdr
+# --
+(cdr ${0:`%`})

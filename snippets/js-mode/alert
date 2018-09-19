@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: alert
+# key: al
+# --
+alert(${0:`%`});

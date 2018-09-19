@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: match
+# uuid: match
+# key: match
+# --
+match ${1:x} {
+    `%`$0
+}

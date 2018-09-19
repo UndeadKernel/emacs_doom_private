@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ac
+# key: ac
+# --
+\ac{${1:ACRONYM}}$0

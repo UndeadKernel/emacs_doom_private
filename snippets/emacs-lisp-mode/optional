@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: &optional ...
+# uuid: optional
+# --
+&optional `%`$0

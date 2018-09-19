@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: &optional ...
+# uuid: opt
+# type: command
+# --
+(%alias "optional")

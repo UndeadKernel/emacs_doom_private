@@ -1,0 +1,5 @@
+# name: @media print { ... }
+# --
+@media print {
+    `%`$0
+}

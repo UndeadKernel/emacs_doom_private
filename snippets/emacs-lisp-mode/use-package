@@ -1,0 +1,6 @@
+# name: use-package
+# key: up
+# --
+(use-package ${1:package}
+  :${2:config}
+  `%`$0)

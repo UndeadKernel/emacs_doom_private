@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: acro
+# key: acro
+# --
+\acro{${1:acronym}}{${2:descirption}}$0

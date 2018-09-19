@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: extern "C" { ... }
+# key: extc
+# condition: (%bolp)
+# --
+extern "C" {
+    `%`$0
+}

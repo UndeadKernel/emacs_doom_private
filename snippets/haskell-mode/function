@@ -1,0 +1,5 @@
+# name: Function
+# key: ::
+# --
+${1:fn-name} :: ${2:type}
+$1

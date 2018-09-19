@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: args
+# key: args
+# --
+[ $# -lt ${1:2} ]

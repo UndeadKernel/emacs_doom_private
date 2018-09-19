@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: examplebox
+# key: examplebox
+# --
+\begin{examplebox}[label=ex:$1:$2]{$3}
+    $0
+\end{examplebox}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: struct
+# uuid: struct_alias
+# key: st
+# type: command
+# condition: (%bolp)
+# --
+(%alias "struct")

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: psuedo class declaration
+# key: cl
+# --
+${1:ClassName} = {}
+$1.new = function($2)
+    local self = {}
+
+    ${3:-- code}
+
+    return self
+end

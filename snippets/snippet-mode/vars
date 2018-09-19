@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Snippet header
+# key:#
+# --
+# -*- mode: snippet -*-
+# name: $1
+# key: ${2:trigger-key}${3:
+# condition: t}
+# --
+$0

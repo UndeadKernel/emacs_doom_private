@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: class
+# uuid: cl
+# type: command
+# --
+(%alias "class")

@@ -1,0 +1,4 @@
+# name: define(..., ...)
+# key: de
+# --
+define("${1:CONSTANT}", ${2:`%`value});

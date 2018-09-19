@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: switch
+# --
+switch (${1:ch}) {
+       case ${2:const}:
+       ${3:a = b};
+       break;
+       ${4:default:
+       ${5:action}}
+}

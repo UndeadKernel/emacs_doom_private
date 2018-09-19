@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: defun
+# --
+(defun ${1:name} ($2)`(and % (concat " " (!%)))`$0)`(%$)`

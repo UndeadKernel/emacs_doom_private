@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: fixme
+# --
+`(yas-with-comment "FIXME: ")`

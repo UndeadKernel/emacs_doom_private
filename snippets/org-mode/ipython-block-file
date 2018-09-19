@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ipython-block-file
+# key: ipyf
+# --
+#+BEGIN_SRC ipython :session ${1::ipyfile ${2:$$(let ((temporary-file-directory "./")) (make-temp-file "py" nil ".png"))}}
+$0
+#+END_SRC
