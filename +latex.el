@@ -25,7 +25,7 @@
 (def-package! org-table ;; internal package
   :commands (orgtbl-mode)
   :init
-  (add-hook! LaTeX-mode #'orgtbl-mode)
+  ;(add-hook! LaTeX-mode #'orgtbl-mode)
   :config
   (when (featurep! :feature snippets)
     (require 'yasnippet)
