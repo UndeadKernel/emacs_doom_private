@@ -4,15 +4,8 @@
 
 ;; ORG config
 (after! org
-  ;; Face of keyword DONE (Green like strings)
-  (set-face-attribute 'org-done nil :foreground "#98be65")
-  ; Face of keyword TODO or [ ] (Purple like keywords)
-  (set-face-attribute 'org-todo nil :foreground "#c678dd")
-  ; Face of ellipsis symbol (Purple like keywords)
-  (set-face-attribute 'org-ellipsis nil :foreground "#c678dd")
-  ; Face of the entire headline of a DONE line
-  (set-face-attribute 'org-headline-done nil :foreground nil)
-  (setq org-tags-column -100 ; the column to the right to align tags
+  (setq org-startup-folded nil ; do not start folded
+        org-tags-column -100 ; the column to the right to align tags
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ↴ ")
