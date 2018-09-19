@@ -26,7 +26,7 @@
    ((custom-theme-enabled-p 'doom-one)
          (set-face-attribute 'org-block-begin-line nil
                              :background "#5c3d5c"
-                             :height 0.8
+                             :height 0.9
                              :box '(:line-width 2 :color "#5c3d5c")))
    ;; For other themes, disable the changes
    (t
