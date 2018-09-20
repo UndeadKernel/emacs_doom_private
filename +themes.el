@@ -24,14 +24,16 @@
   (cond 
    ;; If doom-one theme is enabled
    ((custom-theme-enabled-p 'doom-one)
-         (set-face-attribute 'org-block-begin-line nil
-                             :background "#5c3d5c"
-                             :height 0.9
-                             :box '(:line-width 2 :color "#5c3d5c")))
+      ;; Change the style of the BEGIN_SRC and RESULT blocks
+      (set-face-attribute 'org-block-begin-line nil
+                          :background "#5c3d5c"
+                          :foreground "#83898d"
+                          :height 0.9
+                          :box '(:line-width 2 :color "#5c3d5c")))
    ;; For other themes, disable the changes
    (t
-    (set-face-attribute 'org-block-begin-line nil
-                        :background unspecified
-                        :height uncpecified
-                        :box unspecified
-                        :inherit org-meta-line))))
+      (set-face-attribute 'org-block-begin-line nil
+                          :background unspecified
+                          :height uncpecified
+                          :box unspecified
+                          :inherit org-meta-line))))
