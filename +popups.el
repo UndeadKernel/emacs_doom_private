@@ -8,11 +8,18 @@
     :side 'right :size 35 :quit nil :select t :ttl 0))
 
 ;; Larger undo tree window
-(set-popup-rule! " \\*undo-tree\\*" :slot 2 :side 'left :size 20 :modeline nil :select t :quit t)
+(after! undo-tree
+  (set-popup-rule! " \\*undo-tree\\*" :slot 2 :side 'right :size 20 :modeline nil :select t :quit t))
 
 ;; For better editting org src blocks
 (after! org
-  (set-popup-rule! "^\\*Org Src" :side 'bottom :slot -2 :height 0.6 :width 0.5 :select t :autosave t :ttl nil :quit nil :select t))
+  (set-popup-rule! "^\\*Org Src" :side 'bottom :slot -2 :height 0.6 :width 0.5 :select t :autosave t :ttl nil :quit nil)
+
+  (set-popup-rules! '(("^\\*Python:.*"    :slot 0 :side 'right :size 40 :select nil :quit nil :transient nil)
+                      ("^\\*Python"       :slot 0 :side 'right :size 40 :select nil :quit nil :ttl nil)
+                      ("^\\*ob-ipython.*" :slot 2 :side 'right :size 40 :height 0.2 :select nil :quit nil :transient nil :ttl nil))))
+
+;; (set-popup-rule! "^\\*Python:ob-ipython.*" :side 'left :slot 0 :size 80 :select nil :ttl nil :quit nil)
 
 ;; (set-popup-rule! "^\\*Ibuffer\\*"  :select t)
 
