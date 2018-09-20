@@ -32,3 +32,14 @@
     (set-window-buffer nil buffer)
     (with-current-buffer buffer
       (funcall (default-value 'major-mode)))))
+
+;;;###autoload
+(defun +boy/popup-diagnose ()
+  (interactive)
+  (message "%s"
+           (cl-loop with bname = (buffer-name)
+                    for (pred . action) in display-buffer-alist
+                    if (and (functionp pred) (funcall pred bname action))
+                    return (cons pred action)
+                    else if (and (stringp pred) (string-match-p pred bname))
+                    return (cons pred action))))
