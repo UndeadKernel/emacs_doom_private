@@ -21,3 +21,28 @@ _g_:goto      _s_:split          _q_:cancel
     ("p" org-babel-previous-src-block)
     ("l" recenter-top-bottom)
     ("q" nil :color blue))
+
+;; Hack to get Ipython to not move cursor to output window
+;; Replace pop-to-buffer with display-buffer and move it
+;;;###autoload
+(defun +boy*ob-ipython--output (output append-p)
+  (when (not (s-blank? output))
+    (let ((buf (get-buffer-create "*ob-ipython-out*")))
+      (save-excursion
+        (display-buffer buf)
+        (with-current-buffer buf
+          (special-mode)
+          (let ((inhibit-read-only t))
+            (unless append-p (erase-buffer))
+            (let ((p (point)))
+              (if (= p (point-max))     ;allow tailing
+                  (progn (insert output)
+                         (-when-let (w (get-buffer-window buf 'visible))
+                           (set-window-point w (point-max))))
+                (save-excursion
+                  (goto-char (point-max))
+                  (insert output)))
+              (ansi-color-apply-on-region p (point-max))
+              ;; this adds some support for control chars
+              (comint-carriage-motion p (point-max)))
+            (unless append-p (goto-char (point-min)))))))))

@@ -62,4 +62,6 @@
                  "* %u %?\nLINK: %l\n%i" ; template
                  :prepend t :kill-buffer t)))
 
-
+(after! ob-ipython
+  ;; ob-ipython focuses the output window, instead, leave focus where it was.
+  (advice-add 'ob-ipython--output :override #'+boy*ob-ipython--output))
