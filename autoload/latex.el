@@ -13,3 +13,10 @@
   (yas-expand-snippet (concat "% BEGIN RECEIVE ORGTBL ${1:table_name}" "\n"
                               "$0" "\n"
                               "% END RECEIVE ORGTBL $1")))
+
+;;;###autoload
+(defun +boy/latex-section (arg)
+  "Call LaTeX-section temporarily changing TeX-grcl to add '%' after the section macro."
+  (interactive "*P")
+  (let ((TeX-grcl "}%"))
+    (LaTeX-section arg)))
