@@ -6,10 +6,10 @@
 ;; Change some font weights for the sections in LaTeX
 (add-hook! LaTeX-mode
   (set-face-attribute 'font-latex-sectioning-1-face nil :height 1.6 :weight 'bold)
-  (set-face-attribute 'font-latex-sectioning-2-face nil :height 1.2)
-  (set-face-attribute 'font-latex-sectioning-3-face nil :height 1.0)
-  (set-face-attribute 'font-latex-sectioning-4-face nil :height 0.9)
-  (set-face-attribute 'font-latex-sectioning-5-face nil :height 0.9))
+  (set-face-attribute 'font-latex-sectioning-2-face nil :height 1.3)
+  (set-face-attribute 'font-latex-sectioning-3-face nil :height 1.1)
+  (set-face-attribute 'font-latex-sectioning-4-face nil :height 1.0)
+  (set-face-attribute 'font-latex-sectioning-5-face nil :height 1.0))
 
 ;; Purple boxes for Org BEGIN_SRC and END_SRC
 (add-hook! org-mode
