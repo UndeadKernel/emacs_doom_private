@@ -65,3 +65,12 @@
 (after! ob-ipython
   ;; ob-ipython focuses the output window, instead, leave focus where it was.
   (advice-add 'ob-ipython--output :override #'+boy*ob-ipython--output))
+
+;; Enable displaying of inline PDF images in ORG files
+(add-hook! 'org-mode-hook
+  (make-local-variable 'image-type-file-name-regexps)
+  (make-local-variable 'image-file-name-extensions)
+  (add-to-list 'image-type-file-name-regexps '("\\.pdf\\'" . imagemagick))
+  (add-to-list 'image-file-name-extensions "pdf")
+  (setq-local imagemagick-types-inhibit (remove 'PDF imagemagick-types-inhibit))
+  (setq-local org-image-actual-width '(600)))
