@@ -46,3 +46,15 @@ _g_:goto      _s_:split          _q_:cancel
               ;; this adds some support for control chars
               (comint-carriage-motion p (point-max)))
             (unless append-p (goto-char (point-min)))))))))
+
+;; Look in the arguments of source blocks for `:hidden' and hide those blocks
+;; https://emacs.stackexchange.com/a/44923/9401
+;;;###autoload
+(defun +boy/hide-source-blocks-maybe ()
+  "Fold blocks in the current buffer that have the argument `:hidden'."
+  (interactive)
+  (org-block-map
+   (lambda ()
+     (let ((case-fold-search t))
+       (when (cl-assoc ':hidden (cl-third (org-babel-get-src-block-info)))
+         (org-hide-block-toggle))))))

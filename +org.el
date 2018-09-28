@@ -8,7 +8,8 @@
         org-tags-column -100 ; the column to the right to align tags
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
-        org-ellipsis " ↴ ")
+        org-ellipsis " ↴ "
+        org-babel-min-lines-for-block-output 2) ; always wrap results in #begin_example
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
@@ -67,6 +68,7 @@
   (advice-add 'ob-ipython--output :override #'+boy*ob-ipython--output))
 
 ;; Enable displaying of inline PDF images in ORG files
+;; https://stackoverflow.com/a/35261577/2632102
 (add-hook! 'org-mode-hook
   (make-local-variable 'image-type-file-name-regexps)
   (make-local-variable 'image-file-name-extensions)
@@ -74,3 +76,6 @@
   (add-to-list 'image-file-name-extensions "pdf")
   (setq-local imagemagick-types-inhibit (remove 'PDF imagemagick-types-inhibit))
   (setq-local org-image-actual-width '(600)))
+
+;; Hide source blocks that have the attribute `:hidden'.
+(add-hook! 'org-mode-hook (+boy/hide-source-blocks-maybe))
