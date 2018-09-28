@@ -280,7 +280,9 @@
      ;; Do not overwrite my goto-last-change
      "C-c ."   nil
      ;; Replace LaTeX-section with a version that inserts '%' after the section macro
-     "C-c C-s" #'+boy/latex-section))
+     "C-c C-s" #'+boy/latex-section
+     ;; Run LatexMk without asking
+     "<f8>"    #'+boy/run-latexmk))
  ;; ein notebokks
  (:after ein:notebook-multilang
    (:map ein:notebook-multilang-mode-map

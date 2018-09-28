@@ -20,3 +20,10 @@
   (interactive "*P")
   (let ((TeX-grcl "}%"))
     (LaTeX-section arg)))
+
+;;;###autoload
+(defun +boy/run-latexmk ()
+  "Run LatexMk without asking for confirmation. Saves the master file (and children)."
+  (interactive)
+  (TeX-save-document (TeX-master-file))
+  (TeX-command "LatexMk" #'TeX-master-file -1))
