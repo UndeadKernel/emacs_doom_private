@@ -5,11 +5,19 @@
 
 ;; Change some font weights for the sections in LaTeX
 (add-hook! LaTeX-mode
-  (set-face-attribute 'font-latex-sectioning-1-face nil :height 1.6 :weight 'bold)
-  (set-face-attribute 'font-latex-sectioning-2-face nil :height 1.3)
-  (set-face-attribute 'font-latex-sectioning-3-face nil :height 1.1)
-  (set-face-attribute 'font-latex-sectioning-4-face nil :height 1.0)
-  (set-face-attribute 'font-latex-sectioning-5-face nil :height 1.0))
+  (set-face-attribute 'font-latex-sectioning-1-face nil :height 1.8 :weight 'bold)
+  (set-face-attribute 'font-latex-sectioning-2-face nil :height 1.6)
+  (set-face-attribute 'font-latex-sectioning-3-face nil :height 1.3)
+  (set-face-attribute 'font-latex-sectioning-4-face nil :height 1.1)
+  (set-face-attribute 'font-latex-sectioning-5-face nil :height 1.1))
+
+;(add-hook! 'doom-load-theme-hook)
+;; (after! font-latex
+;;   (doom-themes-set-faces nil
+;;     '(font-latex-sectioning-1-face :height 1.6)))
+;; (after! font-latex
+;;   (custom-theme-set-faces 'user
+;;     '(font-latex-sectioning-2-face ((t (:height 1.6))))))
 
 ;; Purple boxes for Org BEGIN_SRC and END_SRC
 (add-hook! org-mode
@@ -27,13 +35,17 @@
       ;; Change the style of the BEGIN_SRC and RESULT blocks
       (set-face-attribute 'org-block-begin-line nil
                           :background "#5c3d5c"
-                          :foreground "#83898d"
+                          ;:foreground "#744d74"
+                          :foreground "#5c3d5c"
+                          :weight 'bold
                           :height 0.9
                           :box '(:line-width 2 :color "#5c3d5c")))
    ;; For other themes, disable the changes
    (t
       (set-face-attribute 'org-block-begin-line nil
                           :background unspecified
-                          :height uncpecified
+                          :foreground unspecified
+                          :weight unspecified
+                          :height unspecified
                           :box unspecified
                           :inherit org-meta-line))))
