@@ -21,6 +21,8 @@
 
 ;; Purple boxes for Org BEGIN_SRC and END_SRC
 (add-hook! org-mode
+  ;; Document title font
+  (set-face-attribute 'org-document-title nil :height 2.0)
   ;; Face of keyword DONE (Green like strings)
   (set-face-attribute 'org-done nil :foreground "#98be65")
   ;; Face of keyword TODO or [ ] (Purple like keywords)
