@@ -100,19 +100,20 @@
    :desc "Use Temp Template"     "e" #'aya-expand)
  ;; Version control bindings
  (:prefix "C-c v"
-   :desc "Magit status"          "g" #'magit-status
    :desc "Browse issues tracker" "i" #'+vc/git-browse-issues
    :desc "Browse remote"         "o" #'+vc/git-browse
-   :desc "Magit commit"          "c" #'magit-commit
-   :desc "Magit blame"           "b" #'magit-blame
-   :desc "Initialize repo"       "I" #'magit-init
-   :desc "Magit buffer log"      "l" #'magit-log-buffer-file
-   :desc "List repositories"     "L" #'magit-list-repositories
+   :desc "Diff current file"     "d" #'magit-diff-buffer-file
    :desc "Git revert hunk"       "r" #'git-gutter:revert-hunk
-   :desc "Git stage hunk"        "s" #'git-gutter:stage-hunk
    :desc "Git stage file"        "S" #'magit-stage-file
+   :desc "Git stage hunk"        "s" #'git-gutter:stage-hunk
    :desc "Git time machine"      "t" #'git-timemachine-toggle
    :desc "Git unstage file"      "U" #'magit-unstage-file
+   :desc "Initialize repo"       "I" #'magit-init
+   :desc "List repositories"     "L" #'magit-list-repositories
+   :desc "Magit blame"           "b" #'magit-blame
+   :desc "Magit buffer log"      "l" #'magit-log-buffer-file
+   :desc "Magit commit"          "c" #'magit-commit
+   :desc "Magit status"          "g" #'magit-status
    :desc "Next hunk"             "]" #'git-gutter:next-hunk
    :desc "Previous hunk"         "[" #'git-gutter:previous-hunk)
  ;; Working with windows, workgroups and stuff.
