@@ -141,10 +141,23 @@
    "8" (λ! (+workspace/switch-to 7))
    "9" (λ! (+workspace/switch-to 8))
    "0" #'+workspace/switch-to-last)
-
+ ;; Multiple Cursors
+ (:when (featurep! :editor multiple-cursors)
+   (:prefix "C-c m"
+     "l"         #'mc/edit-lines
+     "n"         #'mc/mark-next-like-this
+     "N"         #'mc/unmark-next-like-this
+     "p"         #'mc/mark-previous-like-this
+     "P"         #'mc/unmark-previous-like-this
+     "t"         #'mc/mark-all-like-this
+     "m"         #'mc/mark-all-like-this-dwim
+     "e"         #'mc/edit-ends-of-lines
+     "a"         #'mc/edit-beginnings-of-lines
+     "s"         #'mc/mark-sgml-tag-pair
+     "d"         #'mc/mark-all-like-this-in-defun
+     "<mouse-1>" #'mc/add-cursor-on-click))
 
  ;; Plugins
-
 
  ;; Misc plugins
  "<f9>"    #'+neotree/open
