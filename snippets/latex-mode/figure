@@ -5,5 +5,6 @@
 \begin{figure}[ht]
   \centering
   \includegraphics[${1:options}]{gfx/${2:path.pdf}}
-  \caption{\label{fig:${3:label}} $0}
+  \caption{$0}%
+  \label{fig:${3:label}}
 \end{figure}
