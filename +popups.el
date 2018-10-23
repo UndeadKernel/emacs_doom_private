@@ -9,7 +9,7 @@
 
 ;; Larger undo tree window
 (after! undo-tree
-  (set-popup-rule! " \\*undo-tree\\*" :slot 2 :side 'right :size 40 :modeline nil :select t :quit t))
+  (set-popup-rule! " \\*undo-tree\\*" :slot 2 :side 'left :size 60 :modeline nil :select t :quit t))
 
 ;; Larger org src edit
 (after! org
