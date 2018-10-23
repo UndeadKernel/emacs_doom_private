@@ -40,6 +40,19 @@
       kept-old-versions 2
       version-control t)
 
+;; Don't save undo-tree history
+(after! undo-tree
+  (setq undo-tree-auto-save-history nil))
+
+;; (after! undo-tree
+;;     (advice-remove #'undo-tree-make-history-save-file-name #'doom*undo-tree-make-history-save-file-name)
+;;     (advice-remove #'undo-list-transfer-to-tree #'doom*strip-text-properties-from-undo-history)
+;;     (advice-remove #'undo-tree-save-history #'doom*compress-undo-tree-history)
+;;     (advice-remove #'undo-tree-load-history #'doom*shut-up))
+
+;; (after! undo-tree
+;;   (advice-remove #'undo-tree-make-history-save-file-name #'doom*undo-tree-make-history-save-file-name))
+
 ;; Show me where I made the last change in a document.
 (def-package! goto-last-change
   :commands goto-last-change)
