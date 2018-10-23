@@ -21,17 +21,8 @@
 ;; Enable whitespace mode with latex
 ;; (add-hook 'LaTeX-mode-hook #'whitespace-mode)
 
-  ;; Load the org table package
-(def-package! org-table ;; internal package
-  :commands (orgtbl-mode)
-  :init
-  ;(add-hook! LaTeX-mode #'orgtbl-mode)
-  :config
-  (when (featurep! :feature snippets)
-    (require 'yasnippet)
-    (map! :map orgtbl-mode-map
-          "C-c o s"  #'+boy/print-table-send-cmd
-          "C-c o r"  #'+boy/print-table-rcv-cmd)))
+;; Enable LaTeX-math-mode by default: add math symbols with the key `LaTeX-math-abbrev-prefix'
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
 (add-hook! LaTeX-mode
   ;; Set the fill column to something large so that we can fold without problems
@@ -46,7 +37,6 @@
   (setq sp--special-self-insert-commands (delete `TeX-insert-quote sp--special-self-insert-commands))
   ;; After selecting a region, we can wrap it in parenthesis or quotes.
   (setq sp-autowrap-region t))
-
 
 ;; Custom folding of some macros and commands I normally use
 (after! tex-fold
@@ -90,3 +80,15 @@
       (quote ([134217848 105 115 101 97 114 99 104 32 102 111 114 return
                36 return 2 4 92 40 67108896 6 6 23 134217848 105 115 101 return
                36 return backspace 25] 0 "%d")) arg))))
+
+;; Load the org table package
+(def-package! org-table ;; internal package
+  :commands (orgtbl-mode)
+  :init
+  ;(add-hook! LaTeX-mode #'orgtbl-mode)
+  :config
+  (when (featurep! :feature snippets)
+    (require 'yasnippet)
+    (map! :map orgtbl-mode-map
+          "C-c o s"  #'+boy/print-table-send-cmd
+          "C-c o r"  #'+boy/print-table-rcv-cmd)))
