@@ -19,6 +19,7 @@
 (after! ob-ipython
   (set-popup-rules! '(("^\\*Python:.*"    :slot 0 :side right :size 40 :select nil :quit nil :transient nil)
                       ("^\\*Python"       :slot 0 :side right :size 40 :select nil :quit nil :ttl nil)
+                      ("^\\*ob-ipython-traceback\\*" :slot 0 :side bottom :select t :quit t :transient t)
                       ("^\\*ob-ipython.*" :slot 2 :side right :size 40 :height 0.2 :select nil :quit nil :transient nil :ttl nil))))
 
 ;; (set-popup-rule! "^\\*Ibuffer\\*"  :select t)
