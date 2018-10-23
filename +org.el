@@ -9,7 +9,7 @@
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ↴ "
-        org-babel-min-lines-for-block-output 2) ; always wrap results in #begin_example
+        org-babel-min-lines-for-block-output 5) ; when to wrap results in #begin_example
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
@@ -75,7 +75,7 @@
   (add-to-list 'image-type-file-name-regexps '("\\.pdf\\'" . imagemagick))
   (add-to-list 'image-file-name-extensions "pdf")
   (setq-local imagemagick-types-inhibit (remove 'PDF imagemagick-types-inhibit))
-  (setq-local org-image-actual-width '(600)))
+  (setq-local org-image-actual-width nil))
 
 ;; Hide source blocks that have the attribute `:hidden'.
 (add-hook! 'org-mode-hook (+boy/hide-source-blocks-maybe))
