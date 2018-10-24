@@ -68,7 +68,8 @@
 (after! latex
   (add-to-list 'font-latex-match-reference-keywords '("graffito" "{"))
   (add-to-list 'font-latex-match-reference-keywords '("autoref" "[{"))
-  (add-to-list 'font-latex-match-reference-keywords '("Autoref" "[{")))
+  (add-to-list 'font-latex-match-reference-keywords '("Autoref" "[{"))
+  (add-to-list 'font-latex-match-reference-keywords '("footref" "{")))
 
 (after! latex
   ;; Macro to replace $$ with \(\)
