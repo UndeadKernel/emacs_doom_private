@@ -11,6 +11,11 @@
   (set-face-attribute 'font-latex-sectioning-4-face nil :height 1.1)
   (set-face-attribute 'font-latex-sectioning-5-face nil :height 1.1))
 
+;; Match the background of latex previews and scale a bit less than the default
+(after! preview
+  (setq preview-scale 1.2)
+  (set-face-attribute 'preview-reference-face nil :background (doom-color 'bg)))
+
 ;(add-hook! 'doom-load-theme-hook)
 ;; (after! font-latex
 ;;   (doom-themes-set-faces nil
