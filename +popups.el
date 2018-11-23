@@ -22,6 +22,12 @@
                       ("^\\*ob-ipython-traceback\\*" :slot 0 :side bottom :select t :quit t :transient t)
                       ("^\\*ob-ipython.*" :slot 2 :side right :size 40 :height 0.2 :select nil :quit nil :transient nil :ttl nil))))
 
+;; Larger customize popups
+(set-popup-rule! "\\*Customize.*:.*" :side 'right :size 100 :select t :quit t :transient t)
+
+;; Taller reference window for RefTeX
+(set-popup-rule! "\\*RefTeX Select\\*" :size 80)
+
 ;; (set-popup-rule! "^\\*Ibuffer\\*"  :select t)
 
 ;; (after! magit
