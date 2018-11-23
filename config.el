@@ -52,6 +52,12 @@
 
 ;; (after! undo-tree
 ;;   (advice-remove #'undo-tree-make-history-save-file-name #'doom*undo-tree-make-history-save-file-name))
+;; Pop mark improvements (http://endlessparentheses.com/faster-pop-to-mark-command.html)
+;; pop mark as in C-u C-SPC C-SPC C-SPC ...
+(setq set-mark-command-repeat-pop t)
+;; Pop until marker actually moves
+(advice-add 'pop-to-mark-command :around #'+boy/multi-pop-to-mark)
+
 
 ;; Show me where I made the last change in a document.
 (def-package! goto-last-change

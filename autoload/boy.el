@@ -43,3 +43,12 @@
                     return (cons pred action)
                     else if (and (stringp pred) (string-match-p pred bname))
                     return (cons pred action))))
+
+;;;###autoload
+(defun +boy/multi-pop-to-mark (orig-fun &rest args)
+  "Call ORIG-FUN until the cursor moves.
+Try the repeated popping up to 10 times."
+  (let ((p (point)))
+    (dotimes (i 10)
+      (when (= p (point))
+        (apply orig-fun args)))))
