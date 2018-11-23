@@ -9,7 +9,8 @@
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ↴ "
-        org-babel-min-lines-for-block-output 5) ; when to wrap results in #begin_example
+        org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
+        org-return-follows-link t) ; RET follows links
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
