@@ -66,6 +66,7 @@
 
 ;; Custom fontifications for commands that might appear in my LaTeX files
 (after! latex
+  (add-to-list 'font-latex-match-reference-keywords '("captionof" "{[{"))
   (add-to-list 'font-latex-match-reference-keywords '("graffito" "{"))
   (add-to-list 'font-latex-match-reference-keywords '("autoref" "[{"))
   (add-to-list 'font-latex-match-reference-keywords '("Autoref" "[{"))
