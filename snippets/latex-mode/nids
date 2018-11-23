@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: NIDS
+# key: nids
+# --
+\ac${1:p}{NIDS}$0

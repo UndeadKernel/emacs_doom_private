@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ids
+# key: ids
+# --
+\ac${1:p}{IDS}$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rnn
+# key: rnn
+# --
+\ac${1:p}{RNN}$0
