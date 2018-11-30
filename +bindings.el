@@ -36,12 +36,7 @@
  "C-x p"   #'+popup/other
  "C-x C-o" #'+boy/switch-to-last-window
  "C-x O"   #'switch-window-then-swap-buffer
- ;; Smart-forward
- "M-<up>"    #'smart-up
- "M-<down>"  #'smart-down
- "M-<left>"  #'smart-backward
- "M-<right>" #'smart-forward
- ;; Restore common editing keys in minibuffer
+  ;; Restore common editing keys in minibuffer
  (:map (minibuffer-local-map
         minibuffer-local-ns-map
         minibuffer-local-completion-map
