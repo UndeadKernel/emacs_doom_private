@@ -4,7 +4,7 @@
 # --
 \begin{figure}[ht]
   \centering
-  \includegraphics[${1:options}]{gfx/${2:path.pdf}}
+  \includegraphics[${1:width=\linewidth}]{gfx/ch_$2/${3:file}}
   \caption{$0}%
-  \label{fig:${3:label}}
+  \label{fig:$2:$3}
 \end{figure}

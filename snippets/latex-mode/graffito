@@ -2,4 +2,4 @@
 # name: graffito
 # key: gr
 # --
-\graffito{$1}$0
+graffito{$1}$0
