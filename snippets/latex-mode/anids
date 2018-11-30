@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: anids
+# key: anids
+# --
+\ac${1:p}{ANIDS}$0
