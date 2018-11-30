@@ -36,6 +36,7 @@
 
        :completion
        (company          ; the ultimate code completion backend
+        +tng
         +childframe)
        ivy               ; a search engine for love and life
       ;helm              ; the *other* search engine for love and life
