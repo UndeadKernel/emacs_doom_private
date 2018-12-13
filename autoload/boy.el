@@ -49,6 +49,6 @@
   "Call ORIG-FUN until the cursor moves.
 Try the repeated popping up to 10 times."
   (let ((p (point)))
-    (dotimes (i 10)
+    (dotimes (_i 10)
       (when (= p (point))
         (apply orig-fun args)))))

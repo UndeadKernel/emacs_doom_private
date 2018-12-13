@@ -1,8 +1,9 @@
 ;;; private/boy/+bindings.el -*- lexical-binding: t; -*-
 
 ;; Change the default key of persp-mode to avoid conflicts with projectile.
-(setq persp-keymap-prefix (kbd "C-c e")
-      projectile-keymap-prefix (kbd "C-c p"))
+(setq persp-keymap-prefix (kbd "C-c e"))
+(after! projectile
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (map!
  "M-x"           #'execute-extended-command
@@ -69,6 +70,7 @@
    :desc "Reload Private Config" "R" #'doom/reload)
  "C-`" #'+popup/toggle
  ;; Org related bindings
+ "C-c o" nil
  (:prefix "C-c o"
    "s"     #'org-caldav-sync
    "a a"   #'org-agenda
@@ -105,9 +107,9 @@
    :desc "Git unstage file"      "U" #'magit-unstage-file
    :desc "Initialize repo"       "I" #'magit-init
    :desc "List repositories"     "L" #'magit-list-repositories
-   :desc "Magit blame"           "b" #'magit-blame
+   :desc "Magit blame"           "b" #'magit-blame-addition
    :desc "Magit buffer log"      "l" #'magit-log-buffer-file
-   :desc "Magit commit"          "c" #'magit-commit
+   :desc "Magit commit"          "c" #'magit-commit-create
    :desc "Magit status"          "g" #'magit-status
    :desc "Next hunk"             "]" #'git-gutter:next-hunk
    :desc "Previous hunk"         "[" #'git-gutter:previous-hunk)
