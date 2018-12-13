@@ -5,5 +5,6 @@
 (package! resize-window)
 (package! www-synonyms)
 (package! ag)
+(package! el-patch)
 
 (package! ob-ipython :recipe (:fetcher github :repo "fuxialexander/ob-ipython" :files ("*.el" "*.py")))
