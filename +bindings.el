@@ -72,6 +72,7 @@
  ;; Org related bindings
  "C-c o" nil
  (:prefix "C-c o"
+   "o"     #'+org/dwim-at-point
    "s"     #'org-caldav-sync
    "a a"   #'org-agenda
    "a t"   #'org-todo-list
