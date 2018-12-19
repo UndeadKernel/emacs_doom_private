@@ -12,6 +12,7 @@
 
 ;; Patch emacs to work with Hunspell 1.7
 ;; ... fixed in git emacs, but I cannot wait
+;; https://github.com/hunspell/hunspell/issues/608#issuecomment-444964747
 (el-patch-feature flyspell)
 (after! flyspell
   (el-patch-defun ispell-find-hunspell-dictionaries ()
