@@ -48,44 +48,44 @@
    "C-a" #'move-beginning-of-line)
  ;; Doom emacs bindings
  (:prefix "C-c d"
-   "d" #'+doom-dashboard/open
-   "f" #'recentf-open-files
+   :desc "Dashboard"                 "d" #'+doom-dashboard/open
+   :desc "Recent files"              "f" #'recentf-open-files
    (:when (featurep! :ui neotree)
-     "n" #'+neotree/open
-     "N" #'neotree/find-this-file)
+   :desc "Open neotree"              "n" #'+neotree/open
+     :desc "File in neotree"         "N" #'neotree/find-this-file)
    (:when (featurep! :ui treemacs)
-     "n" #'+treemacs/toggle
-     "N" #'+treemacs/find-file)
-   "o" #'+popup/other
-   "t" #'+popup/toggle
-   "c" #'+popup/close
-   "C" #'+popup/close-all
-   "r" #'+popup/raise
-   "R" #'+popup/restore
-   "s" #'doom/open-scratch-buffer
-   "S" #'doom/switch-to-scratch-buffer
-   "u" #'doom/sudo-this-file
-   "e" #'+eshell/open-popup
-   "E" #'+eshell/open
-   :desc "Reload Private Config" "R" #'doom/reload)
- "C-`" #'+popup/toggle
+     :desc "Toggle treemacs"         "n" #'+treemacs/toggle
+     :desc "File in treemacs"        "N" #'+treemacs/find-file)
+   :desc "Popup other"               "o" #'+popup/other
+   :desc "Popup toggle"              "t" #'+popup/toggle
+   :desc "Popup close"               "c" #'+popup/close
+   :desc "Popup close all"           "C" #'+popup/close-all
+   :desc "Popup raise"               "r" #'+popup/raise
+   :desc "Popup restore"             "R" #'+popup/restore
+   :desc "Scratch buffer"            "s" #'doom/open-scratch-buffer
+   :desc "Switch to scratch buffer"  "S" #'doom/switch-to-scratch-buffer
+   :desc "Sudo this file"            "u" #'doom/sudo-this-file
+   :desc "Eshell popup"              "e" #'+eshell/open-popup
+   :desc "Eshell open"               "E" #'+eshell/open
+   :desc "Reload Private Config"     "R" #'doom/reload)
+ :desc "Popup toggle"                "C-`" #'+popup/toggle
  ;; Org related bindings
  "C-c o" nil
  (:prefix "C-c o"
-   "o"     #'+org/dwim-at-point
-   "s"     #'org-caldav-sync
-   "a a"   #'org-agenda
-   "a t"   #'org-todo-list
-   "a m"   #'org-tags-view
-   "a v"   #'org-search-view
-   "c"     #'org-capture
-   "C"     (λ! (require 'org-capture) (call-interactively #'org-capture-goto-target))
-   "b"     #'org-iswitchb
-   "e l b" #'org-beamer-export-to-latex
-   "e l B" #'org-beamer-export-as-latex
-   "e l P" #'org-beamer-export-to-pdf
-   "l"     #'org-store-link
-   "b"     #'+boy/org-babel-hydra/body)
+   :desc "Do what I mean"          "o"     #'+org/dwim-at-point
+   :desc "Sync org caldav"         "s"     #'org-caldav-sync
+   :desc "Agenda"                  "a a"   #'org-agenda
+   :desc "Todo list"               "a t"   #'org-todo-list
+   :desc "Tags view"               "a m"   #'org-tags-view
+   :desc "View search"             "a v"   #'org-search-view
+   :desc "Capture"                 "c"     #'org-capture
+   :desc "Goto capture"            "C"     (λ! (require 'org-capture) (call-interactively #'org-capture-goto-target))
+   :desc "Switch org buffers"      "b"     #'org-switchb
+   :desc "Export beamer to latex"  "e l b" #'org-beamer-export-to-latex
+   :desc "Export beamer as latex"  "e l B" #'org-beamer-export-as-latex
+   :desc "Export beamer as pdf"    "e l P" #'org-beamer-export-to-pdf
+   :desc "Link store"              "l"     #'org-store-link
+   :desc "Org hydra"               "b"     #'+boy/org-babel-hydra/body)
  ;; Snippets
  (:prefix "C-c s"
    :desc "New snippet"           "n" #'yas-new-snippet
@@ -116,44 +116,45 @@
    :desc "Previous hunk"         "[" #'git-gutter:previous-hunk)
  ;; Working with windows, workgroups and stuff.
  (:prefix "C-c w"
-   "d" #'+workspace/display
-   "r" #'+workspace/rename
-   "c" #'+workspace/new
-   "k" #'+workspace/delete
-   "s" #'+workspace/save-session
-   "l" #'+workspace/load-session
-   "L" #'+workspace/load-last-session
-   "o" #'doom/kill-other-buffers
-   "u" #'winner-undo
-   "U" #'winner-redo
-   "p" #'+workspace/switch-left
-   "n" #'+workspace/switch-right
-   "h" #'resize-window ; requires private package 'resize-window'
-   "1" (λ! (+workspace/switch-to 0))
-   "2" (λ! (+workspace/switch-to 1))
-   "3" (λ! (+workspace/switch-to 2))
-   "4" (λ! (+workspace/switch-to 3))
-   "5" (λ! (+workspace/switch-to 4))
-   "6" (λ! (+workspace/switch-to 5))
-   "7" (λ! (+workspace/switch-to 6))
-   "8" (λ! (+workspace/switch-to 7))
-   "9" (λ! (+workspace/switch-to 8))
-   "0" #'+workspace/switch-to-last)
+   :desc "Display workspaces"           "d" #'+workspace/display
+   :desc "Rename workspace"             "r" #'+workspace/rename
+   :desc "Create workspace"             "c" #'+workspace/new
+   :desc "Delete workspace"             "k" #'+workspace/delete
+   :desc "Save session"                 "s" (λ! (let ((current-prefix-arg '(4))) (call-interactively #'+workspace/save-session)))
+   :desc "Save workspace"               "S" #'+workspace/save
+   :desc "Load session"                 "l" #'+workspace/load-session
+   :desc "Load last autosaved session"  "L" #'+workspace/load-last-session
+   :desc "Kill other buffers"           "o" #'doom/kill-other-buffers
+   :desc "Undo window config"           "u" #'winner-undo
+   :desc "Redo window config"           "U" #'winner-redo
+   :desc "Switch to left workspace"     "p" #'+workspace/switch-left
+   :desc "Switch to right workspace"    "n" #'+workspace/switch-right
+   :desc "Resize window"                "h" #'resize-window ; requires private package 'resize-window'
+   :desc "Switch to workspace 1"        "1" (λ! (+workspace/switch-to 0))
+   :desc "Switch to workspace 2"        "2" (λ! (+workspace/switch-to 1))
+   :desc "Switch to workspace 3"        "3" (λ! (+workspace/switch-to 2))
+   :desc "Switch to workspace 4"        "4" (λ! (+workspace/switch-to 3))
+   :desc "Switch to workspace 5"        "5" (λ! (+workspace/switch-to 4))
+   :desc "Switch to workspace 6"        "6" (λ! (+workspace/switch-to 5))
+   :desc "Switch to workspace 7"        "7" (λ! (+workspace/switch-to 6))
+   :desc "Switch to workspace 8"        "8" (λ! (+workspace/switch-to 7))
+   :desc "Switch to workspace 9"        "9" (λ! (+workspace/switch-to 8))
+   :desc "Switch to last workspace"     "0" #'+workspace/switch-to-last)
  ;; Multiple Cursors
  (:when (featurep! :editor multiple-cursors)
    (:prefix "C-c m"
-     "l"         #'mc/edit-lines
-     "n"         #'mc/mark-next-like-this
-     "N"         #'mc/unmark-next-like-this
-     "p"         #'mc/mark-previous-like-this
-     "P"         #'mc/unmark-previous-like-this
-     "t"         #'mc/mark-all-like-this
-     "m"         #'mc/mark-all-like-this-dwim
-     "e"         #'mc/edit-ends-of-lines
-     "a"         #'mc/edit-beginnings-of-lines
-     "s"         #'mc/mark-sgml-tag-pair
-     "d"         #'mc/mark-all-like-this-in-defun
-     "<mouse-1>" #'mc/add-cursor-on-click))
+     :desc "Edit lines"         "l"         #'mc/edit-lines
+     :desc "Mark next"          "n"         #'mc/mark-next-like-this
+     :desc "Unmark next"        "N"         #'mc/unmark-next-like-this
+     :desc "Mark previous"      "p"         #'mc/mark-previous-like-this
+     :desc "Unmark previous"    "P"         #'mc/unmark-previous-like-this
+     :desc "Mark all"           "t"         #'mc/mark-all-like-this
+     :desc "Mark all DWIM"      "m"         #'mc/mark-all-like-this-dwim
+     :desc "Edit line endings"  "e"         #'mc/edit-ends-of-lines
+     :desc "Edit line starts"   "a"         #'mc/edit-beginnings-of-lines
+     :desc "Mark tag"           "s"         #'mc/mark-sgml-tag-pair
+     :desc "Mark in defun"      "d"         #'mc/mark-all-like-this-in-defun
+     :desc "Add cursor w/mouse" "<mouse-1>" #'mc/add-cursor-on-click))
 
  ;; Plugins
 
