@@ -2,4 +2,5 @@
 # name: ipython-header
 # key: ipyh
 # --
-#+PROPERTY: header-args:ipython :session ${1:default} :async t :exports both :results output drawer$0
+#+PROPERTY: header-args:ipython :session ${1:default} :async t :exports both :results output drawer
+$0
