@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: results_output
+# key: rout
+# --
+:results output$0

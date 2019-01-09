@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: results_silent
+# key: rsil
+# --
+:results silent$0
