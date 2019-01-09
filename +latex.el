@@ -16,7 +16,8 @@
 
 ;; Do not spellcheck latex documents when opened, this takes a lot of time.
 ;;(remove-hook 'flyspell-mode-hook #'+spellcheck|immediately)
-(setq-hook! 'TeX-mode-hook +spellcheck-immediately nil)
+(after! tex
+  (setq-hook! 'TeX-mode-hook +spellcheck-immediately nil))
 
 ;; Enable whitespace mode with latex
 ;; (add-hook 'LaTeX-mode-hook #'whitespace-mode)
