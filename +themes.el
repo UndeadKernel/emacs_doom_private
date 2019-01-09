@@ -43,7 +43,8 @@
       (set-face-attribute 'org-block-begin-line nil
                           :background "#5c3d5c"
                           ;:foreground "#744d74"
-                          :foreground "#5c3d5c"
+                          ;:foreground "#5c3d5c"
+                          :foreground "#a16ba1"
                           :weight 'bold
                           :height 0.9
                           :box '(:line-width 2 :color "#5c3d5c")))
