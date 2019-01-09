@@ -12,7 +12,8 @@
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
         org-return-follows-link t  ; RET follows links
         org-hide-emphasis-markers t ; do not show format markers
-        ob-async-no-async-languages-alist '("ipython")) ; do not use async with ob-ipython
+        ob-async-no-async-languages-alist '("ipython")  ; do not use async with ob-ipython
+        visual-fill-column-width 120) ; size for usage with visual fill column mode
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
