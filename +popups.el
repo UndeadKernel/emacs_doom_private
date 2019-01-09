@@ -19,8 +19,8 @@
 (after! ob-ipython
   (set-popup-rules! '(("^\\*Python:.*"    :slot 0 :side right :size 40 :select nil :quit nil :transient nil)
                       ("^\\*Python"       :slot 0 :side right :size 40 :select nil :quit nil :ttl nil)
-                      ("^\\*ob-ipython-traceback\\*" :slot 0 :side bottom :select t :quit t :transient t)
-                      ("^\\*ob-ipython.*" :slot 2 :side right :size 40 :height 0.2 :select nil :quit nil :transient nil :ttl nil))))
+                      ("^\\*ob-ipython.*" :slot 2 :side right :size 40 :height 0.2 :select nil :quit nil :transient nil :ttl nil)
+                      ("^\\*ob-ipython-traceback\\*" :slot 0 :side bottom :select t :quit t :transient t))))
 
 ;; Larger customize popups
 (set-popup-rule! "\\*Customize.*:.*" :side 'right :size 100 :select t :quit t :transient t)
