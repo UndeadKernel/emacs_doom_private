@@ -1,5 +1,8 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; Start emacs maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; Font setup
 (setq
       doom-font (font-spec :family "Fira Mono" :size 14)
