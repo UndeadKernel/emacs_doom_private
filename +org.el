@@ -81,5 +81,8 @@
   (setq-local imagemagick-types-inhibit (remove 'PDF imagemagick-types-inhibit))
   (setq-local org-image-actual-width nil))
 
-;; Hide source blocks that have the attribute `:hidden'.
+;; Custom hack: Hide source blocks that have the attribute `:hidden'.
 (add-hook! 'org-mode-hook (+boy/hide-source-blocks-maybe))
+
+;; Enable visual-fill-column-mode by default
+(add-hook! 'org-mode-hook '(visual-fill-column-mode visual-line-mode))
