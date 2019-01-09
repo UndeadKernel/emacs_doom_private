@@ -2,4 +2,4 @@
 # name: autoref
 # key: ar
 # --
-\autoref{$0}
+\autoref{$1}$0

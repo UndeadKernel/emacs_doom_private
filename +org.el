@@ -10,7 +10,9 @@
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ↴ "
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
-        org-return-follows-link t) ; RET follows links
+        org-return-follows-link t  ; RET follows links
+        org-hide-emphasis-markers t ; do not show format markers
+        ob-async-no-async-languages-alist '("ipython")) ; do not use async with ob-ipython
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
