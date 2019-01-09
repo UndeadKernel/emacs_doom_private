@@ -85,7 +85,7 @@
    :desc "Export beamer as latex"  "e l B" #'org-beamer-export-as-latex
    :desc "Export beamer as pdf"    "e l P" #'org-beamer-export-to-pdf
    :desc "Link store"              "l"     #'org-store-link
-   :desc "Org hydra"               "b"     #'+boy/org-babel-hydra/body)
+   :desc "Org hydra"               "h"     #'+boy/org-babel-hydra/body)
  ;; Snippets
  (:prefix "C-c s"
    :desc "New snippet"           "n" #'yas-new-snippet
