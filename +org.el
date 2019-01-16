@@ -12,6 +12,7 @@
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
         org-return-follows-link t  ; RET follows links
         org-hide-emphasis-markers t ; do not show format markers
+        org-startup-with-inline-images t ; open buffers show inline images
         ob-async-no-async-languages-alist '("ipython")  ; do not use async with ob-ipython
         visual-fill-column-width 120) ; size for usage with visual fill column mode
 
@@ -86,3 +87,7 @@
 
 ;; Enable visual-fill-column-mode by default
 (add-hook! 'org-mode-hook '(visual-fill-column-mode visual-line-mode))
+
+;; After evaluating a SRC_BLOCK, redisplay inline images
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
