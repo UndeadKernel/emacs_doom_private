@@ -13,7 +13,7 @@
         org-return-follows-link t  ; RET follows links
         org-hide-emphasis-markers t ; do not show format markers
         org-startup-with-inline-images t ; open buffers show inline images
-        ob-async-no-async-languages-alist '("ipython")  ; do not use async with ob-ipython
+        ob-async-no-async-languages-alist '("ipython" "jupyter") ; do not use async for these languages
         visual-fill-column-width 120) ; size for usage with visual fill column mode
 
   ;; Custom org-capture templates
@@ -91,3 +91,15 @@
 ;; After evaluating a SRC_BLOCK, redisplay inline images
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
+;; (after! org
+;;   (defun org-babel-result-end ()
+;;   "Return the point at the end of the current set of results."
+;;   (cond ((looking-at-p "^[ \t]*$") (point)) ;no result
+;; 	((looking-at-p (format "^[ \t]*%s[ \t]*$" org-bracket-link-regexp))
+;; 	 (line-beginning-position 2))
+;;     (t (save-excursion
+;; 		 (goto-char
+;; 		  (min (point-max)		;for narrowed buffers
+;; 			   (org-element-property :end (org-element-at-point))))
+;; 		 (skip-chars-backward " \r\t\n")
+;; 		 (line-beginning-position 2))))))
