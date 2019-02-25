@@ -5,10 +5,13 @@
 
 ;; Font setup
 (setq
-      doom-font (font-spec :family "Fira Mono" :size 14)
-      doom-variable-pitch-font (font-spec :family "Fira Sans")
-      doom-unicode-font (font-spec :family "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "Fira Mono" :size 19))
+      ;doom-font (font-spec :family "Fira Mono" :size 14)
+      doom-font (font-spec :family "Iosevka" :size 18)
+      ;doom-big-font (font-spec :family "Fira Mono" :size 19)
+      doom-big-font (font-spec :family "Iosevka" :size 28)
+      ;doom-variable-pitch-font (font-spec :family "Fira Sans")
+      ;doom-unicode-font (font-spec :family "DejaVu Sans Mono")
+      )
 
 ;; Prevents the unstyled mode-line flash at startup
 (setq-default mode-line-format nil)
