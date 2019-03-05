@@ -74,4 +74,8 @@
      "M-b" nil
      "M-n" nil
      "M-p" nil)) ; disable key bindings
+ ;; info mode
+ (:map Info-mode-map
+   "M-n" nil ; disable key bindings
+   "M-p" nil)
  )
