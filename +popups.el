@@ -28,6 +28,19 @@
 ;; Taller reference window for RefTeX
 (set-popup-rule! "\\*RefTeX Select\\*" :size 80)
 
+(after! pdf-tools
+  (setq tablist-context-window-display-action
+        '((+popup-display-buffer-stacked-side-window)
+          (side . right)
+          (slot . 2)
+          (window-height . 0.4)
+          (inhibit-same-window . t))
+        pdf-annot-list-display-buffer-action
+        '((+popup-display-buffer-stacked-side-window)
+          (side . right)
+          (slot . 3)
+          (inhibit-same-window . t))))
+
 ;; (set-popup-rule! "^\\*Ibuffer\\*"  :select t)
 
 ;; (after! magit
