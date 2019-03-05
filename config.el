@@ -40,6 +40,10 @@
       kept-old-versions 2
       version-control t)
 
+;; Visual fill column mode by default
+(setq visual-fill-column-width 120)
+(global-visual-fill-column-mode)
+
 ;; Don't save undo-tree history
 (after! undo-tree
   (setq undo-tree-auto-save-history nil))

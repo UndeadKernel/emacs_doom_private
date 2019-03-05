@@ -13,8 +13,9 @@
         org-return-follows-link t  ; RET follows links
         org-hide-emphasis-markers t ; do not show format markers
         org-startup-with-inline-images t ; open buffers show inline images
-        ob-async-no-async-languages-alist '("ipython" "jupyter") ; do not use async for these languages
-        visual-fill-column-width 120) ; size for usage with visual fill column mode
+        ;;ob-async-no-async-languages-alist '("ipython" "jupyter") ; do not use async for these languages
+        ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
+        )
 
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
