@@ -42,7 +42,13 @@
 
 ;; Visual fill column mode by default
 (setq visual-fill-column-width 120)
-(global-visual-fill-column-mode)
+(add-hook! '(text-mode-hook prog-mode-hook) #'visual-fill-column-mode)
+
+;; Window splitting logic
+(setq window-combination-resize t ; after splitting, rebalance windows
+      window-combination-limit nil)
+;; Custom split: always vertical except if average window column < 80
+(setq split-window-preferred-function #'+boy/split-window-sensibly)
 
 ;; Don't save undo-tree history
 (after! undo-tree

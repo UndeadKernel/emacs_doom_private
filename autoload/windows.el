@@ -146,3 +146,22 @@ and redisplays the current buffer there."
       (select-frame frame)
       (select-window win))))
 
+;; https://lists.gnu.org/archive/html/auctex/2015-12/msg00010.html
+;;;###autoload
+(defun +boy/split-window-sensibly (&optional window)
+  "Split vertically except if that would leave the average window horizontal
+size smaller than 80."
+  (let ((root (frame-root-window)))
+    (cond
+     ((>= (/ (window-total-width root)
+             (1+ (window-combinations root t)))
+          80)
+      (split-window window nil 'right))
+     ((and (< (window-combinations root) 2)
+           (>= (/ (window-total-height root)
+                  (1+ (window-combinations root)))
+               20))
+      (split-window window nil 'below))
+     (t
+      (let ((split-height-threshold nil))
+        (split-window-sensibly window))))))
