@@ -9,31 +9,31 @@
  "C-M-q"         #'+boy/unfill-paragraph
  "S-<f1>"        #'+boy/macro-on
  "<f1>"          #'call-last-kbd-macro
- "C-c p p" #'projectile-switch-project
+ "C-c p p"       #'projectile-switch-project
  ;; Editor related bindings
  [remap newline] #'newline-and-indent
  "C-j"           #'+default/newline
  ;; Buffer related bindings
- "s-<left>"    #'+boy/window-move-left
- "s-<right>"   #'+boy/window-move-right
- "s-<up>"      #'+boy/window-move-up
- "s-<down>"    #'+boy/window-move-down
- "C-s-<left>"  #'+boy/window-move-far-left
- "C-s-<right>" #'+boy/window-move-far-right
- "C-s-<up>"    #'+boy/window-move-very-top
- "C-s-<down>"  #'+boy/window-move-very-bottom
+ "s-<left>"      #'+boy/window-move-left
+ "s-<right>"     #'+boy/window-move-right
+ "s-<up>"        #'+boy/window-move-up
+ "s-<down>"      #'+boy/window-move-down
+ "C-s-<left>"    #'+boy/window-move-far-left
+ "C-s-<right>"   #'+boy/window-move-far-right
+ "C-s-<up>"      #'+boy/window-move-very-top
+ "C-s-<down>"    #'+boy/window-move-very-bottom
  ;; Switching windows
- "C-x C-o" #'+boy/switch-to-last-window
+ "C-x C-o"       #'+boy/switch-to-last-window
  (:prefix "C-c w"
-   :desc "Resize window"                "h" #'resize-window) ; requires private package 'resize-window'
+   :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
  ;; Org related bindings
  (:prefix "C-c o"
-   :desc "Org hydra"               "h"     #'+boy/org-babel-hydra/body
-   :desc "Display inline images"   "i"     #'org-display-inline-images)
-   ;; Snippets
-   (:prefix "C-c s"
-     :desc "Find snippet"          "s" #'+default/find-in-snippets
-     :desc "Find snippet for mode" "S" #'+default/browse-snippets)
+   :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body
+   :desc "Display inline images"   "i" #'org-display-inline-images)
+ ;; Snippets
+ (:prefix "C-c s"
+   :desc "Find snippet"          "s" #'+default/find-in-snippets
+   :desc "Find snippet for mode" "S" #'+default/browse-snippets)
 
  ;; Plugins
 
