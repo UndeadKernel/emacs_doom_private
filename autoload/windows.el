@@ -137,14 +137,11 @@ and redisplays the current buffer there."
 
 ;;;###autoload
 (defun +boy/switch-to-last-window ()
-  "Switch to the previously selected window, skipping any other window in between."
+  "Switch to the most recently used window."
   (interactive)
-  (let ((win (get-mru-window t t t)))
-    (unless win (error "Last window not found."))
-    (let ((frame (window-frame win)))
-      (raise-frame frame)
-      (select-frame frame)
-      (select-window win))))
+  (let ((win (get-mru-window nil t t)))
+    (unless win (error "Most recent window not found."))
+    (select-window win)))
 
 ;; https://lists.gnu.org/archive/html/auctex/2015-12/msg00010.html
 ;;;###autoload
