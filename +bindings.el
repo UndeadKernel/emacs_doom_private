@@ -31,9 +31,15 @@
    :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body
    :desc "Display inline images"   "i" #'org-display-inline-images)
  ;; Snippets
- (:prefix "C-c s"
+ (:prefix "C-c &"
    :desc "Find snippet"          "s" #'+default/find-in-snippets
    :desc "Find snippet for mode" "S" #'+default/browse-snippets)
+ ;; Terminal
+ (:leader
+   "`"   nil) ; overwrite opening a terminal with this key
+ (:prefix "C-c t"
+   "t"  #'+eshell/open-popup
+   "T"  #'+eshell/open)
 
  ;; Plugins
 
