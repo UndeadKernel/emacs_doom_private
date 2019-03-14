@@ -1,5 +1,14 @@
 ;;; +ui.el -*- lexical-binding: t; -*-
 
+;; Modeline config
+(setq doom-modeline-icon t
+      doom-modeline-major-mode-icon t
+      doom-modeline-minor-modes nil
+      doom-modeline-enable-word-count t
+      doom-modeline-checker-simple-format t
+      doom-modeline-persp-name t
+      doom-modeline-lsp t)
+
 ;; Show trailing white spaces
 (setq show-trailing-whitespace t)
 
