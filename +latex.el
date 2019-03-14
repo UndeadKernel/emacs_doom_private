@@ -95,3 +95,10 @@
     (map! :map orgtbl-mode-map
           "C-c o s"  #'+boy/print-table-send-cmd
           "C-c o r"  #'+boy/print-table-rcv-cmd)))
+
+;; TextLint support in flycheck for LaTeX
+(when (featurep! :tools flycheck)
+  (after! flycheck
+    (setq flycheck-textlint-plugin-alist
+          '((latex-mode . "textlint-plugin-latex")))))
+
