@@ -45,6 +45,15 @@
 
  ;; Misc plugins
  "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
+ ;; pdf-tools
+ (:after pdf-tools
+   (:map pdf-view-mode-map
+     "q"   #'pdf-annot-add-highlight-markup-annotation
+     "w"   #'pdf-annot-add-text-annotation
+     "e"   #'pdf-annot-add-underline-markup-annotation
+     "r"   #'pdf-annot-add-squiggly-markup-annotation
+     "t"   #'pdf-annot-attachment-dired
+     "D"   #'pdf-annot-delete))
  ;; switch-window
  (:after switch-window
    (:when (featurep! :ui window-select +switch-window)
