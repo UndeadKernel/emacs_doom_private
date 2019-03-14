@@ -18,14 +18,19 @@
 
 ;; Color the border of windows according to the `highlight' color of the doom's theme
 (add-hook! 'doom-load-theme-hook
+  ;; A more visible window border
   (set-face-attribute 'vertical-border nil :foreground (doom-color 'highlight))
-  (after! org
-    (when (custom-theme-enabled-p 'doom-one)
+  ;; Flycheck errors use the color of functions
+  (after! flycheck
+      (set-face-attribute 'flycheck-error nil
+                          :underline `(:color ,(doom-color 'functions)
+                                       :style wave)))
+  ;; Custom doom-one configuration
+  (when (custom-theme-enabled-p 'doom-one)
+    (after! org
       ;; Purple boxes for Org BEGIN_SRC and END_SRC
       (set-face-attribute 'org-block-begin-line nil
                           :background "#5c3d5c"
-                          ;:foreground "#744d74"
-                          ;:foreground "#5c3d5c"
                           :foreground "#a16ba1"
                           :weight 'bold
                           :height 0.9
