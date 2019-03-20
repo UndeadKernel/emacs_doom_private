@@ -28,6 +28,7 @@
    :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
  ;; Org related bindings
  (:prefix "C-c o"
+   :desc "Do what I mean"          "o" #'+org/dwim-at-point
    :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body
    :desc "Display inline images"   "i" #'org-display-inline-images)
  ;; Snippets
@@ -35,12 +36,14 @@
    :desc "Find snippet"          "s" #'+default/find-in-snippets
    :desc "Find snippet for mode" "S" #'+default/browse-snippets)
  ;; Terminal
- (:leader
-   "`"   nil) ; overwrite opening a terminal with this key
  (:prefix "C-c t"
    "t"  #'+eshell/open-popup
    "T"  #'+eshell/open)
-
+ ;; Unbindings
+ (:leader
+   "`"   nil ; overwrite opening a terminal with this key
+   "C-f"  nil) ; unbind projectile find file
+ 
  ;; Plugins
 
  ;; Misc plugins
@@ -81,8 +84,9 @@
  ;; flyspell
  (:after flyspell
    (:map flyspell-mode-map
-     "C-;" nil ; Do not override
-     "C-M-i" #'flyspell-auto-correct-previous-word))
+     "C-;"   nil ; Do not override
+     "C-M-i" #'flyspell-correct-wrapper
+     "M-i"   #'flyspell-auto-correct-previous-word))
  ;; latex
  (:after latex
    (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
