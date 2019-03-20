@@ -74,6 +74,8 @@
 ;; Pop until marker actually moves
 (advice-add 'pop-to-mark-command :around #'+boy/multi-pop-to-mark)
 
+;; Enable narrow to region
+(put 'narrow-to-region 'disabled nil)
 
 ;; ---------------------------------------------------------------------------------
 ;; Additional Packages
