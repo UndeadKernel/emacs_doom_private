@@ -57,23 +57,23 @@ the line."
   (delete-region
    (point)
    (progn
-	 (if arg
-		 (forward-visible-line (prefix-numeric-value arg))
-	   (if (eobp)
-		   (signal 'end-of-buffer nil))
-	   (let ((end
-			  (save-excursion
-			    (end-of-visible-line) (point))))
-		 (if (or (save-excursion
-			       ;; If trailing whitespace is visible,
-			       ;; don't treat it as nothing.
-			       (unless show-trailing-whitespace
-				     (skip-chars-forward " \t" end))
-			       (= (point) end))
-			     (and kill-whole-line (bolp)))
-			 (forward-visible-line 1)
-		   (goto-char end))))
-	 (point))))
+     (if arg
+         (forward-visible-line (prefix-numeric-value arg))
+       (if (eobp)
+           (signal 'end-of-buffer nil))
+       (let ((end
+              (save-excursion
+                (end-of-visible-line) (point))))
+         (if (or (save-excursion
+                   ;; If trailing whitespace is visible,
+                   ;; don't treat it as nothing.
+                   (unless show-trailing-whitespace
+                     (skip-chars-forward " \t" end))
+                   (= (point) end))
+                 (and kill-whole-line (bolp)))
+             (forward-visible-line 1)
+           (goto-char end))))
+     (point))))
 
 ; Functions to easily toggle the recording of macros.
 (defun +boy/macro-on ()
