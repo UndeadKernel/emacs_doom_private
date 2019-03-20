@@ -4,13 +4,13 @@
 (setq flycheck-emacs-lisp-load-path '("./"))
 
 ;; Choose hunspell as our spell checker
-(setq ispell-program-name "/usr/bin/hunspell")
-(setq flyspell-issue-welcome-flag nil)
-(setq ispell-local-dictionary-alist
-      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
-(setq ispell-local-dictionary "en_US")
+;; (setq ispell-program-name "/usr/bin/hunspell")
+;; (setq flyspell-issue-welcome-flag nil)
+;; (setq ispell-local-dictionary-alist
+;;       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+;; (setq ispell-local-dictionary "en_US")
 
-;; Patch emacs to work with Hunspell 1.7
+;; patch emacs to work with Hunspell 1.7
 ;; ... fixed in git emacs, but I cannot wait
 ;; https://github.com/hunspell/hunspell/issues/608#issuecomment-444964747
 (el-patch-feature flyspell)
