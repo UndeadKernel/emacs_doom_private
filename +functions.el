@@ -1,31 +1,16 @@
 ;;; +functions.el --- My Own Awesome™ Functions
 
-;; Scroll and recenter
-;; (defun +boy/down-scroll ()
-;;   "Scroll down and center the screen"
-;;   (interactive)
-;;   (forward-line)
-;;   (recenter))
-
-;; ;; Smooth scroll up
-;; (defun +boy/up-scroll ()
-;;   "Scroll up and center the screen"
-;;   (interactive)
-;;   (previous-line 1 1)
-;;   (recenter))
-
 (defun +boy/up-scroll (n)
   "Scroll up marker and line N times."
   (interactive "p")
-  (line-move (* -1 n))
-  (unless (eq (window-start) (point-min))
+  (if (= (window-start) (point-min))
+      (forward-line (- n))
     (scroll-down n)))
 
 (defun +boy/down-scroll (n)
   "Scroll down marker and line N times."
   (interactive "p")
-  (line-move n)
-  (unless (eq (window-end) (point-max))
+  (let ((scroll-margin 0))
     (scroll-up n)))
 
 ;; Delete a word forward without pasting in the kill-region
