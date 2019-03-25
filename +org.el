@@ -1,6 +1,6 @@
 ;;; private/boy/+org.el -*- lexical-binding: t; -*-
 
-(setq +org-dir "~/Documents/org/")
+(setq org-directory "~/Documents/org/")
 
 ;; ORG config
 (after! org
