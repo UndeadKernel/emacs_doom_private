@@ -50,8 +50,6 @@
 ;; Custom split: always vertical except if average window column < 80
 (setq split-window-preferred-function #'+boy/split-window-sensibly)
 
-;;keep cursor at same position when scrolling
-(setq scroll-preserve-screen-position 1)
 
 ;; Don't save undo-tree history
 (after! undo-tree
