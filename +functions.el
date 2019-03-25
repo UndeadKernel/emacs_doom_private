@@ -3,15 +3,22 @@
 (defun +boy/up-scroll (n)
   "Scroll up marker and line N times."
   (interactive "p")
-  (if (= (window-start) (point-min))
-      (forward-line (- n))
-    (scroll-down n)))
+  (line-move-visual (* -1 n) t)
+  (unless (eq (window-start) (point-min))
+    (recenter (1+
+               (count-screen-lines
+                (save-excursion (beginning-of-visual-line))
+                (window-start))))))
 
 (defun +boy/down-scroll (n)
   "Scroll down marker and line N times."
   (interactive "p")
+  (line-move-visual n t)
   (let ((scroll-margin 0))
-    (scroll-up n)))
+    (recenter (1-
+               (count-screen-lines
+                (save-excursion (beginning-of-visual-line))
+                (window-start))))))
 
 ;; Delete a word forward without pasting in the kill-region
 (defun +boy/delete-word (arg)
