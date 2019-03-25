@@ -50,6 +50,8 @@
 ;; Custom split: always vertical except if average window column < 80
 (setq split-window-preferred-function #'+boy/split-window-sensibly)
 
+;; Scrolling commands do not cancel isearch
+(setq isearch-allow-scroll t)
 
 ;; Don't save undo-tree history
 (after! undo-tree
