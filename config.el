@@ -41,8 +41,8 @@
       version-control t)
 
 ;; Visual fill column mode by default
-(setq visual-fill-column-width 120)
-(add-hook! '(text-mode-hook prog-mode-hook) #'visual-fill-column-mode)
+;; (setq visual-fill-column-width 120)
+;; (add-hook! '(text-mode-hook prog-mode-hook) #'visual-fill-column-mode)
 
 ;; Window splitting logic
 (setq window-combination-resize t ; after splitting, rebalance windows
