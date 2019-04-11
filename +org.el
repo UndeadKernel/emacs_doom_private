@@ -17,6 +17,9 @@
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
         )
 
+  ;; Do not enable auto-fill-mode by default
+  (remove-hook 'org-mode-hook #'auto-fill-mode)
+
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
                '("h" "Templates for Thesis related info"))
@@ -86,11 +89,11 @@
 ;; Custom hack: Hide source blocks that have the attribute `:hidden'.
 (add-hook! 'org-mode-hook (+boy/hide-source-blocks-maybe))
 
-;; Enable visual-fill-column-mode by default
-(add-hook! 'org-mode-hook '(visual-fill-column-mode visual-line-mode))
+;; Enable flyspell
+(add-hook 'org-mode-hook #'flyspell-mode)
 
 ;; After evaluating a SRC_BLOCK, redisplay inline images
-(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+(add-hook 'org-babel-after-execute-hook #'org-redisplay-inline-images)
 
 ;; (after! org
 ;;   (defun org-babel-result-end ()
