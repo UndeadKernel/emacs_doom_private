@@ -22,6 +22,9 @@
  "C-s-<right>"   #'+boy/window-move-far-right
  "C-s-<up>"      #'+boy/window-move-very-top
  "C-s-<down>"    #'+boy/window-move-very-bottom
+ ;; Creating empty buffers
+ (:prefix "C-c f"
+   :desc "New empty buffer" "n" #'+boy/new-buffer)
  ;; Switching windows
  "C-x C-o"       #'+boy/switch-to-last-window
  (:prefix "C-c w"
