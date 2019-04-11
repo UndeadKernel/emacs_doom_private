@@ -48,6 +48,13 @@
 
  ;; Misc plugins
  "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
+  ;; magit
+ (:after magit
+   (:map magit-mode-map
+     "M-n"     nil ; do not overwrite
+     "M-p"     nil
+     "C-c C-n" #'magit-section-forward-sibling
+     "C-c C-p" #'magit-section-backward-sibling))
  ;; pdf-tools
  (:after pdf-tools
    (:map pdf-view-mode-map
@@ -109,3 +116,13 @@
    "M-n" nil ; disable key bindings
    "M-p" nil)
  )
+
+;; eshell
+(defun +boy|setup-eshell-bindings ()
+  (map!
+   (:map eshell-mode-map
+     "M-p" nil
+     "M-n" nil
+     "C-p" #'eshell-previous-matching-input-from-input
+     "C-n" #'eshell-next-matching-input-from-input)))
+(add-hook 'eshell-first-time-mode-hook #'+boy|setup-eshell-bindings)
