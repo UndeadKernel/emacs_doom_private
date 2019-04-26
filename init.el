@@ -96,6 +96,8 @@
        (flycheck         ; tasing you for every semicolon you forget
         +childframe)
        flyspell          ; tasing you for misspelling mispelling
+       (flyspell         ; tasing you for misspelling mispelling
+        +hunspell)
        gist              ; interacting with github gists
        ;;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
