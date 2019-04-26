@@ -5,6 +5,7 @@
  "M-p"           #'+boy/up-scroll
  "M-d"           #'+boy/delete-word
  "<M-backspace>" #'+boy/backward-delete-word
+ "<C-backspace>" #'+boy/backward-delete-word
  "C-k"           #'+boy/kill-line
  "C-M-q"         #'+boy/unfill-paragraph
  "S-<f1>"        #'+boy/macro-on
@@ -24,6 +25,7 @@
  "C-s-<down>"    #'+boy/window-move-very-bottom
  ;; Creating empty buffers
  (:prefix "C-c f"
+   :desc "Move this file"   "m" #'doom/move-this-file
    :desc "New empty buffer" "n" #'+boy/new-buffer)
  ;; Switching windows
  "C-x C-o"       #'+boy/switch-to-last-window
