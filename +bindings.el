@@ -73,11 +73,12 @@
  (:after switch-window
    (:when (featurep! :ui window-select +switch-window)
      "C-x O"         #'switch-window-then-swap-buffer
+     "C-x 4 1"       #'switch-window-then-maximize
      "C-x 4 d"       #'switch-window-then-dired
      "C-x 4 f"       #'switch-window-then-find-file
-     "C-x 4 m"       #'switch-window-then-compose-mail
      "C-x 4 o"       #'switch-window-then-display-buffer
-     "C-x 4 0"       #'switch-window-then-kill-buffer
+     "C-x 4 0"       #'switch-window-then-delete
+     "C-x 4 k"       #'switch-window-then-kill-buffer
      (:when (featurep! :ui popup)
        "C-x o"         #'+boy/switch-window
        "C-x p"         (lambda () (interactive) (+boy/switch-window t)))))
