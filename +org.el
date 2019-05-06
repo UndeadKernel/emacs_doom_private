@@ -15,7 +15,7 @@
         org-startup-with-inline-images t ; open buffers show inline images
         ;;ob-async-no-async-languages-alist '("ipython" "jupyter") ; do not use async for these languages
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
-        )
+        org-babel-default-header-args:sh '((:results . "verbatim")))
 
   ;; Do not enable auto-fill-mode by default
   (remove-hook 'org-mode-hook #'auto-fill-mode)
