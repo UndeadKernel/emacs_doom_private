@@ -20,6 +20,9 @@
   ;; Do not enable auto-fill-mode by default
   (remove-hook 'org-mode-hook #'auto-fill-mode)
 
+  ;; Do not move my buffer after cycling visibility
+  (remove-hook 'org-cycle-hook #'org-optimize-window-after-visibility-change)
+
   ;; Custom org-capture templates
   (add-to-list 'org-capture-templates
                '("h" "Templates for Thesis related info"))
