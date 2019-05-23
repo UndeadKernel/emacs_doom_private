@@ -53,7 +53,11 @@
 
  ;; Misc plugins
  "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
-  ;; magit
+ ;; smartparens
+ (:after smartparens
+   (:map smartparens-mode-map
+     "M-(" #'sp-wrap-round))
+ ;; magit
  (:after magit
    (:map magit-mode-map
      "M-n"     nil ; do not overwrite
