@@ -23,36 +23,58 @@
  "C-s-<right>"   #'+boy/window-move-far-right
  "C-s-<up>"      #'+boy/window-move-very-top
  "C-s-<down>"    #'+boy/window-move-very-bottom
- ;; Creating empty buffers
- (:prefix "C-c f"
-   :desc "Move this file"   "m" #'doom/move-this-file
-   :desc "New empty buffer" "n" #'+boy/new-buffer)
  ;; Switching windows
  "C-x C-o"       #'+boy/switch-to-last-window
- (:prefix "C-c w"
-   :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
- ;; Org related bindings
- (:prefix "C-c o"
-   :desc "Do what I mean"          "o" #'+org/dwim-at-point
-   :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body
-   :desc "Display inline images"   "i" #'org-display-inline-images)
- ;; Snippets
- (:prefix "C-c &"
-   :desc "Find snippet"          "s" #'+default/find-in-snippets
-   :desc "Find snippet for mode" "S" #'+default/browse-snippets)
- ;; Terminal
- (:prefix "C-c t"
-   "t"  #'+eshell/open-popup
-   "T"  #'+eshell/open)
- ;; Unbindings
  (:leader
-   "`"   nil ; overwrite opening a terminal with this key
-   "C-f"  nil) ; unbind projectile find file
- 
+   (:prefix-map ("f" . "file")
+     :desc "Move this file"   "m" #'doom/move-this-file
+     ;; Creating empty buffers
+     :desc "New empty buffer" "n" #'+boy/new-buffer)
+   (:prefix-map ("w" . "workspaces/windows")
+     :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
+   ;; Org related bindings
+   (:prefix-map ("o". "org")
+     :desc "Do what I mean"          "o" #'+org/dwim-at-point
+     :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body
+     :desc "Display inline images"   "i" #'org-display-inline-images)
+   ;; Snippets
+   (:prefix-map ("&" . "snippets")
+     :desc "Find snippet"          "s" #'+default/find-in-snippets
+     :desc "Find snippet for mode" "S" #'+default/browse-snippets)
+   ;; Terminal
+   (:prefix-map ("t" . "terminal")
+     "t"  #'+eshell/toggle
+     "T"  #'+eshell/here)
+   ;; Lookup
+   (:when (featurep! :tools lookup)
+     (:prefix-map ("g" . "lookup")
+       "k" #'+lookup/documentation
+       "d" #'+lookup/definition
+       "D" #'+lookup/references
+       "f" #'+lookup/file
+       "o" #'+lookup/online-select
+       "i" #'+lookup/in-docsets
+       "I" #'+lookup/in-all-docsets))
+   ;; Unbindings
+   "`"    nil ; overwrite opening a terminal with this key
+   "C-f"  nil ; unbind projectile find file
+   (:after eww
+     (:map eww-mode-map
+       "M-p" nil
+       "M-n" nil)))
+
  ;; Plugins
 
  ;; Misc plugins
  "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
+ ;; objed
+ "M-o"     #'objed-activate-object
+ "M-["     #'objed-beg-of-object-at-point
+ "M-]"     #'objed-end-of-object-at-point
+ "C-,"     #'objed-prev-identifier
+ "C-."     #'objed-next-identifier
+ "C-<"     #'objed-first-identifier
+ "C->"     #'objed-last-identifier
  ;; smartparens
  (:after smartparens
    (:map smartparens-mode-map
