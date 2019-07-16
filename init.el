@@ -16,6 +16,8 @@
 ;; Prevents the unstyled mode-line flash at startup
 (setq-default mode-line-format nil)
 
+;; Select and raise the frame, always
+(select-frame-set-input-focus (selected-frame))
 
 ;; Select popup buffers by default
 (setq +popup-defaults
@@ -26,7 +28,10 @@
         :select t
         :ttl    5))
 
-(doom!
+(doom! :input
+       ;;chinese
+       ;;japanese
+
        :completion
        (company          ; the ultimate code completion backend
         +childframe)
@@ -57,7 +62,8 @@
        ;;unicode         ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       (window-select +switch-window)  ; visually switch windows
+       (window-select    ; visually switch windows
+        +switch-window)
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :editor
@@ -67,6 +73,8 @@
        ;;(format +onsave) ; automated prettiness
        ;;lispy           ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
+       (objed            ; text object editing for the innocent
+        +manual)
        ;;parinfer        ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
@@ -77,10 +85,12 @@
         +icons           ; colorful icons for dired-mode
         )
        electric          ; smarter, keyword-based electric-indent
-       eshell            ; a consistent, cross-platform shell (WIP)
-       imenu             ; an imenu sidebar and searchable code index
-       term              ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
+
+       :term
+       eshell            ; a consistent, cross-platform shell (WIP)
+       ;;term              ; terminals in Emacs
+       ;;vterm             ; another terminals in Emacs
 
        :tools
        ;;ansible
@@ -96,13 +106,12 @@
         +hunspell)
        gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
-        +devdocs         ; ...on devdocs.io online
         +docsets)        ; ...or in Dash docsets locally
        ;;lsp
        ;;macos             ; MacOS-specific commands
+       magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
-       magit
-       ;;password-store    ; password manager for nerds
+       ;;pass              ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb             ; creating color strings
@@ -110,13 +119,12 @@
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
-       ;;vterm             ; another terminals in Emacs
 
        :lang
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
        ;;(cc +irony +rtags); C/C++/Obj-C madness
-       ;;clojure           ; java with a lisp
+       clojure             ; java with a lisp
        common-lisp         ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
@@ -127,6 +135,7 @@
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        ;;ess               ; emacs speaks statistics
+       ;;fsharp           ; ML stands for Microsoft's Language
        ;;go                ; the hipster dialect
        ;;(haskell +intero) ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
@@ -143,15 +152,10 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
-        +attach            ; custom attachment system
-        +babel             ; running code in org
-        +capture           ; org-capture in and outside of Emacs
-        +export            ; Exporting org to whatever you want
-        ;;+habit           ; Keep track of your habits
-        +present           ; Emacs for presentations
-        +publish
-        +right-popup
-        )
+        +dragndrop       ; file drag & drop support
+        ;;+ipython         ; ipython support for babel
+        +pandoc          ; pandoc integration into org's exporter
+        +present)        ; using Emacs for presentations
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
