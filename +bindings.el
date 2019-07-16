@@ -131,8 +131,9 @@
 (defun +boy|setup-eshell-bindings ()
   (map!
    (:map eshell-mode-map
-     "M-p" nil
-     "M-n" nil
-     "C-p" #'eshell-previous-matching-input-from-input
-     "C-n" #'eshell-next-matching-input-from-input)))
+     "RET"     #'+boy/eshell-gotoend-or-send
+     "C-e"     #'end-of-line
+     "C-d"     #'+eshell/quit-or-delete-char
+     "TAB"     #'+eshell/pcomplete
+     [tab]     #'+eshell/pcomplete)))
 (add-hook 'eshell-first-time-mode-hook #'+boy|setup-eshell-bindings)

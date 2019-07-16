@@ -25,6 +25,10 @@
 (load! "+feature")
 ;; Config of DOOM completion
 (load! "+completion")
+;; Config of DOOM editor
+(load! "+editor")
+;; Config of DOOM term
+(load! "+term")
 
 ;; Smooth mouse scrolling
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
