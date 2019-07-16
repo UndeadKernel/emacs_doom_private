@@ -7,6 +7,7 @@
       doom-modeline-enable-word-count t
       doom-modeline-checker-simple-format t
       doom-modeline-persp-name t
+      doom-modeline-persp-name-icon t
       doom-modeline-lsp t)
 
 ;; Show trailing white spaces
