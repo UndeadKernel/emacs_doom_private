@@ -2,8 +2,7 @@
 
 (setq eshell-hist-ignoredups t
       eshell-cmpl-cycle-completions nil
-      eshell-cmpl-ignore-case t
-      eshell-ask-to-save-history (quote always))
+      eshell-cmpl-ignore-case t)
 
 (defun +boy/eshell-gotoend-or-send ()
     "In eshell, either go to the end of the buffer or, if point
