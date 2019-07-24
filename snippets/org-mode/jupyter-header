@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: jupyter-header
+# key: jyh
+# --
+#+PROPERTY: header-args:jupyter-python :session ${1:default} :async yes :exports both :results output
+$0

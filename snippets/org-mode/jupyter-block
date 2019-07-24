@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jupyter-block
+# key: jy
+# --
+#+begin_src jupyter-python
+$0
+#+end_src
