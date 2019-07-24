@@ -108,3 +108,17 @@
   :init
   (setq ag-highlight-search t
         ag-reuse-buffers t))
+
+(def-package! jupyter
+  ;; :load-path ("~/src/emacs-jupyter" "~/src/emacs-zmq")
+  :after org
+  :config
+  (after! ob-async
+    (add-to-list 'ob-async-no-async-languages-alist "jupyter-python"))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     ;; (julia . t)
+     (python . t)
+     (jupyter . t))))
+
