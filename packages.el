@@ -11,3 +11,5 @@
 (package! jupyter)
 (package! websocket)
 (package! zmq)
+
+(package! pacfiles-mode)

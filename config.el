@@ -122,3 +122,8 @@
      (python . t)
      (jupyter . t))))
 
+
+(def-package! pacfiles-mode
+  :commands (pacfiles pacfiles-start)
+  :config
+  (set-popup-rule! "^\\*pacfiles.*" :ignore t))
