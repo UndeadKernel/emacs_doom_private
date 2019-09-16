@@ -113,6 +113,9 @@
 (use-package! jupyter
   ;; :load-path ("~/src/emacs-jupyter" "~/src/emacs-zmq")
   :after org
+  :init
+  ;; use overlays in jupyter-scratch to show evaluation results
+  (setq jupyter-eval-use-overlays t)
   :config
   (after! ob-async
     (add-to-list 'ob-async-no-async-languages-alist "jupyter-python"))
