@@ -87,7 +87,7 @@
   (add-to-list 'image-type-file-name-regexps '("\\.pdf\\'" . imagemagick))
   (add-to-list 'image-file-name-extensions "pdf")
   (setq-local imagemagick-types-inhibit (remove 'PDF imagemagick-types-inhibit))
-  (setq-local org-image-actual-width nil))
+  (setq-local org-image-actual-width '(300)))
 
 ;; Custom hack: Hide source blocks that have the attribute `:hidden'.
 (add-hook! 'org-mode-hook (+boy/hide-source-blocks-maybe))
@@ -102,11 +102,11 @@
 ;;   (defun org-babel-result-end ()
 ;;   "Return the point at the end of the current set of results."
 ;;   (cond ((looking-at-p "^[ \t]*$") (point)) ;no result
-;; 	((looking-at-p (format "^[ \t]*%s[ \t]*$" org-bracket-link-regexp))
-;; 	 (line-beginning-position 2))
+;;    ((looking-at-p (format "^[ \t]*%s[ \t]*$" org-bracket-link-regexp))
+;;     (line-beginning-position 2))
 ;;     (t (save-excursion
-;; 		 (goto-char
-;; 		  (min (point-max)		;for narrowed buffers
-;; 			   (org-element-property :end (org-element-at-point))))
-;; 		 (skip-chars-backward " \r\t\n")
-;; 		 (line-beginning-position 2))))))
+;;       (goto-char
+;;        (min (point-max)    ;for narrowed buffers
+;;           (org-element-property :end (org-element-at-point))))
+;;       (skip-chars-backward " \r\t\n")
+;;       (line-beginning-position 2))))))
