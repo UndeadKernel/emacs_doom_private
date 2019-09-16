@@ -17,6 +17,7 @@
 ;; Configuration of DOOM lang
 (load! "+latex")
 (load! "+org")
+(load! "+lang")
 ;; Configuration of DOOM tools
 (load! "+tools")
 ;; Configuration of DOOM ui
