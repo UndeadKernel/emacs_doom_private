@@ -85,7 +85,7 @@
                36 return backspace 25] 0 "%d")) arg))))
 
 ;; Load the org table package
-(def-package! org-table ;; internal package
+(use-package! org-table ;; internal package
   :commands (orgtbl-mode)
   :init
   ;(add-hook! LaTeX-mode #'orgtbl-mode)

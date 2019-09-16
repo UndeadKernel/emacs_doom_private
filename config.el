@@ -90,27 +90,27 @@
 ;; ---------------------------------------------------------------------------------
 
 ;; Show me where I made the last change in a document.
-(def-package! goto-last-change
+(use-package! goto-last-change
   :commands goto-last-change)
 
 ;; Resize windows interactively.
-(def-package! resize-window
+(use-package! resize-window
   :commands (resize-window))
 
 ;; Latex synonyms
-(def-package! www-synonyms
+(use-package! www-synonyms
   :if (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
   :commands (www-synonyms-insert-synonym www-synonyms-change-language)
   :config
   (setq www-synonyms-key boy--synonyms-key))
 
-(def-package! ag
+(use-package! ag
   :defer t
   :init
   (setq ag-highlight-search t
         ag-reuse-buffers t))
 
-(def-package! jupyter
+(use-package! jupyter
   ;; :load-path ("~/src/emacs-jupyter" "~/src/emacs-zmq")
   :after org
   :config
@@ -124,7 +124,7 @@
      (jupyter . t))))
 
 
-(def-package! pacfiles-mode
+(use-package! pacfiles-mode
   :commands (pacfiles pacfiles-start)
   :config
   (set-popup-rule! "^\\*pacfiles.*" :ignore t))
