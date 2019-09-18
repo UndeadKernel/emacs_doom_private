@@ -120,10 +120,17 @@
      "M-RET" #'srefactor-refactor-at-point)
    (:map c-mode-map
      "M-RET" #'srefactor-refactor-at-point))
+ ;; org
+ (:after org
+   (:map org-mode-map
+     ;; unset for objed)
+     "C-,"   nil))
  ;; flyspell
  (:after flyspell
    (:map flyspell-mode-map
      "C-;"   nil ; Do not override
+     "C-,"   nil ; unset for objed
+     "C-."   nil ; unset for objed
      "C-M-i" #'flyspell-correct-wrapper
      "M-i"   #'flyspell-auto-correct-previous-word))
  ;; latex
