@@ -1,5 +1,8 @@
 ;;; private/boy/+bindings.el -*- lexical-binding: t; -*-
 
+(map! "C-z" nil)
+(setq doom-localleader-alt-key "C-z")
+
 (map!
  "M-n"           #'+boy/down-scroll
  "M-p"           #'+boy/up-scroll
@@ -88,7 +91,7 @@
      "C-c C-p" #'magit-section-backward-sibling))
  ;; pdf-tools
  (:after pdf-tools
-   (:map pdf-view-mode-map
+   (:map pdf-annot-minor-mode-map
      "q"   #'pdf-annot-add-highlight-markup-annotation
      "w"   #'pdf-annot-add-text-annotation
      "e"   #'pdf-annot-add-underline-markup-annotation

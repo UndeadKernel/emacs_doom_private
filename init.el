@@ -48,19 +48,21 @@
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       ;;fill-column       ; a `fill-column' indicator
+       ;;fill-column     ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree         ; a project drawer, like NERDTree for vim
-       ophints           ; highlight the region an operation acts on
+       ;;ophints         ; highlight the region an operation acts on
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
-       ;;pretty-code     ; replace bits of code with pretty symbols
-       ;;tabs              ; an tab bar for Emacs
+       (pretty-code      ; replace bits of code with pretty symbols
+        +iosevka
+        )
+       ;;tabs            ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        ;;unicode         ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
@@ -92,17 +94,17 @@
 
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
-       ;;shell             ; a terminal REPL for Emacs
-       ;;term              ; terminals in Emacs
-       ;;vterm             ; another terminals in Emacs
+       ;;shell           ; a terminal REPL for Emacs
+       ;;term            ; terminals in Emacs
+       ;;vterm           ; another terminals in Emacs
 
        :tools
        ;;ansible
        debugger        ; FIXME stepping through code, to help you add bugs
        ;;direnv
        ;;docker
-       ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ;;editorconfig    ; let someone else argue about tabs vs spaces
+       ;;ein             ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
        (flycheck         ; tasing you for every semicolon you forget
         +childframe)
@@ -112,14 +114,14 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
        lsp
-       ;;macos             ; MacOS-specific commands
+       ;;macos           ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
-       ;;pass              ; password manager for nerds
+       ;;pass            ; password manager for nerds
        pdf               ; pdf enhancements
-       ;;prodigy           ; FIXME managing external services & code builders
+       ;;prodigy         ; FIXME managing external services & code builders
        ;;rgb             ; creating color strings
-       ;;terraform         ; infrastructure as code
+       ;;terraform       ; infrastructure as code
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
@@ -128,7 +130,7 @@
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
        ;;(cc +irony +rtags); C/C++/Obj-C madness
-       (clojure +lsp)             ; java with a lisp
+       (clojure)           ; java with a lisp
        common-lisp         ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
@@ -139,7 +141,7 @@
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        ;;ess               ; emacs speaks statistics
-       ;;fsharp           ; ML stands for Microsoft's Language
+       ;;fsharp            ; ML stands for Microsoft's Language
        ;;go                ; the hipster dialect
        ;;(haskell +intero) ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
@@ -156,10 +158,10 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
-        +dragndrop       ; file drag & drop support
+        +dragndrop         ; file drag & drop support
         ;;+ipython         ; ipython support for babel
-        +pandoc          ; pandoc integration into org's exporter
-        +present)        ; using Emacs for presentations
+        +pandoc            ; pandoc integration into org's exporter
+        +present)          ; using Emacs for presentations
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -173,7 +175,7 @@
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
-       (sh +fish)           ; she sells (ba|z|fi)sh shells on the C xor
+       (sh +fish)          ; she sells (ba|z|fi)sh shells on the C xor
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
