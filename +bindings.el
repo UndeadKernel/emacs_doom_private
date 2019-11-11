@@ -31,8 +31,8 @@
  (:leader
    (:prefix-map ("f" . "file")
      :desc "Move this file"   "m" #'doom/move-this-file
-     ;; Creating empty buffers
-     :desc "New empty buffer" "n" #'+boy/new-buffer)
+     :desc "New empty buffer" "n" #'+boy/new-buffer
+     :desc "Kill all buffers" "K" #'doom/kill-all-buffers)
    (:prefix-map ("w" . "workspaces/windows")
      :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
    ;; Org related bindings
