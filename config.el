@@ -45,9 +45,13 @@
       kept-old-versions 2
       version-control t)
 
+;; Favor visual line wrapping
+(remove-hook 'text-mode-hook #'auto-fill-mode)
+(add-hook 'text-mode-hook #'visual-line-mode)
+
 ;; Visual fill column mode by default
-;; (setq visual-fill-column-width 120)
-;; (add-hook! '(text-mode-hook prog-mode-hook) #'visual-fill-column-mode)
+;;(setq visual-fill-column-width 120)
+;;(add-hook! '(text-mode-hook prog-mode-hook) #'visual-fill-column-mode)
 
 ;; Window splitting logic
 (setq window-combination-resize t ; after splitting, rebalance windows
