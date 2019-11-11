@@ -17,9 +17,6 @@
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
         org-babel-default-header-args:sh '((:results . "verbatim")))
 
-  ;; Do not enable auto-fill-mode by default
-  (remove-hook 'org-mode-hook #'auto-fill-mode)
-
   ;; Do not move my buffer after cycling visibility
   (remove-hook 'org-cycle-hook #'org-optimize-window-after-visibility-change)
 
