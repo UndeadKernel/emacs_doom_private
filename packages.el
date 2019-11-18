@@ -13,3 +13,5 @@
 (package! zmq)
 
 (package! pacfiles-mode)
+
+(package! org-trello)

@@ -135,3 +135,30 @@
   :commands (pacfiles pacfiles-start)
   :config
   (set-popup-rule! "^\\*pacfiles.*" :ignore t))
+
+(use-package! org-trello
+  :defer t ;; the package comes with everything needed as an autoload
+  :init
+  (setq org-trello-files '("~/documents/org/trello.org"))
+  ;; HACK: setup hook to run `org-trello-mode' when accessing files
+  ;; ... in `org-trello-files'.
+  (defun +boy--org-trello-helper ()
+    (if (bound-and-true-p org-trello-mode)
+        (remove-hook 'org-mode-hook #'boy--org-trello-helper)
+      (progn
+        (mapc (lambda (name)
+                (when (string= (expand-file-name name) buffer-file-name)
+                  (org-trello-mode)
+                  (remove-hook 'org-mode-hook #'+boy--org-trello-helper)))
+              org-trello-files))))
+  (add-hook 'org-mode-hook #'+boy--org-trello-helper)
+  :config
+  (after! org-trello-setup
+    ;; HACK: customize where the config files are stored
+    (setq org-trello--config-dir (format "%s%s/" doom-cache-dir "trello")
+          org-trello--config-file (concat org-trello--config-dir "%s.el"))
+    (unless (file-directory-p org-trello--config-dir)
+      (mkdir org-trello--config-dir t))
+    ;; change default prefix
+    (setq org-trello-default-prefix-keybinding "C-c l")
+    (setq org-trello-current-prefix-keybinding "C-c l")))
