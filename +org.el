@@ -107,3 +107,8 @@
 ;;           (org-element-property :end (org-element-at-point))))
 ;;       (skip-chars-backward " \r\t\n")
 ;;       (line-beginning-position 2))))))
+
+(after! org
+  (mapc (lambda (color)
+          (add-to-list 'org-tag-faces `(,color . (:foreground ,color))))
+        '("yellow" "green" "red" "blue" "purple" "orange")))
