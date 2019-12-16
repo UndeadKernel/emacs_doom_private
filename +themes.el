@@ -3,6 +3,11 @@
 ;; All themes are safe to load
 (setq custom-safe-themes t)
 
+;; Splash image
+(setq +doom-dashboard-banner-dir (concat doom-private-dir "banners/")
+      +doom-dashboard-banner-file "black-hole.png"
+      +doom-dashboard-banner-padding '(0 . 1))
+
 ;; Change some font weights for the sections in LaTeX
 (add-hook! LaTeX-mode
   (set-face-attribute 'font-latex-sectioning-1-face nil :height 1.8 :weight 'bold)
