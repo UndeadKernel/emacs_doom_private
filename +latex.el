@@ -102,3 +102,23 @@
     (setq flycheck-textlint-plugin-alist
           '((latex-mode . "textlint-plugin-latex")))))
 
+;; When switching to the latex output buffer, switch to the buffer.
+;; ... Without this patch, the original buffer retains focus.
+(el-patch-feature latex)
+(after! latex
+  (el-patch-defun TeX-recenter-output-buffer (line)
+    "Redisplay buffer of TeX job output so that most recent output can be seen.
+The last line of the buffer is displayed on line LINE of the window, or
+at bottom if LINE is nil."
+    (interactive "P")
+    (let ((buffer (TeX-active-buffer)))
+      (if buffer
+          (let ((old-buffer (current-buffer)))
+            (TeX-pop-to-buffer buffer t t)
+            (bury-buffer buffer)
+            (goto-char (point-max))
+            (recenter (if line
+                          (prefix-numeric-value line)
+                        (/ (window-height) 2)))
+            (el-patch-remove (TeX-pop-to-buffer old-buffer nil t)))
+        (message "No process for this document.")))))
