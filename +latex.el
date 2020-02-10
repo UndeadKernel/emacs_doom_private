@@ -42,7 +42,7 @@
 ;; Custom folding of some macros and commands I normally use
 (after! tex-fold
   ;; Custom macro transformation functions
-  (defun +boy//latex-fold-autoref (arg)
+  (defun +boy--latex-fold-autoref (arg)
     "Extract text from ARG up until the first `:', capitalize, format and return it."
     (let ((word (car (split-string arg ":" t))))
       (if word
@@ -59,7 +59,7 @@
   (add-to-list 'TeX-fold-macro-spec-list '("[hyphenations]" ("hyphenation")))
   (add-to-list 'TeX-fold-macro-spec-list '("[side-note]" ("graffito")))
   (add-to-list 'TeX-fold-macro-spec-list '("[SBOX {1}]" ("sbox")))
-  (add-to-list 'TeX-fold-macro-spec-list '(+boy//latex-fold-autoref ("autoref" "Autoref")))
+  (add-to-list 'TeX-fold-macro-spec-list '(+boy--latex-fold-autoref ("autoref" "Autoref")))
   ;; Custom folds for Environments
   (add-to-list 'TeX-fold-env-spec-list '("[figure]" ("figure" "figure*")))
   (add-to-list 'TeX-fold-env-spec-list '("[table]" ("table")))
