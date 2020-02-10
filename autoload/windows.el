@@ -162,3 +162,12 @@ size smaller than 80."
      (t
       (let ((split-height-threshold nil))
         (split-window-sensibly window))))))
+
+;;;###autoload
+(defun +boy/pop-window (&optional delete-window)
+  "Create a frame with the buffer of the current window and maybe delete the window."
+  (interactive "P")
+  (let ((buffer (current-buffer)))
+    (unless (or (not delete-window) (one-window-p))
+      (delete-window))
+    (display-buffer-pop-up-frame buffer nil)))
