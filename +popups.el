@@ -15,57 +15,21 @@
 (after! org
   (set-popup-rule! "^\\*Org Src" :side 'bottom :slot -2 :height 0.6 :width 0.5 :select t :autosave t :ttl nil :quit nil))
 
-;; For better editting org src blocks
-(after! ob-ipython
-  (set-popup-rules! '(("^\\*Python:.*"    :slot 0 :side right :size 40 :select nil :quit nil :transient nil)
-                      ("^\\*Python"       :slot 0 :side right :size 40 :select nil :quit nil :ttl nil)
-                      ("^\\*ob-ipython.*" :slot 2 :side right :size 40 :height 0.2 :select nil :quit nil :transient nil :ttl nil)
-                      ("^\\*ob-ipython-traceback\\*" :slot 0 :side bottom :select t :quit t :transient t))))
-
 ;; Larger customize popups
-(set-popup-rule! "\\*Customize.*:.*" :side 'right :size 100 :select t :quit t :transient t)
+(set-popup-rule! "\\*Customize.*:.*" :side 'right :size 100 :select t :quit t)
 
 ;; Taller reference window for RefTeX
 (set-popup-rule! "\\*RefTeX Select\\*" :size 80)
 
-(after! pdf-tools
-  (setq tablist-context-window-display-action
-        '((+popup-display-buffer-stacked-side-window)
-          (side . right)
-          (slot . 2)
-          (window-height . 0.4)
-          (inhibit-same-window . t))
-        pdf-annot-list-display-buffer-action
-        '((+popup-display-buffer-stacked-side-window)
-          (side . right)
-          (slot . 3)
-          (inhibit-same-window . t))))
-
-;; (set-popup-rule! "^\\*Ibuffer\\*"  :select t)
-
-;; (after! magit
-;;   (set! :popup "^\\(?: ?\\*\\)?magit.*: "
-;;     '((slot . -1) (side . right) (size . 80))
-;;     '((select . t) (quit . nil)))
-;;   (set! :popup "^\\*magit.*popup\\*"
-;;     '((slot . 0) (side . right))
-;;     '((select . t)))
-;;   (set! :popup "^\\(?: ?\\*\\)?magit-revision:.*"
-;;     '((slot . 2) (side . right) (window-height . 0.6))
-;;     '((select . t)))
-;;   (set! :popup "^\\(?: ?\\*\\)?magit-diff:.*"
-;;     '((slot . 2) (side . right) (window-height . 0.6))
-;;     '((select . nil))))
-
-;; (after! magit
-;;   ;(set! :popup "^\\*magit:*" '((slot . -1) (side . right) (size . 60)) '((modeline . nil) (select)))
-;;   (set! :popup "^magit:" '((slot . -1) (side . right) (size . 60)) '((modeline . nil) (select)))
-;;   (set! :popup "^\\*magit.*popup\\*" '((slot . 1) (side . right) (size . 50)) '((modeline . nil) (select . t)))
-;;   (set! :popup "^\\*magit-revision:.*" '((slot . 0) (side . right) (window-height . 0.6)) '((modeline . nil) (select . t)))
-;;   (set! :popup "^\\*magit-diff:.*" '((slot . 0) (side . right) (window-height . 0.6)) '((modeline . nil) (select . nil)))
-;;   (set! :popup "^magit-log:.*" '((vslot . 1) (side . right) (size . 130)) nil))
-
-;; (after! ein
-;;   (set! :popup "^\\*ein:notebooklist .*" '((side . left) (size . 60)) '((select . t)))
-;;   (set! :popup "^\\*ein: .*" nil '(modeline . t)))
-
+;; (after! pdf-tools
+;;   (setq tablist-context-window-display-action
+;;         '((+popup-display-buffer-stacked-side-window)
+;;           (side . right)
+;;           (slot . 2)
+;;           (window-height . 0.4)
+;;           (inhibit-same-window . t))
+;;         pdf-annot-list-display-buffer-action
+;;         '((+popup-display-buffer-stacked-side-window)
+;;           (side . right)
+;;           (slot . 3)
+;;           (inhibit-same-window . t))))
