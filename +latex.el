@@ -12,7 +12,11 @@
   ;; if the babel language is german, set the quotes as if english
   (add-hook 'TeX-language-de-hook
             (lambda ()
-              (setq TeX-quote-language `("ngerman" "``" "''" ,TeX-quote-after-quote)))))
+              (setq TeX-quote-language `("ngerman" "``" "''" ,TeX-quote-after-quote))))
+  ;; Allow `TeX-view' to refresh a PDF in another frame
+  ;; https://emacs.stackexchange.com/questions/55395/auctex-and-pdf-tools-in-2-separate-frames-for-dual-monitor-setup
+  (advice-add 'TeX-pdf-tools-sync-view :around #'+boy/display-buffer-use-some-frame)
+  (advice-add 'pdf-sync-backward-search-mouse :around #'+boy/display-buffer-use-some-frame))
 
 ;; Do not spellcheck latex documents when opened, this takes a lot of time.
 ;;(remove-hook 'flyspell-mode-hook #'+spellcheck|immediately)
@@ -122,3 +126,4 @@ at bottom if LINE is nil."
                         (/ (window-height) 2)))
             (el-patch-remove (TeX-pop-to-buffer old-buffer nil t)))
         (message "No process for this document.")))))
+
