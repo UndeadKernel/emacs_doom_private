@@ -13,7 +13,6 @@
         org-return-follows-link t  ; RET follows links
         org-hide-emphasis-markers t ; do not show format markers
         org-startup-with-inline-images t ; open buffers show inline images
-        ;;ob-async-no-async-languages-alist '("ipython" "jupyter") ; do not use async for these languages
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
         org-babel-default-header-args:sh '((:results . "verbatim")))
 
@@ -71,10 +70,6 @@
                  (file+headline "thesis.org" "NOTEs") ; target
                  "* %u %?\nLINK: %l\n%i" ; template
                  :prepend t :kill-buffer t)))
-
-(after! ob-ipython
-  ;; ob-ipython focuses the output window, instead, leave focus where it was.
-  (advice-add 'ob-ipython--output :override #'+boy*ob-ipython--output))
 
 ;; Enable displaying of inline PDF images in ORG files
 ;; https://stackoverflow.com/a/35261577/2632102
