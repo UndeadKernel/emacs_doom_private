@@ -13,10 +13,6 @@
  "C-M-q"         #'+boy/unfill-paragraph
  "S-<f1>"        #'+boy/macro-on
  "<f1>"          #'call-last-kbd-macro
- "C-c p p"       #'projectile-switch-project
- ;; Editor related bindings
- [remap newline] #'newline-and-indent
- "C-j"           #'+default/newline
  ;; Buffer related bindings
  "s-<left>"      #'+boy/window-move-left
  "s-<right>"     #'+boy/window-move-right
@@ -30,37 +26,14 @@
  "C-x C-o"       #'+boy/switch-to-last-window
  (:leader
    (:prefix-map ("f" . "file")
-     :desc "Move this file"   "m" #'doom/move-this-file
-     :desc "New empty buffer" "n" #'+boy/new-buffer
-     :desc "Kill all buffers" "K" #'doom/kill-all-buffers)
+     :desc "New empty buffer" "n" #'+boy/new-buffer)
    (:prefix-map ("w" . "workspaces/windows")
      :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
    ;; Org related bindings
-   (:prefix-map ("o". "org")
+   (:prefix-map ("n". "notes")
      :desc "Do what I mean"          "o" #'+org/dwim-at-point
-     :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body
-     :desc "Display inline images"   "i" #'org-display-inline-images)
-   ;; Snippets
-   (:prefix-map ("&" . "snippets")
-     :desc "Find snippet"          "s" #'+default/find-in-snippets
-     :desc "Find snippet for mode" "S" #'+default/browse-snippets)
-   ;; Terminal
-   (:prefix-map ("t" . "terminal")
-     "t"  #'+eshell/toggle
-     "T"  #'+eshell/here)
-   ;; Lookup
-   (:when (featurep! :tools lookup)
-     (:prefix-map ("g" . "lookup")
-       "k" #'+lookup/documentation
-       "d" #'+lookup/definition
-       "D" #'+lookup/references
-       "f" #'+lookup/file
-       "o" #'+lookup/online-select
-       "i" #'+lookup/in-docsets
-       "I" #'+lookup/in-all-docsets))
+     :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body)
    ;; Unbindings
-   "`"    nil ; overwrite opening a terminal with this key
-   "C-f"  nil ; unbind projectile find file
    (:after eww
      (:map eww-mode-map
        "M-p" nil
@@ -110,19 +83,11 @@
      "C-x 4 k"       #'switch-window-then-kill-buffer
      (:when (featurep! :ui popup)
        "C-x o"         #'+boy/switch-window
-       "C-x p"         (lambda () (interactive) (+boy/switch-window t)))))
+       "C-x p"         (λ! (+boy/switch-window t)))))
  ;; edebug
  (:after edebug
    (:map edebug-mode-map
      "l"   #'recenter-top-bottom))
- ;; Refactoring and compilation
- (:map prog-mode-map
-   "M-RET" #'emr-show-refactor-menu)
- (:after cc-mode
-   (:map c++-mode-map
-     "M-RET" #'srefactor-refactor-at-point)
-   (:map c-mode-map
-     "M-RET" #'srefactor-refactor-at-point))
  ;; org
  (:after org
    (:map org-mode-map
@@ -160,12 +125,9 @@
  )
 
 ;; eshell
-(defun +boy|setup-eshell-bindings ()
+(defun +boy-setup-eshell-bindings ()
   (map!
    (:map eshell-mode-map
      "RET"     #'+boy/eshell-gotoend-or-send
-     "C-e"     #'end-of-line
-     "C-d"     #'+eshell/quit-or-delete-char
-     "TAB"     #'+eshell/pcomplete
-     [tab]     #'+eshell/pcomplete)))
-(add-hook 'eshell-first-time-mode-hook #'+boy|setup-eshell-bindings)
+     [return]  #'+boy/eshell-gotoend-or-send)))
+(add-hook 'eshell-first-time-mode-hook #'+boy-setup-eshell-bindings)
