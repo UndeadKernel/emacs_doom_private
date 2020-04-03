@@ -10,7 +10,7 @@
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ↴ "
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
-        org-return-follows-link t  ; RET follows links
+        org-return-follows-link nil  ; RET doesn't follow links
         org-hide-emphasis-markers t ; do not show format markers
         org-startup-with-inline-images t ; open buffers show inline images
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
