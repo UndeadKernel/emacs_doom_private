@@ -1,6 +1,8 @@
 ;;; private/boy/+org.el -*- lexical-binding: t; -*-
 
-(setq org-directory "~/documents/org/")
+(setq org-directory "~/documents/org/"
+      org-archive-location (concat org-directory ".archive/%s::")
+      org-roam-directory (concat org-directory "notes/"))
 
 ;; ORG config
 (after! org
@@ -8,7 +10,8 @@
         org-tags-column -100 ; the column to the right to align tags
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
-        org-ellipsis " ↴ "
+        org-ellipsis " ▼ "
+        org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷")
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
         org-return-follows-link nil  ; RET doesn't follow links
         org-hide-emphasis-markers t ; do not show format markers
