@@ -1,5 +1,8 @@
 ;;; ~/emacs/doom_private/+themes.el -*- lexical-binding: t; -*-
 
+;; Main theme
+(setq doom-theme 'doom-dracula)
+
 ;; All themes are safe to load
 (setq custom-safe-themes t)
 
