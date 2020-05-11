@@ -109,7 +109,8 @@
 
        :tools
        ;;ansible
-       debugger        ; FIXME stepping through code, to help you add bugs
+       (debugger           ; FIXME stepping through code, to help you add bugs
+        +lsp)
        ;;direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
@@ -177,7 +178,8 @@
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python             ; beautiful is better than ugly
-        +pyvenv)
+        +pyvenv
+        +lsp)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client
