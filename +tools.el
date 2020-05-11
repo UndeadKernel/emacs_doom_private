@@ -1,5 +1,9 @@
 ;;; +tools.el --- description -*- lexical-binding: t; -*-
 
+;; ssh-deploy config
+(after! ssh-deploy
+  (setq ssh-deploy-on-explicit-save nil))
+
 ;; pdf-tools config
 ;; enable visual-line-mode in the buffer where annotations
 ;; ... are shown (*Contents*)
