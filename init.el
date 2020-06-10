@@ -3,6 +3,7 @@
 ;; Start emacs maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+
 ;; Font setup
 (setq
       ;doom-font (font-spec :family "Fira Mono" :size 14)
@@ -37,7 +38,7 @@
         +childframe)
        (ivy              ; a search engine for love and life
         +childframe
-        +prescient
+        ;+prescient
         +icons)
        ;;helm            ; the *other* search engine for love and life
        ;;ido             ; the other *other* search engine...

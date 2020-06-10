@@ -1,13 +1,13 @@
 ;;; private/boy/+org.el -*- lexical-binding: t; -*-
 
-(setq org-directory "~/documents/org/"
+(setq org-directory "~/Documents/work/org/"
       org-archive-location (concat org-directory ".archive/%s::")
       org-roam-directory (concat org-directory "notes/"))
 
 ;; ORG config
 (after! org
   (setq org-startup-folded nil ; do not start folded
-        org-tags-column -100 ; the column to the right to align tags
+        org-tags-column 80 ; the column to the right to align tags
         org-log-done 'time ; record the time when an element was marked done/checked
         org-fontify-done-headline nil ; do not change the font of DONE items
         org-ellipsis " ▼ "
@@ -19,6 +19,24 @@
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
         org-babel-default-header-args:sh '((:results . "verbatim")))
 
+  ;; open pdf files in emacs
+  (if (assoc "\\.pdf\\'" org-file-apps)
+         (setcdr (assoc "\\.pdf\\'" org-file-apps) "emacs")
+       (add-to-list 'org-file-apps '("\\.pdf\\'" . "emacs") t))
+
+    (setq org-todo-state-tags-triggers
+          (quote (("KILL" ("KILL" . t))
+                  ("WAIT" ("WAIT" . t))
+                  ("HOLD" ("WAIT") ("HOLD" . t))
+                  (done ("WAIT") ("HOLD"))
+                  ("TODO" ("WAIT") ("KILL") ("HOLD"))
+                  ("NEXT" ("WAIT") ("KILL") ("HOLD"))
+                  ("DONE" ("WAIT") ("KILL") ("HOLD")))))
+
+    (setq org-todo-keywords
+          '((sequence "PROJ(p)" "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+            (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "KILL(c@/!)")))
+
   ;; Do not move my buffer after cycling visibility
   (remove-hook 'org-cycle-hook #'org-optimize-window-after-visibility-change)
 
@@ -29,6 +47,20 @@
                  (file+headline "emacs.org" "Notes")
                  "* %u %?\n %i\n %a"
                  :prepend t :kill-buffer t))
+  (add-to-list 'org-capture-templates
+               '("w" "Work Templates"))
+  (add-to-list 'org-capture-templates
+               '("wn" "Notes"
+                 entry
+                 (file"refile.org")
+                 "* %? :NOTE:\n%U\n%A\n"
+                 :prepend t :kill-buffer t))
+  (add-to-list 'org-capture-templates
+               '("wt" "Todo"
+                 entry  ; type
+                 (file "refile.org") ; target
+                 "* TODO %?\n%U\n%A" ; template
+                 :prepend t :kill-buffer t)) ; properties
 
   ;; Thesis finished, I don't need you anymore!!!
   ;; (add-to-list 'org-capture-templates
@@ -81,7 +113,71 @@
   ;;                (file+headline "thesis.org" "NOTEs") ; target
   ;;                "* %u %?\nLINK: %l\n%i" ; template
   ;;                :prepend t :kill-buffer t))
-  )
+
+  (setq org-agenda-compact-blocks t
+        org-agenda-custom-commands
+        '((" " "Agenda"
+           ((agenda "" nil)
+            (tags "REFILE"
+                  ((org-agenda-overriding-header "Tasks to Refile")
+                   (org-tags-match-list-sublevels nil)))
+            (tags-todo "-CANCELLED/!"
+                       ((org-agenda-overriding-header "Stuck Projects")
+                        (org-agenda-skip-function '+boy/skip-non-stuck-projects)
+                        (org-agenda-sorting-strategy
+                         '(category-keep))))
+            (tags-todo "-HOLD-CANCELLED/!"
+                       ((org-agenda-overriding-header "Projects")
+                        (org-agenda-skip-function '+boy/skip-non-projects)
+                        (org-tags-match-list-sublevels 'indented)
+                        (org-agenda-sorting-strategy
+                         '(category-keep))))
+            (tags-todo "-CANCELLED/!NEXT"
+                       ((org-agenda-overriding-header
+                         (concat "Project Next Tasks"
+                                 (if +boy/hide-scheduled-and-waiting-next-tasks
+                                     ""
+                                   " (including WAITING and SCHEDULED tasks)")))
+                        (org-agenda-skip-function '+boy/skip-projects-and-single-tasks)
+                        (org-tags-match-list-sublevels t)
+                        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-sorting-strategy
+                         '(todo-state-down effort-up category-keep))))
+            (tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
+                       ((org-agenda-overriding-header (concat "Project Subtasks"
+                                                              (if +boy/hide-scheduled-and-waiting-next-tasks
+                                                                  ""
+                                                                " (including WAITING and SCHEDULED tasks)")))
+                        (org-agenda-skip-function '+boy/skip-non-project-tasks)
+                        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-sorting-strategy
+                         '(category-keep))))
+            (tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
+                       ((org-agenda-overriding-header (concat "Standalone Tasks"
+                                                              (if +boy/hide-scheduled-and-waiting-next-tasks
+                                                                  ""
+                                                                " (including WAITING and SCHEDULED tasks)")))
+                        (org-agenda-skip-function '+boy/skip-project-tasks)
+                        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-sorting-strategy
+                         '(category-keep))))
+            (tags-todo "-CANCELLED+WAITING|HOLD/!"
+                       ((org-agenda-overriding-header (concat "Waiting and Postponed Tasks"
+                                                              (if +boy/hide-scheduled-and-waiting-next-tasks
+                                                                  ""
+                                                                " (including WAITING and SCHEDULED tasks)")))
+                        (org-agenda-skip-function '+boy/skip-non-tasks)
+                        (org-tags-match-list-sublevels nil)
+                        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)))))))
+
+  (setq org-refile-target-verify-function '+boy/verify-refile-target))
 
 ;; Enable displaying of inline PDF images in ORG files
 ;; https://stackoverflow.com/a/35261577/2632102
