@@ -13,6 +13,8 @@
 (load! "+popups")
 ;; Theme related things
 (load! "+themes")
+;; Different config for different systems
+(load! "+systems")
 
 ;; Configuration of DOOM lang
 (load! "+latex")
