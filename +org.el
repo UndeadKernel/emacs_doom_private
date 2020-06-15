@@ -9,7 +9,9 @@
   (setq org-startup-folded nil ; do not start folded
         org-tags-column 80 ; the column to the right to align tags
         org-log-done 'time ; record the time when an element was marked done/checked
-        org-fontify-done-headline nil ; do not change the font of DONE items
+        ;org-fontify-done-headline nil ; do not change the font of DONE items
+        org-catch-invisible-edits 'show-and-error
+        org-list-demote-modify-bullet '(("+" . "-") ("-" . "+"))
         org-ellipsis " ▼ "
         org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷")
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
