@@ -9,4 +9,7 @@
                           '(" --path-separator=//"
                             " --path-separator //"
                             "--path-separator"
-                            "//")))))
+                            "//"))))
+  ;; org directory of work env
+  (after! org
+    (setq org-directory "~/Documents/work/org/")))

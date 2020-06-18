@@ -1,6 +1,6 @@
 ;;; private/boy/+org.el -*- lexical-binding: t; -*-
 
-(setq org-directory "~/Documents/work/org/"
+(setq org-directory "~/documents/org/"
       org-archive-location (concat org-directory ".archive/%s::")
       org-roam-directory (concat org-directory "notes/"))
 
