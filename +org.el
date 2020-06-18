@@ -55,13 +55,13 @@
                '("wn" "Notes"
                  entry
                  (file"refile.org")
-                 "* %? :NOTE:\n%U\n%A\n"
+                 "* %? :NOTE:\n%U"
                  :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
                '("wt" "Todo"
                  entry  ; type
                  (file "refile.org") ; target
-                 "* TODO %?\n%U\n%A" ; template
+                 "* TODO %?\n%U" ; template
                  :prepend t :kill-buffer t)) ; properties
 
   ;; Thesis finished, I don't need you anymore!!!
