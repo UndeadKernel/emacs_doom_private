@@ -74,6 +74,7 @@
      "f"   #'pdf-annot-add-squiggly-markup-annotation
      "g"   #'pdf-annot-attachment-dired
      "D"   #'pdf-annot-delete))
+
  ;; switch-window
  (:after switch-window
    (:when (featurep! :ui window-select +switch-window)

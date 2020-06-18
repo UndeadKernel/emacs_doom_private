@@ -34,6 +34,20 @@ _g_:goto      _s_:split          _q_:cancel
        (when (cl-assoc ':hidden (cl-third (org-babel-get-src-block-info)))
          (org-hide-block-toggle))))))
 
+;; ORG PDF Annot functions
+;;;###autoload
+(defun +boy/highlight-and-annot-w-noter (list-of-edges)
+  "Add a highlight with pdf-tools and an annotation with pdf-noter."
+  (interactive (list (pdf-view-active-region nil)))
+  (unless (pdf-view-active-region-p)
+    (user-error "A selected region is needed"))
+  (let ((region pdf-view-active-region))
+    ;; highlights
+    (let ((pdf-annot-activate-created-annotations nil))
+      (pdf-annot-add-highlight-markup-annotation list-of-edges "snow3"))
+    ;; add pdf-noter note
+    (org-noter-insert-precise-note)))
+
 ;; ORG Agenda functions
 
 ;;;###autoload
@@ -154,7 +168,7 @@ Callers of this function already widen the buffer view."
 
 ;;;###autoload
 (defun +boy/skip-non-stuck-projects ()
-  "Skip trees that are not stuck projects"
+  "Skip trees that are not stuck projects (i.e., no NEXT, WAIT or HOLD task)"
   ;; (+boy/list-sublevels-for-projects-indented)
   (save-restriction
     (widen)
@@ -164,7 +178,9 @@ Callers of this function already widen the buffer view."
                  (has-next ))
             (save-excursion
               (forward-line 1)
-              (while (and (not has-next) (< (point) subtree-end) (re-search-forward "^\\*+ NEXT " subtree-end t))
+              (while (and (not has-next)
+                          (< (point) subtree-end)
+                          (re-search-forward "^\\*+ NEXT " subtree-end t))
                 (unless (member "WAIT" (org-get-tags-at))
                   (setq has-next t))))
             (if has-next
