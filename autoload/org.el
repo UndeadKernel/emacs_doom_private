@@ -41,12 +41,11 @@ _g_:goto      _s_:split          _q_:cancel
   (interactive (list (pdf-view-active-region nil)))
   (unless (pdf-view-active-region-p)
     (user-error "A selected region is needed"))
-  (let ((region pdf-view-active-region))
-    ;; highlights
-    (let ((pdf-annot-activate-created-annotations nil))
-      (pdf-annot-add-highlight-markup-annotation list-of-edges "snow3"))
-    ;; add pdf-noter note
-    (org-noter-insert-precise-note)))
+  ;; highlights
+  (let ((pdf-annot-activate-created-annotations nil))
+    (pdf-annot-add-highlight-markup-annotation list-of-edges "snow3"))
+  ;; add pdf-noter note
+  (org-noter-insert-precise-note))
 
 ;; ORG Agenda functions
 
