@@ -116,7 +116,9 @@
   ;;                "* %u %?\nLINK: %l\n%i" ; template
   ;;                :prepend t :kill-buffer t))
 
+  ;; agenda config
   (setq org-agenda-compact-blocks t
+        org-agenda-skip-scheduled-if-deadline-is-shown t
         org-agenda-custom-commands
         '((" " "Agenda"
            ((agenda "" nil)
