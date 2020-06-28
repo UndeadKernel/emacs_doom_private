@@ -1,13 +1,11 @@
 ;;; app/bibliography/autoload.el -*- lexical-binding: t; -*-
 
-(defvar +bibliography--wconf nil
-  "Hold the window configuration before `+bibliography/init' is invoked
-(when workspaces are not used).")
-
 ;;;###autoload
 (defun =bibliography ()
   "Activate (or switch to) the `bibliography' in its workspace."
   (interactive)
+  (load! "parser")
+  (load! "addbib")
   (if (featurep! :ui workspaces)
       (progn
         (+workspace-switch +bibliography-workspace-name t)
@@ -16,16 +14,20 @@
     (delete-other-windows))
   (+bibliography/init))
 
+;;;###autoload
 (defun +bibliography/init ()
   (let* ((file-path (concat +bibliography-notes-dir +bibliography-notes-file))
          (file-exists (file-exists-p file-path)))
     (find-file file-path)
     (unless file-exists
       ;; set the title of the org buffer
-      (insert "Bibliography\n\n")
+      (insert "Bibliography\n")
+      (insert "#+COLUMNS: %60ITEM %TAGS %AUTHOR %YEAR")
+      (insert (concat "#+PROPERTY: header-args:bibtex :exports none :tangle "
+                      "\"" +bibliography-bib-file "\"\n"))
+      (insert "#+STARTUP: hideblocks overview\n\n")
       (save-buffer))
-    ;; enable Zotero integration
-    (org-zotxt-mode)))
+    (setq +bibliography--buffer (current-buffer))))
 
 ;;;###autoload
 (defun +bibliography/quit ()
@@ -33,6 +35,7 @@
   (interactive)
   (if (featurep! :ui workspaces)
       (+workspace/delete +bibliography-workspace-name)
-    (doom-kill-matching-buffers (concat "^\\" +bibliography-notes-file))
+    (kill-buffer +bibliography--buffer)
     (set-window-configuration +bibliography--wconf)
-    (setq +bibliography--wconf nil)))
+    (setq +bibliography--wconf nil))
+  (setq +bibliography--buffer nil))
