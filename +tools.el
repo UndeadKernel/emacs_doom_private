@@ -15,8 +15,6 @@
           (visual-line-mode)))))
   ;; advice the function responsible for creating the *Contents* buffer
   (advice-add 'pdf-annot-list-context-function :after #'boy/annot-visual-line))
-;; automatically activate new annotations
-(setq pdf-annot-activate-created-annotations t)
 ;; more fine-grained zooming
 (setq pdf-view-resize-factor 1.1)
 ;; set some default properties for all annotations
@@ -37,7 +35,7 @@
 (add-hook! magit-mode (visual-line-mode +1))
 
 ;; EIN config
-(setq +ein-notebook-dir "~/Documents/CASED/Development")
+(setq +ein-notebook-dir "~")
 (add-hook! ein:notebook-multilang-mode
   (map! :map ein:notebook-mode-map
         "M-p" #'+boy/up-scroll
