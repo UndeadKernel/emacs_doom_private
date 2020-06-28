@@ -41,8 +41,11 @@
 
  ;; Plugins
 
- ;; Misc plugins
+ ;; misc plugins
  "C-c ."   #'goto-last-change ; requires private package 'goto-last-change'
+ ;; undo-fu
+ (:when (fboundp #'undo-fu-only-redo)
+   "C-?"   #'undo-fu-only-redo)
  ;; objed
  "M-o"     #'objed-activate-object
  "M-["     #'objed-beg-of-object-at-point
@@ -65,11 +68,11 @@
  ;; pdf-tools
  (:after pdf-tools
    (:map pdf-annot-minor-mode-map
-     "q"   #'pdf-annot-add-highlight-markup-annotation
-     "w"   #'pdf-annot-add-text-annotation
-     "e"   #'pdf-annot-add-underline-markup-annotation
-     "r"   #'pdf-annot-add-squiggly-markup-annotation
-     "t"   #'pdf-annot-attachment-dired
+     "a"   #'pdf-annot-add-highlight-markup-annotation
+     "s"   #'pdf-annot-add-text-annotation
+     "d"   #'pdf-annot-add-underline-markup-annotation
+     "f"   #'pdf-annot-add-squiggly-markup-annotation
+     "g"   #'pdf-annot-attachment-dired
      "D"   #'pdf-annot-delete))
  ;; switch-window
  (:after switch-window
