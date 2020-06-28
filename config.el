@@ -155,3 +155,5 @@
     ;; change default prefix
     (setq org-trello-default-prefix-keybinding "C-c l")
     (setq org-trello-current-prefix-keybinding "C-c l")))
+
+(setq +bibliography-notes-dir "~/documents/org/")
