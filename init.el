@@ -44,7 +44,6 @@
 
        :ui
        ;;deft            ; notational velocity for Emacs
-       center-window
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
@@ -70,7 +69,9 @@
        (window-select    ; visually switch windows
         +switch-window)
        workspaces        ; tab emulation, persistence & separate workspaces
-       ;;zen               ; distraction-free coding or writing
+       zen               ; distraction-free coding or writing
+       ;; custom modules
+       center-window
 
        :editor
        ;;(evil +everywhere) ; come to the dark side, we have cookies
