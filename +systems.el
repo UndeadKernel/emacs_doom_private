@@ -12,4 +12,5 @@
                             "//"))))
   ;; org directory of work env
   (after! org
-    (setq org-directory "~/Documents/work/org/")))
+    (setq org-directory "~/Documents/work/org/"
+          +bibliography-notes-dir "~/Documents/work/org/bib/")))

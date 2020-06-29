@@ -9,7 +9,7 @@
 (defvar +bibliography-notes-dir org-directory
   "Directory where `+bibliography-notes-file' is located.")
 
-(defvar +bibliography-pdfs-dir "~/pdfs"
+(defvar +bibliography-pdfs-dir (concat +bibliography-notes-dir "pdfs/")
   "Location where PDFs are searched for.")
 
 (defvar +bibliography-workspace-name "bibliography"
