@@ -35,6 +35,7 @@ _g_:goto      _s_:split          _q_:cancel
          (org-hide-block-toggle))))))
 
 ;; ORG PDF Annot functions
+
 ;;;###autoload
 (defun +boy/highlight-and-annot-w-noter (list-of-edges)
   "Add a highlight with pdf-tools and an annotation with pdf-noter."

@@ -16,10 +16,12 @@
         org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷")
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
         org-return-follows-link nil  ; RET doesn't follow links
-        org-hide-emphasis-markers t ; do not show format markers
+        org-hide-emphasis-markers nil ; do show format markers
         org-startup-with-inline-images t ; open buffers show inline images
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
-        org-babel-default-header-args:sh '((:results . "verbatim")))
+        org-babel-default-header-args:sh '((:results . "verbatim"))
+        org-todo-repeat-to-state t
+        pdf-annot-activate-created-annotations nil) ; do not open annotations after creating them
 
   ;; open pdf files in emacs
   (if (assoc "\\.pdf\\'" org-file-apps)
@@ -180,6 +182,10 @@
                         (org-tags-match-list-sublevels nil)
                         (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)))))))
+
+  ;; org-noter config
+  (setq org-noter-default-heading-title "Page $p$")
+  (add-hook! 'org-noter-notes-mode-hook (display-line-numbers-mode -1))
 
   (setq org-refile-target-verify-function '+boy/verify-refile-target))
 
