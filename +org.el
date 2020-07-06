@@ -25,8 +25,8 @@
 
   ;; open pdf files in emacs
   (if (assoc "\\.pdf\\'" org-file-apps)
-         (setcdr (assoc "\\.pdf\\'" org-file-apps) "emacs")
-       (add-to-list 'org-file-apps '("\\.pdf\\'" . "emacs") t))
+      (setcdr (assoc "\\.pdf\\'" org-file-apps) 'emacs)
+    (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs) t))
 
     (setq org-todo-state-tags-triggers
           (quote (("KILL" ("KILL" . t))
@@ -185,9 +185,12 @@
 
   ;; org-noter config
   (setq org-noter-default-heading-title "Page $p$")
-  (add-hook! 'org-noter-notes-mode-hook (display-line-numbers-mode -1))
+  ;; (add-hook! 'org-noter-notes-mode-hook (display-line-numbers-mode -1))
 
   (setq org-refile-target-verify-function '+boy/verify-refile-target))
+
+;; Disable line numbers by default
+(add-hook! 'org-mode-hook (display-line-numbers-mode -1))
 
 ;; Enable displaying of inline PDF images in ORG files
 ;; https://stackoverflow.com/a/35261577/2632102
