@@ -137,8 +137,6 @@ Callers of this function already widen the buffer view."
     (setq org-tags-match-list-sublevels nil))
   nil)
 
-(defvar +boy/hide-scheduled-and-waiting-next-tasks t)
-
 ;;;###autoload
 (defun +boy/toggle-next-task-display ()
   (interactive)

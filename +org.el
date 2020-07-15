@@ -1,5 +1,7 @@
 ;;; private/boy/+org.el -*- lexical-binding: t; -*-
 
+(defvar +boy/hide-scheduled-and-waiting-next-tasks t)
+
 (setq org-directory "~/documents/org/"
       org-archive-location (concat org-directory ".archive/%s::")
       org-roam-directory (concat org-directory "notes/"))
