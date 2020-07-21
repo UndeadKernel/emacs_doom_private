@@ -73,7 +73,17 @@
      "d"   #'pdf-annot-add-underline-markup-annotation
      "f"   #'pdf-annot-add-squiggly-markup-annotation
      "g"   #'pdf-annot-attachment-dired
-     "D"   #'pdf-annot-delete))
+     "D"   #'pdf-annot-delete)
+   (:map (image-mode-map image-minor-mode-map)
+    "C-c C-x"  nil))
+ ;; org-noter
+ (:after org-noter
+  (:map org-noter-notes-mode-map
+   "M-n"   nil
+   "M-p"   nil)
+  (:map org-noter-doc-mode-map
+   "t"   #'+boy/highlight-and-add-item
+   "T"   #'+boy/highlight-and-annot-w-noter))
 
  ;; switch-window
  (:after switch-window

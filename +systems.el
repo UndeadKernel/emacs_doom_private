@@ -13,5 +13,7 @@
   ;; org directory of work env
   (after! org
     (setq org-directory "~/Documents/work/org/"
+          org-agenda-files (list org-directory)
+          org-archive-location (concat org-directory ".archive/%s::")
           +bibliography-notes-dir "~/Documents/work/org/bib/")
     (add-to-list 'org-file-apps '("\\.docx?\\'" . system))))
