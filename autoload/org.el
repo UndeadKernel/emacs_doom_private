@@ -287,7 +287,9 @@ Skip project and sub-project tasks, and project related tasks."
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
        ((and +boy/hide-scheduled-and-waiting-next-tasks
-             (member "WAIT" (org-get-tags-at)))
+             (or
+              (member "WAIT" (org-get-tags-at))
+              (save-excursion (re-search-forward org-scheduled-string next-headline t))))
         next-headline)
        ((+boy/is-project-p)
         next-headline)
@@ -350,6 +352,9 @@ Skip project and sub-project tasks, and loose non-project tasks."
         subtree-end)
        ((not (+boy/is-project-subtree-p))
         subtree-end)
+       ((and +boy/hide-scheduled-and-waiting-next-tasks
+             (save-excursion (re-search-forward org-scheduled-string next-headline t)))
+        next-headline)
        (t
         nil)))))
 
