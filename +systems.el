@@ -37,4 +37,7 @@
     (add-to-list 'org-file-apps '("\\.docx?\\'" . system)))
 
   ;; use putty's plink as default tramp method
-  (setq tramp-default-method "plink"))
+  (setq tramp-default-method "plink")
+  ;; set a custom path to find git-gui--askpass
+  (setenv "SSH_ASKPASS"
+          "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-gui--askpass"))
