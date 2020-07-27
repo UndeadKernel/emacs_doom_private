@@ -23,7 +23,8 @@
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
         org-babel-default-header-args:sh '((:results . "verbatim"))
         org-todo-repeat-to-state t
-        pdf-annot-activate-created-annotations nil) ; do not open annotations after creating them
+        pdf-annot-activate-created-annotations nil ; do not open annotations after creating them
+        org-duration-format (quote h:mm)) ; display clock times as hours only
 
   ;; open pdf files in emacs
   (if (assoc "\\.pdf\\'" org-file-apps)
