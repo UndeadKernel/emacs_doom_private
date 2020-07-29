@@ -198,43 +198,47 @@ Callers of this function already widen the buffer view."
 
 ;;;###autoload
 (defun +boy/skip-stuck-projects ()
-  "Skip trees that are not stuck projects"
+  "Skip trees that are stuck projects (i.e., subtrees without a todo or next task)"
   (save-restriction
     (widen)
-    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+    (let ((next-headline
+           (save-excursion (or (outline-next-heading) (point-max)))))
       (if (+boy/is-project-p)
-          (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
-                 (has-next ))
+          (let* ((subtree-end
+                  (save-excursion (org-end-of-subtree t)))
+                 (has-next-or-todo))
             (save-excursion
               (forward-line 1)
-              (while (and (not has-next) (< (point) subtree-end) (re-search-forward "^\\*+ NEXT " subtree-end t))
+              (while (and (not has-next-or-todo)
+                          (< (point) subtree-end)
+                          (re-search-forward "^\\*+ \\(:?NEXT\\|TODO\\) " subtree-end t))
                 (unless (member "WAIT" (org-get-tags-at))
-                  (setq has-next t))))
-            (if has-next
+                  (setq has-next-or-todo t))))
+            (if has-next-or-todo
                 nil
               next-headline)) ; a stuck project, has subtasks but no next task
         nil))))
 
 ;;;###autoload
 (defun +boy/skip-non-stuck-projects ()
-  "Skip trees that are not stuck projects (i.e., no NEXT, WAIT or HOLD task)"
-  ;; (+boy/list-sublevels-for-projects-indented)
+  "Skip trees that are not stuck projects (i.e., no next or todo task)"
   (save-restriction
     (widen)
-    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+    (let ((next-headline
+           (save-excursion (or (outline-next-heading) (point-max)))))
       (if (+boy/is-project-p)
           (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
-                 (has-next ))
+                 (has-next-or-todo ))
             (save-excursion
               (forward-line 1)
-              (while (and (not has-next)
+              (while (and (not has-next-or-todo)
                           (< (point) subtree-end)
-                          (re-search-forward "^\\*+ NEXT " subtree-end t))
+                          (re-search-forward "^\\*+ \\(:?NEXT\\|TODO\\) " subtree-end t))
                 (unless (member "WAIT" (org-get-tags-at))
-                  (setq has-next t))))
-            (if has-next
+                  (setq has-next-or-todo t))))
+            (if has-next-or-todo
                 next-headline
-              nil)) ; a stuck project, has subtasks but no next task
+              nil)) ; a stuck project, has subtasks but no next or todo task
         next-headline))))
 
 ;;;###autoload
