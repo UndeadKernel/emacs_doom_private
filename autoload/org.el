@@ -48,14 +48,11 @@ _g_:goto      _s_:split          _q_:cancel
   ;; add pdf-noter note
   (org-noter-insert-precise-note))
 
-(defun +boy/highlight-and-add-item (list-of-edges)
+(defun +boy/highlight-and-add-item (list-of-edges indent)
   "Add a highlight and yank the highlighted text as a new list item."
-  (interactive (list (pdf-view-active-region nil)))
+  (interactive (list (pdf-view-active-region nil) current-prefix-arg))
   (unless (pdf-view-active-region-p)
     (user-error "A selected PDF region is needed"))
-  ;; highlights
-  (let ((pdf-annot-activate-created-annotations nil))
-    (pdf-annot-add-highlight-markup-annotation list-of-edges "#eee8aa"))
   ;; add new list item
   (let ((window (org-noter--get-notes-window 'force))
         (selected-text
@@ -63,36 +60,47 @@ _g_:goto      _s_:split          _q_:cancel
                                                        (pdf-view-active-region-text)
                                                        " "))))
     (select-frame-set-input-focus (window-frame window))
-    (select-window window)
-    (cond
-     ;; point in an empty line
-     ((string-match-p "\\`\\s-*$" (thing-at-point 'line))
-      (insert "+ " selected-text) )
-     ;; point in a line with only an item bullet
-     ((+boy/at-empty-item-p)
-      (org-end-of-line)
-      (insert selected-text))
-     ;; point in an item
-     ((org-in-item-p)
-      (+org/insert-item-below 1)
-      (insert selected-text))
-     ;; point in a heading
-     ((org-at-heading-p)
-      (let ((headline-element (org-element-at-point)))
-        (goto-char (org-element-property :contents-begin headline-element))
+    (with-selected-window window
+      (cond
+       ;; point in an empty line
+       ((string-match-p "\\`\\s-*$" (thing-at-point 'line))
+        (insert "+ " selected-text) )
+       ;; point in a line with only an item bullet
+       ((+boy/at-empty-item-p)
+        (org-end-of-line)
+        (insert selected-text)
+        (fill-paragraph)
+        (scroll-right))
+       ;; point in an item
+       ((org-in-item-p)
+        (+org/insert-item-below 1)
+        (insert selected-text)
+        (fill-paragraph)
+        (scroll-right))
+       ;; point in a heading
+       ((org-at-heading-p)
+        (let ((headline-element (org-element-at-point)))
+          (goto-char (org-element-property :contents-begin headline-element))
+          (let ((props-element-maybe (org-element-at-point)))
+            (when (eq 'property-drawer (car props-element-maybe))
+              (goto-char (org-element-property :end props-element-maybe)))))
+        (open-line 1)
+        (insert "+ " selected-text)
+        (fill-paragraph)
+        (scroll-right))
+       ;; point in a property drawer
+       ((org-at-drawer-p)
         (let ((props-element-maybe (org-element-at-point)))
           (when (eq 'property-drawer (car props-element-maybe))
-            (goto-char (org-element-property :end props-element-maybe)))))
-      (open-line 1)
-      (insert "+ " selected-text))
-     ;; point in a property drawer
-     ((org-at-drawer-p)
-      (let ((props-element-maybe (org-element-at-point)))
-        (when (eq 'property-drawer (car props-element-maybe))
-          (goto-char (org-element-property :end props-element-maybe))))
-      (open-line 1)
-      (insert "+ " selected-text))
-     (t (display-warning :warning "Don't know where to add highlighted text. ")))))
+            (goto-char (org-element-property :end props-element-maybe))))
+        (open-line 1)
+        (insert "+ " selected-text)
+        (fill-paragraph)
+        (scroll-right))
+       (t (display-warning :warning "Don't know where to add highlighted text. ")))))
+  ;; add highlights
+  (let ((pdf-annot-activate-created-annotations nil))
+    (pdf-annot-add-highlight-markup-annotation list-of-edges "#eee8aa")))
 
 (defun +boy/at-empty-item-p ()
   "Return t if point is at an empty list item."
