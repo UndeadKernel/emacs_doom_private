@@ -4,7 +4,9 @@
 
 (setq org-directory "~/documents/org/"
       org-archive-location (concat org-directory ".archive/%s::")
-      org-roam-directory (concat org-directory "notes/"))
+      org-roam-directory (concat org-directory "notes/")
+      +org-capture-notes-file "personal.org"
+      +org-capture-journal-file "journal.org")
 
 ;; ORG config
 (after! org
