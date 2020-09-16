@@ -16,7 +16,8 @@
           org-agenda-files (list org-directory)
           org-archive-location (concat org-directory ".archive/%s::")
           +bibliography-notes-dir "~/Documents/work/org/bib/")
-    (add-to-list 'org-file-apps '("\\.docx?\\'" . system))))
+    (add-to-list 'org-file-apps '("\\.docx?\\'" . system))
+    (add-to-list 'org-file-apps '("\\.xlsx?\\'" . system))))
 
 (when (string= "SPC-VM-C-CG" (system-name))
   (after! ivy
