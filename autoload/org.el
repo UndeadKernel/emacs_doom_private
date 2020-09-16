@@ -352,7 +352,7 @@ Skip project and sub-project tasks, and loose non-project tasks."
        ((+boy/is-project-p)
         next-headline)
        ((and (+boy/is-project-subtree-p)
-             (member (org-get-todo-state) (list "NEXT")))
+             (member (org-get-todo-state) (list "NEXT" "WAIT" "HOLD")))
         subtree-end)
        ((not (+boy/is-project-subtree-p))
         subtree-end)
