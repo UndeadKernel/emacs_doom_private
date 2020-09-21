@@ -154,7 +154,7 @@
                                      ""
                                    " (including WAIT and SCHEDULED tasks)")))
                         (org-agenda-skip-function '+boy/skip-projects-and-single-tasks)
-                        (org-tags-match-list-sublevels t)
+                        (org-tags-match-list-sublevels 'indented)
                         (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
@@ -166,6 +166,7 @@
                                                                   ""
                                                                 " (including WAIT and SCHEDULED tasks)")))
                         (org-agenda-skip-function '+boy/skip-non-project-tasks)
+                        (org-tags-match-list-sublevels 'indented)
                         (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)

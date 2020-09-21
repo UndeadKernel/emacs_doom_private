@@ -110,73 +110,25 @@ _g_:goto      _s_:split          _q_:cancel
 ;; ORG Agenda functions
 
 ;;;###autoload
-(defun +boy/find-project-task ()
-  "Move point to the parent (project) task if any"
-  (save-restriction
-    (widen)
-    (let ((parent-task (save-excursion (org-back-to-heading 'invisible-ok) (point))))
-      (while (org-up-heading-safe)
-        (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
-          (setq parent-task (point))))
-      (goto-char parent-task)
-      parent-task)))
-
-;;;###autoload
 (defun +boy/is-project-p ()
-  "Any task with a todo keyword subtask"
-  (save-restriction
-    (widen)
-    (let ((has-subtask)
-          (subtree-end (save-excursion (org-end-of-subtree t)))
-          (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-      (save-excursion
-        (forward-line 1)
-        (while (and (not has-subtask)
-                    (< (point) subtree-end)
-                    (re-search-forward "^\*+ " subtree-end t))
-          (when (member (org-get-todo-state) org-todo-keywords-1)
-            (setq has-subtask t))))
-      (and is-a-task has-subtask))))
+  "Any task with a `PROJ' state"
+  (member (org-get-todo-state) '("PROJ")))
 
 ;;;###autoload
 (defun +boy/is-project-subtree-p ()
-  "Any task with a todo keyword that is in a project subtree.
-Callers of this function already widen the buffer view."
-  (let ((task (save-excursion (org-back-to-heading 'invisible-ok)
-                              (point))))
+  "Any task with a todo keyword (that is not a project) and in a project subtree."
+  (let ((is-proj nil))
     (save-excursion
-      (+boy/find-project-task)
-      (if (equal (point) task)
-          nil
-        t))))
+      (org-back-to-heading 'invisible-ok)
+      (while (and (not is-proj) (org-up-heading-safe))
+        (when (member (nth 2 (org-heading-components)) '("PROJ"))
+          (setq is-proj t)))
+      is-proj)))
 
 ;;;###autoload
 (defun +boy/is-task-p ()
-  "Any task with a todo keyword and no subtask"
-  (save-restriction
-    (widen)
-    (let ((has-subtask)
-          (subtree-end (save-excursion (org-end-of-subtree t)))
-          (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-      (save-excursion
-        (forward-line 1)
-        (while (and (not has-subtask)
-                    (< (point) subtree-end)
-                    (re-search-forward "^\*+ " subtree-end t))
-          (when (member (org-get-todo-state) org-todo-keywords-1)
-            (setq has-subtask t))))
-      (and is-a-task (not has-subtask)))))
-
-;;;###autoload
-(defun +boy/is-subproject-p ()
-  "Any task which is a subtask of another project"
-  (let ((is-subproject)
-        (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-    (save-excursion
-      (while (and (not is-subproject) (org-up-heading-safe))
-        (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
-          (setq is-subproject t))))
-    (and is-a-task is-subproject)))
+  "Any task with a todo keyword that is not a project"
+  (member (nth 2 (org-heading-components)) (remove "PROJ" org-todo-keywords-1)))
 
 ;;;###autoload
 (defun +boy/list-sublevels-for-projects-indented ()
@@ -206,7 +158,7 @@ Callers of this function already widen the buffer view."
 
 ;;;###autoload
 (defun +boy/skip-stuck-projects ()
-  "Skip trees that are stuck projects (i.e., subtrees without a todo or next task)"
+  "Skip stuck projects (i.e., projects without a todo or next task)"
   (save-restriction
     (widen)
     (let ((next-headline
@@ -229,7 +181,7 @@ Callers of this function already widen the buffer view."
 
 ;;;###autoload
 (defun +boy/skip-non-stuck-projects ()
-  "Skip trees that are not stuck projects (i.e., no next or todo task)"
+  "Skip projects that are not stuck (i.e., no next or todo task)"
   (save-restriction
     (widen)
     (let ((next-headline
@@ -251,7 +203,7 @@ Callers of this function already widen the buffer view."
 
 ;;;###autoload
 (defun +boy/skip-non-projects ()
-  "Skip trees that are not projects"
+  "Skip tasks that are not projects"
   ;; (+boy/list-sublevels-for-projects-indented)
   (if (save-excursion (+boy/skip-non-stuck-projects))
       (save-restriction
@@ -278,18 +230,6 @@ Skip project and sub-project tasks, and project related tasks."
         nil)
        (t
         next-headline)))))
-
-;;;###autoload
-(defun +boy/skip-project-trees ()
-  "Skip trees that are projects"
-  (save-restriction
-    (widen)
-    (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-      (cond
-       ((+boy/is-project-p)
-        subtree-end)
-       (t
-        nil)))))
 
 ;;;###autoload
 (defun +boy/skip-projects-and-single-tasks ()
@@ -381,14 +321,6 @@ Skip project and sub-project tasks, and loose non-project tasks."
         subtree-end)
        (t
         nil)))))
-
-;;;###autoload
-(defun +boy/skip-non-subprojects ()
-  "Skip trees that are not projects"
-  (let ((next-headline (save-excursion (outline-next-heading))))
-    (if (+boy/is-subproject-p)
-        nil
-      next-headline)))
 
 ;;;###autoload
 (defun +boy/verify-refile-target ()
