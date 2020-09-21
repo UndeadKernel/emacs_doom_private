@@ -11,11 +11,11 @@
                             "--path-separator"
                             "//"))))
   ;; org directory of work env
+  (setq org-directory "~/Documents/work/org/"
+        org-agenda-files (list org-directory)
+        org-archive-location (concat org-directory ".archive/%s::")
+        +bibliography-notes-dir "~/Documents/work/org/bib/")
   (after! org
-    (setq org-directory "~/Documents/work/org/"
-          org-agenda-files (list org-directory)
-          org-archive-location (concat org-directory ".archive/%s::")
-          +bibliography-notes-dir "~/Documents/work/org/bib/")
     (add-to-list 'org-file-apps '("\\.docx?\\'" . system))
     (add-to-list 'org-file-apps '("\\.xlsx?\\'" . system))))
 
@@ -30,12 +30,13 @@
                             "--path-separator"
                             "//"))))
   ;; org directory of work env
+  (setq org-directory "~/Documents/work/org/"
+        org-agenda-files (list org-directory)
+        org-archive-location (concat org-directory ".archive/%s::")
+        +bibliography-notes-dir "~/Documents/work/org/bib/")
   (after! org
-    (setq org-directory "~/Documents/work/org/"
-          org-agenda-files (list org-directory)
-          org-archive-location (concat org-directory ".archive/%s::")
-          +bibliography-notes-dir "~/Documents/work/org/bib/")
-    (add-to-list 'org-file-apps '("\\.docx?\\'" . system)))
+    (add-to-list 'org-file-apps '("\\.docx?\\'" . system))
+    (add-to-list 'org-file-apps '("\\.xlsx?\\'" . system)))
 
   ;; use putty's plink as default tramp method
   (setq tramp-default-method "plink")

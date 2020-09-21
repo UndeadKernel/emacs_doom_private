@@ -2,8 +2,11 @@
 
 (defvar +boy/hide-scheduled-and-waiting-next-tasks t)
 
-(setq org-directory "~/documents/org/"
-      org-archive-location (concat org-directory ".archive/%s::")
+;; change `org-directory' only if it still has the default value
+(if (or (not (boundp 'org-directory)) (string= org-directory "~/org"))
+  (setq org-directory "~/documents/org/"))
+
+(setq org-archive-location (concat org-directory ".archive/%s::")
       org-roam-directory (concat org-directory "notes/")
       +org-capture-notes-file "personal.org"
       +org-capture-journal-file "journal.org")
