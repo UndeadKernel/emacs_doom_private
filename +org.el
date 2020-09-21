@@ -64,7 +64,7 @@
   (add-to-list 'org-capture-templates
                '("wn" "Notes"
                  entry
-                 (file"refile.org")
+                 (file "refile.org")
                  "* %? :NOTE:\n%U"
                  :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
