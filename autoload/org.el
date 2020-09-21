@@ -220,7 +220,7 @@ Callers of this function already widen the buffer view."
               (while (and (not has-next-or-todo)
                           (< (point) subtree-end)
                           (re-search-forward "^\\*+ \\(:?NEXT\\|TODO\\) " subtree-end t))
-                (unless (member "WAIT" (org-get-tags-at))
+                (unless (member "WAIT" (org-get-tags))
                   (setq has-next-or-todo t))))
             (if has-next-or-todo
                 nil
@@ -242,7 +242,7 @@ Callers of this function already widen the buffer view."
               (while (and (not has-next-or-todo)
                           (< (point) subtree-end)
                           (re-search-forward "^\\*+ \\(:?NEXT\\|TODO\\) " subtree-end t))
-                (unless (member "WAIT" (org-get-tags-at))
+                (unless (member "WAIT" (org-get-tags))
                   (setq has-next-or-todo t))))
             (if has-next-or-todo
                 next-headline
@@ -300,7 +300,7 @@ Skip project and sub-project tasks, and project related tasks."
       (cond
        ((and +boy/hide-scheduled-and-waiting-next-tasks
              (or
-              (member "WAIT" (org-get-tags-at))
+              (member "WAIT" (org-get-tags))
               (save-excursion (re-search-forward org-scheduled-string next-headline t))))
         next-headline)
        ((+boy/is-project-p)
