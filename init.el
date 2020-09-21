@@ -51,7 +51,9 @@
        ;;fill-column     ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
-       ;;indent-guides     ; highlighted indent columns
+       ;;indent-guides   ; highlighted indent columns
+       (ligature         ; replace bits of code with pretty symbols
+        +iosevka)
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree         ; a project drawer, like NERDTree for vim
@@ -59,9 +61,6 @@
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
-       (pretty-code      ; replace bits of code with pretty symbols
-        +iosevka
-        )
        ;;tabs            ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        ;;unicode         ; extended unicode support for various languages
