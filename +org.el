@@ -130,6 +130,7 @@
   (setq org-agenda-compact-blocks t
         org-agenda-skip-scheduled-if-deadline-is-shown t
         org-agenda-skip-deadline-prewarning-if-scheduled t
+        org-agenda-start-day "" ;; show entries starting today
         org-agenda-custom-commands
         '((" " "Agenda"
            ((agenda "" nil)
