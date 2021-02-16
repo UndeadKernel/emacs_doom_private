@@ -10,6 +10,9 @@
       doom-modeline-persp-name-icon t
       doom-modeline-lsp t)
 
+;; Smaller icons so the modeline shows fully
+(setq all-the-icons-scale-factor 1.1)
+
 ;; Show trailing white spaces
 (setq show-trailing-whitespace t)
 
