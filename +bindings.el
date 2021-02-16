@@ -57,7 +57,11 @@
  ;; smartparens
  (:after smartparens
    (:map smartparens-mode-map
-     "M-(" #'sp-wrap-round))
+    "M-(" #'sp-wrap-round
+    "C-<right>" #'sp-forward-slurp-sexp
+    "C-M-<right>" #'sp-forward-barf-sexp
+    "C-<left>" #'sp-backward-slurp-sexp
+    "C-M-<left>" #'sp-backward-barf-sexp))
  ;; magit
  (:after magit
    (:map magit-mode-map
