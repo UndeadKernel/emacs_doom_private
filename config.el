@@ -124,3 +124,16 @@
   (set-popup-rule! "^\\*pacfiles.*" :ignore t))
 
 (setq +bibliography-notes-dir "~/documents/org/")
+
+(use-package! command-log-mode
+  :commands global-command-log-mode
+  :init
+  (setq command-log-mode-auto-show t
+        command-log-mode-open-log-turns-on-mode t
+        command-log-mode-window-font-size 0
+        command-log-mode-window-size 80)
+  :config
+  (setq clm/log-command-exceptions*
+        (append clm/log-command-exceptions*
+                '(+boy/up-scroll
+                  +boy/down-scroll))))

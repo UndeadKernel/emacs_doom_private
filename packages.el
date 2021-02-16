@@ -15,3 +15,4 @@
 (package! pacfiles-mode)
 
 (package! org-trello)
+(package! command-log-mode)

@@ -26,13 +26,16 @@
  "C-x C-o"       #'+boy/switch-to-last-window
  (:leader
    (:prefix-map ("f" . "file")
-     :desc "New empty buffer" "n" #'+boy/new-buffer)
+     :desc "New empty buffer"        "n" #'+boy/new-buffer)
    (:prefix-map ("w" . "workspaces/windows")
      :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
    ;; Org related bindings
    (:prefix-map ("n". "notes")
      :desc "Do what I mean"          "o" #'+org/dwim-at-point
      :desc "Org hydra"               "h" #'+boy/org-babel-hydra/body)
+   ;; Toggle bindings
+   (:prefix-map ("t" . "toggle")
+    :desc "Toggle Command-Log-Mode"  "c" #'global-command-log-mode)
    ;; Unbindings
    (:after eww
      (:map eww-mode-map
