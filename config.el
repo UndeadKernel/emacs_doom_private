@@ -15,6 +15,8 @@
 (load! "+themes")
 ;; Different config for different systems
 (load! "+systems")
+;; Patches of functions to fix other packages
+(load! "+patches")
 
 ;; Configuration of DOOM lang
 (load! "+latex")
