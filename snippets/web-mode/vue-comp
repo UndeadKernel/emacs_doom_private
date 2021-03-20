@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: vue-comp
+# uuid:
+# key: comp
+# condition: t
+# --
+<template>
+    <div>
+    $0
+    </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue"
+
+export default Vue.extend({
+     name: '${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`'}
+ });
+</script>
+
+<style scoped lang="postcss">
+
+</style>
