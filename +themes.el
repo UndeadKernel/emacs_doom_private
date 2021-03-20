@@ -26,6 +26,17 @@
 
 ;; Color the border of windows according to the `highlight' color of the doom's theme
 (add-hook! 'doom-load-theme-hook
+  ;; web-mode tag selected highlight color
+  (after! web-mode
+    (set-face-attribute 'web-mode-current-element-highlight-face nil
+                        :foreground (doom-color 'highlight)
+                        :background nil
+                        :weight 'bold
+                        :underline t))
+  ;; Color matching parenthesis with the highlight color
+  (set-face-attribute 'show-paren-match nil
+                      :foreground (doom-color 'highlight)
+                      :background (doom-color 'region))
   ;; A more visible window border
   (set-face-attribute 'vertical-border nil :foreground (doom-color 'highlight))
   ;; Flycheck errors use the color of functions
