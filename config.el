@@ -93,6 +93,9 @@
 ;; Enable narrow to region
 (put 'narrow-to-region 'disabled nil)
 
+;; Do not start auto start comments in new lines.
+(setq +default-want-RET-continue-comments nil)
+
 ;; ---------------------------------------------------------------------------------
 ;; Additional Packages
 ;; ---------------------------------------------------------------------------------
