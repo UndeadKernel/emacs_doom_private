@@ -36,10 +36,9 @@
 (load! "+term")
 
 ;; Smooth mouse scrolling
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
-      mouse-wheel-progressive-speed nil             ; don't accelerate scrolling
-      mouse-wheel-follow-mouse t                    ; scroll window under mouse
-      scroll-step 1)
+(setq mouse-wheel-scroll-amount '(1) ; scroll two lines at a time
+      mouse-wheel-progressive-speed t ; don't accelerate scrolling
+      mouse-wheel-follow-mouse t) ; scroll window under mouse
 
 ;; Backups
 (setq make-backup-files t
