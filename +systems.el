@@ -43,3 +43,9 @@
   ;; set a custom path to find git-gui--askpass
   (setenv "SSH_ASKPASS"
           "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-gui--askpass"))
+
+(when (string= "turtles" (system-name))
+  (setq org-directory "~/windows/Documents/work/org/"
+        org-agenda-files (list org-directory)
+        org-archive-location (concat org-directory ".archive/%s::")
+        +bibliography-notes-dir "~/windows/Documents/work/org/bib/"))
