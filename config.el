@@ -22,6 +22,9 @@
 (load! "+latex")
 (load! "+org")
 (load! "+lang")
+
+;; Configuration of DOOM checkers
+(load! "+checkers")
 ;; Configuration of DOOM tools
 (load! "+tools")
 ;; Configuration of DOOM ui
