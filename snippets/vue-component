@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Vue Component
+# uuid:
+# key: comp
+# condition: t
+# --
+<template>
+$0
+</template>
+
+
+<script>
+
+</script>
+
+
+<style scoped lang="postcss">
+
+</style>
