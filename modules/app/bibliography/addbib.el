@@ -57,8 +57,8 @@
 (defun +bibliography--add-bib-save ()
   "Do the parsing and inclusion of the user-supplied bib entries."
   ;; add bib entries to bibliography file
-  (unless +bibliography--buffer
-    (user-error "Bibliography file not open."))
+  (unless (bound-and-true-p +bibliography--buffer)
+    (user-error "Bibliography file not open"))
   (message "Saving bib entries...")
   (goto-char (point-min))
   (setq entries (make-hash-table :test #'equal))
