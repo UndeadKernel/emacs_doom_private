@@ -8,7 +8,7 @@
 
 ;; Splash image
 (setq +doom-dashboard-banner-dir (concat doom-private-dir "banners/")
-      +doom-dashboard-banner-file "black-hole.png"
+      +doom-dashboard-banner-file "black-hole-dracula.png"
       +doom-dashboard-banner-padding '(0 . 1))
 
 ;; Change some font weights for the sections in LaTeX
