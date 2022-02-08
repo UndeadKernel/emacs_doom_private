@@ -143,7 +143,9 @@
  (:map Info-mode-map
    "M-n" nil ; disable key bindings
    "M-p" nil)
- )
+ ;; company mode
+ (:map company-active-map
+   "C-;"  #'company-complete-selection))
 
 ;; eshell
 (defun +boy-setup-eshell-bindings ()
