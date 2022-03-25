@@ -3,7 +3,7 @@
 
 (after! objed
   ;; Never start objed automatically
-  (pushnew! objed-keeper-commands 'org-cycle 'org-todo '+boy/down-scroll '+boy/up-scroll))
+  (pushnew! objed-keeper-commands 'org-cycle 'org-todo '+boy/down-scroll '+boy/up-scroll 'recenter-top-bottom))
 
 ;; always indent with tab
 (setq-default tab-always-indent t)
