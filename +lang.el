@@ -1,8 +1,10 @@
 ;;; ~/.doom.d/+lang.el -*- lexical-binding: t; -*-
 
-;; lsp-ui-sideline is redundant with eldoc and much more invasive
-(setq lsp-ui-sideline-enable nil
-      lsp-enable-symbol-highlighting nil)
+;; we like lsp-ui-sideline now :D
+(setq lsp-ui-sideline-enable t
+      lsp-enable-symbol-highlighting t
+      lsp-ui-sideline-show-hover nil
+      lsp-ui-sideline-show-code-actions nil)
 
 ;; web-mode config
 (setq web-mode-markup-indent-offset 2
