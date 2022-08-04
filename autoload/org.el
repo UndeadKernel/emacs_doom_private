@@ -37,6 +37,18 @@ _g_:goto      _s_:split          _q_:cancel
 ;; ORG PDF Annot functions
 
 ;;;###autoload
+(defun +boy/save-pdf-and-notes (&optional arg)
+  "When saving a PDF under the command of org-noter, save the associated org notes file."
+  (interactive "p")
+  (when (bound-and-true-p org-noter-doc-mode)
+    ;; Save the associated notes file.
+    (let ((notes-window (org-noter--get-notes-window)))
+      (with-selected-window notes-window
+        (save-buffer arg)))
+  ;; Save the PDF file.
+  (save-buffer arg)))
+
+;;;###autoload
 (defun +boy/highlight-and-annot-w-noter (list-of-edges)
   "Add a highlight with pdf-tools and an annotation with pdf-noter."
   (interactive (list (pdf-view-active-region nil)))
@@ -48,6 +60,7 @@ _g_:goto      _s_:split          _q_:cancel
   ;; add pdf-noter note
   (org-noter-insert-precise-note))
 
+;;;###autoload
 (defun +boy/highlight-and-add-item (list-of-edges indent)
   "Add a highlight and yank the highlighted text as a new list item."
   (interactive (list (pdf-view-active-region nil) current-prefix-arg))
@@ -62,9 +75,6 @@ _g_:goto      _s_:split          _q_:cancel
     (select-frame-set-input-focus (window-frame window))
     (with-selected-window window
       (cond
-       ;; point in an empty line
-       ((string-match-p "\\`\\s-*$" (thing-at-point 'line))
-        (insert "+ " selected-text) )
        ;; point in a line with only an item bullet
        ((+boy/at-empty-item-p)
         (org-end-of-line)
@@ -97,11 +107,17 @@ _g_:goto      _s_:split          _q_:cancel
         (insert "+ " selected-text)
         (fill-paragraph)
         (scroll-right))
+       ;; point in an empty line or end of buffer
+       ((or (string-match-p "\\`\\s-*$" (thing-at-point 'line)) (eobp))
+        (insert "+ " selected-text)
+        (fill-paragraph)
+        (scroll-right))
        (t (display-warning :warning "Don't know where to add highlighted text. ")))))
   ;; add highlights
   (let ((pdf-annot-activate-created-annotations nil))
     (pdf-annot-add-highlight-markup-annotation list-of-edges "#eee8aa")))
 
+;;;###autoload
 (defun +boy/at-empty-item-p ()
   "Return t if point is at an empty list item."
   (string-match-p "^[ 	]*\\(\\(?:[-+*]\\|\\(?:[0-9]+\\|[A-Za-z]\\)[.)]\\)\\)[ 	]*$"

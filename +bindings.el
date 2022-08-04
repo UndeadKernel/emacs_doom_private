@@ -89,8 +89,9 @@
    "M-n"   nil
    "M-p"   nil)
   (:map org-noter-doc-mode-map
-   "t"   #'+boy/highlight-and-add-item
-   "T"   #'+boy/highlight-and-annot-w-noter))
+   "t"       #'+boy/highlight-and-add-item
+   "T"       #'+boy/highlight-and-annot-w-noter
+   "C-x C-s" #'+boy/save-pdf-and-notes))
 
  ;; switch-window
  (:after switch-window
