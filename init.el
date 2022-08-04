@@ -192,7 +192,10 @@
         +dragndrop         ; drag & drop files/images into org buffers
         +jupyter           ; ipython/jupyter support for babel
         +pandoc            ; export-with-pandoc support
-        +present)          ; using org-mode for presentations
+        +present           ; using org-mode for presentations
+        +pretty
+        +noter
+        +roam2)
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
