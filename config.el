@@ -131,7 +131,8 @@
   :config
   (set-popup-rule! "^\\*pacfiles.*" :ignore t))
 
-(setq +bibliography-notes-dir "~/documents/org/")
+(when (not (boundp '+bibliography-notes-dir))
+  (setq +bibliography-notes-dir "~/documents/bib/"))
 
 (use-package! command-log-mode
   :commands global-command-log-mode

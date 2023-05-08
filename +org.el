@@ -194,11 +194,13 @@
                         (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)))))))
 
-  ;; org-noter config
-  (setq org-noter-default-heading-title "Page $p$")
-  ;; (add-hook! 'org-noter-notes-mode-hook (display-line-numbers-mode -1))
-
   (setq org-refile-target-verify-function '+boy/verify-refile-target))
+
+
+;; org-noter config
+(setq org-noter-default-heading-title "Page $p$"
+      org-noter-always-create-frame nil)
+;; (add-hook! 'org-noter-notes-mode-hook (display-line-numbers-mode -1))
 
 ;; Disable line numbers by default
 (add-hook! 'org-mode-hook (display-line-numbers-mode -1))
