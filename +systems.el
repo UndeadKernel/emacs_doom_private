@@ -1,49 +1,38 @@
 ;;; ~/.doom.d/+systems.el -*- lexical-binding: t; -*-
 
-(when (string= "DE-L081832" (system-name))
-  (after! ivy
-    ;; remove the path separator that would make rg from chocolatey
-    ;; ... exit with an error
-    (setq counsel-rg-base-command
-          (seq-difference counsel-rg-base-command
-                          '(" --path-separator=//"
-                            " --path-separator //"
-                            "--path-separator"
-                            "//"))))
+;; Office 2 Laptop
+(when (string= "DE-L089725" (system-name))
   ;; org directory of work env
-  (setq org-directory "~/Documents/work/org/"
+  (setq org-directory "~/work/org/"
         org-agenda-files (list org-directory)
         org-archive-location (concat org-directory ".archive/%s::")
-        +bibliography-notes-dir "~/Documents/work/org/bib/")
-  (after! org
-    (add-to-list 'org-file-apps '("\\.docx?\\'" . system))
-    (add-to-list 'org-file-apps '("\\.xlsx?\\'" . system))))
-
-(when (string= "SPC-VM-C-CG" (system-name))
-  (after! ivy
-    ;; remove the path separator that would make rg from chocolatey
-    ;; ... exit with an error
-    (setq counsel-rg-base-command
-          (seq-difference counsel-rg-base-command
-                          '(" --path-separator=//"
-                            " --path-separator //"
-                            "--path-separator"
-                            "//"))))
-  ;; org directory of work env
-  (setq org-directory "~/Documents/work/org/"
-        org-agenda-files (list org-directory)
-        org-archive-location (concat org-directory ".archive/%s::")
-        +bibliography-notes-dir "~/Documents/work/org/bib/")
+        +bibliography-notes-dir "~/work/org/bib/")
   (after! org
     (add-to-list 'org-file-apps '("\\.docx?\\'" . system))
     (add-to-list 'org-file-apps '("\\.xlsx?\\'" . system)))
+  ;; Add a copy function for WSL2
+  (defun wsl-copy (start end)
+    (interactive "r")
+    (shell-command-on-region start end "clip.exe")
+    (deactivate-mark)))
 
-  ;; use putty's plink as default tramp method
-  (setq tramp-default-method "plink")
-  ;; set a custom path to find git-gui--askpass
-  (setenv "SSH_ASKPASS"
-          "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git-gui--askpass"))
+;; Office 1 Laptop
+(when (string= "DE-L081832" (system-name))
+  ;; org directory of work env
+  (setq org-directory "~/work/org/"
+        org-agenda-files (list org-directory)
+        org-archive-location (concat org-directory ".archive/%s::")
+        +bibliography-notes-dir "~/work/org/bib/")
+  (after! org
+    (add-to-list 'org-file-apps '("\\.docx?\\'" . system))
+    (add-to-list 'org-file-apps '("\\.xlsx?\\'" . system)))
+  ;; Add a copy function for WSL2
+  (defun wsl-copy (start end)
+    (interactive "r")
+    (shell-command-on-region start end "clip.exe")
+    (deactivate-mark)))
 
+;; VirtualBox VM
 (when (string= "turtles" (system-name))
   (setq org-directory "~/windows/Documents/work/org/"
         org-agenda-files (list org-directory)
