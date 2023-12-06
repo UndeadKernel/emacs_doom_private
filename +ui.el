@@ -25,7 +25,7 @@
 
 ;; Use switch-window more intelligently
 ;; ... either switch only real buffers or popup buffers
-(when (and (featurep! :ui popup) (featurep! :ui window-select +switch-window))
+(when (and (modulep! :ui popup) (modulep! :ui window-select +switch-window))
   (defvar +boy--switch-popups nil "Is t when we are switching between popups.")
 
   (defun +boy--window-list (frame minibuf window)
