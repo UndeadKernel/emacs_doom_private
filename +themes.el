@@ -65,4 +65,4 @@
   ;; Face of ellipsis symbol (Purple like keywords)
   (set-face-attribute 'org-ellipsis nil :foreground "#c678dd")
   ;; Face of the entire headline of a DONE line
-  (set-face-attribute 'org-headline-done nil :foreground nil))
+  (set-face-attribute 'org-headline-done nil :foreground 'unspecified))
