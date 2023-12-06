@@ -78,3 +78,10 @@ windows from all frames. Call `other-window' otherwise."
                        (if (bound-and-true-p +boy--switch-popups)
                            (+popup/other)
                          (other-window 1)))))))
+
+(after! highlight-indent-guides
+  (setq highlight-indent-guides-method 'character
+        highlight-indent-guides-responsive 'stack
+        highlight-indent-guides-auto-stack-odd-face-perc 60
+        highlight-indent-guides-auto-stack-even-face-perc 60
+        highlight-indent-guides-auto-stack-character-face-perc 40))

@@ -59,7 +59,7 @@
        ;;(emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
-       ;;indent-guides    ; highlighted indent columns
+       indent-guides    ; highlighted indent columns
        (ligatures         ; ligatures and symbols to make your code pretty again
         +iosevka)
        minimap           ; show a map of the code on the side
