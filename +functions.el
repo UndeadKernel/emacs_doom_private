@@ -82,17 +82,27 @@ the line."
            (goto-char end))))
      (point))))
 
-; Functions to easily toggle the recording of macros.
 (defun +boy/macro-on ()
-  "One-key keyboard macros: turn recording on."
+  "Easily toggle the recording of macros on."
   (interactive)
   (define-key global-map (this-command-keys)
     '+boy/macro-off)
   (start-kbd-macro nil))
 
 (defun +boy/macro-off ()
-  "One-key keyboard macros: turn recording off."
+  "Easily toggle the recording of macros off."
   (interactive)
   (define-key global-map (this-command-keys)
     '+boy/macro-on)
   (end-kbd-macro))
+
+(defun +boy/copy-to-other-windows ()
+  "Copy the contents of the current window into all other visible windows."
+  (interactive)
+  (let ((src-buffer (current-buffer)))
+    (mapc
+     #'(lambda (win)
+         (with-selected-window win
+           (erase-buffer)
+           (insert-buffer-substring src-buffer)))
+     (cdr (window-list)))))
