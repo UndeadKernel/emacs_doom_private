@@ -179,7 +179,8 @@
        ;;json              ; At least it ain't XML
        ;;(java +lsp) ; the poster child for carpal tunnel syndrome
        (javascript        ; all(hope(abandon(ye(who(enter(here))))))
-        +lsp)
+        +lsp
+        +tree-sitter)
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        (latex +latexmk)    ; writing papers in Emacs has never been so fun
@@ -203,7 +204,8 @@
        ;;purescript        ; javascript, but functional
        (python             ; beautiful is better than ugly
         +pyvenv
-        +lsp)
+        +lsp
+        +pyright)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6

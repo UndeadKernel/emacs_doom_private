@@ -146,3 +146,21 @@
         (append clm/log-command-exceptions*
                 '(+boy/up-scroll
                   +boy/down-scroll))))
+
+;; This variable should go inside of :init, but doesn't get called at the right time.
+(setq lsp-tailwindcss-add-on-mode t)
+(use-package! lsp-tailwindcss
+  :when (featurep! +lsp)
+  :after lsp-mode
+  :config
+  (setq lsp-tailwindcss-emmet-completions (featurep 'emmet-mode))
+
+  ;; Advice that uses a locally installed rustywind binary.
+  (defun +rustywind-with-local-bin (orig-fun &rest args)
+    (let ((lsp-tailwindcss-rustywind-command
+           (concat (projectile-project-root)
+                   "node_modules/.bin/rustywind")))
+      (apply orig-fun args)))
+  (advice-add #'lsp-tailwindcss-rustywind :around #'+rustywind-with-local-bin))
+
+(set-docsets! '(web-mode css-mode rjsx-mode typescript-tsx-mode) :add "Tailwind_CSS")
