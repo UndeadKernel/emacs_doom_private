@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: vue-comp
-# uuid:
+# uuid: vue-comp
 # key: comp
 # condition: t
 # --
@@ -10,13 +10,15 @@
     </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue"
 
-export default Vue.extend({
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
      name: '${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`'}
  });
 </script>
+
 
 <style scoped lang="postcss">
 
