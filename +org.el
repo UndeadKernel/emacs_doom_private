@@ -84,7 +84,8 @@
         org-agenda-skip-deadline-prewarning-if-scheduled t
         org-agenda-start-day "" ;; show entries starting today
         org-agenda-span 15 ;; display from today, two weeks
-        org-refile-target-verify-function '+boy/verify-refile-target)
+        org-refile-target-verify-function '+boy/verify-refile-target
+        org-agenda-dim-blocked-tasks nil)
 
   ;; Agenda helper functions
 
@@ -144,6 +145,7 @@
         (concat "Next Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
+       (org-agenda-prefix-format " %-10c %-10(car (last (org-get-outline-path)))")
        (org-agenda-skip-function '+boy/skip-projects-and-single-tasks)
        (org-tags-match-list-sublevels 'indented)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
@@ -158,6 +160,7 @@
         (concat "Project Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
+       (org-agenda-prefix-format " %-10c %-10(car (last (org-get-outline-path)))")
        (org-agenda-skip-function '+boy/skip-non-project-tasks)
        (org-tags-match-list-sublevels 'indented)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
