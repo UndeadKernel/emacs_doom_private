@@ -1,5 +1,11 @@
 ;;; ~/emacs/doom_private/+term.el -*- lexical-binding: t; -*-
 
+;; Use bash for internal commands, fish for terminals.
+(setq shell-file-name (executable-find "bash"))
+(when (executable-find "fish")
+  (setq-default vterm-shell (executable-find "fish"))
+  (setq-default explicit-shell-file-name (executable-find "fish")))
+
 (setq eshell-hist-ignoredups t
       eshell-cmpl-cycle-completions nil
       eshell-cmpl-ignore-case t)
