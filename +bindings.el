@@ -1,9 +1,11 @@
 ;;; private/boy/+bindings.el -*- lexical-binding: t; -*-
 
+;; Set the "localleader" binding to C-z
 (map! "C-z" nil)
 (setq doom-localleader-alt-key "C-z")
 
 (map!
+ ;; Global Bindings
  "M-n"           #'+boy/down-scroll
  "M-p"           #'+boy/up-scroll
  "M-d"           #'+boy/delete-word
@@ -24,11 +26,23 @@
  "C-s-<down>"    #'+boy/window-move-very-bottom
  ;; Switching windows
  "C-x C-o"       #'+boy/switch-to-last-window
+ ;; Switching Workspaces
+ "M-="    #'+workspace/display
+ "M-1"    #'+workspace/switch-to-0
+ "M-2"    #'+workspace/switch-to-1
+ "M-3"    #'+workspace/switch-to-2
+ "M-4"    #'+workspace/switch-to-3
+ "M-5"    #'+workspace/switch-to-4
+ "M-6"    #'+workspace/switch-to-5
+ "M-7"    #'+workspace/switch-to-6
+ "M-8"    #'+workspace/switch-to-7
+ "M-9"    #'+workspace/switch-to-8
+ "M-0"    #'+workspace/switch-to-final
  (:leader
    (:prefix-map ("f" . "file")
      :desc "New empty buffer"        "n" #'+boy/new-buffer)
    (:prefix-map ("w" . "workspaces/windows")
-     :desc "Resize window"           "h" #'resize-window) ; requires private package 'resize-window'
+    :desc "Resize window"            "h" #'resize-window) ; requires private package 'resize-window'
    ;; Org related bindings
    (:prefix-map ("n". "notes")
      :desc "Do what I mean"          "o" #'+org/dwim-at-point
@@ -70,6 +84,12 @@
    (:map magit-mode-map
      "M-n"     nil ; do not overwrite
      "M-p"     nil
+     "M-="     nil
+     "M-1"     nil
+     "M-2"     nil
+     "M-3"     nil
+     "M-4"     nil
+     "M-5"     nil
      "C-c C-n" #'magit-section-forward-sibling
      "C-c C-p" #'magit-section-backward-sibling))
  ;; pdf-tools
