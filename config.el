@@ -119,11 +119,11 @@
   :config
   (setq www-synonyms-key boy--synonyms-key))
 
-(use-package! jupyter
-  ;; :load-path ("~/src/emacs-jupyter" "~/src/emacs-zmq")
-  :after org
-  :init
-  (setq jupyter-eval-use-overlays t))
+;; (use-package! jupyter
+;;   ;; :load-path ("~/src/emacs-jupyter" "~/src/emacs-zmq")
+;;   :after org
+;;   :init
+;;   (setq jupyter-eval-use-overlays t))
 
 
 (use-package! pacfiles-mode
