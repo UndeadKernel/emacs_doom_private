@@ -275,4 +275,7 @@
   ;; After evaluating a SRC_BLOCK, redisplay inline images
   (add-hook 'org-babel-after-execute-hook #'org-redisplay-inline-images)
 
+  ;; Jupyter config
+  (setq jupyter-eval-use-overlays t)
+
   ) ;; end of (after! org)
