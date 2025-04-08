@@ -1,5 +1,30 @@
 ;;; ~/.doom.d/+systems.el -*- lexical-binding: t; -*-
 
+;; Office 3 Laptop
+(when (string= "LT05133" (system-name))
+  (after! org
+    (defun +boy/org-roam-find-acronyms ()
+      "Get the file path of the `acronyms' node"
+      (org-roam-node-file (org-roam-node-from-title-or-alias "acronyms")))
+    (defun +boy/org-roam-find-people ()
+      "Get the file path of the `people' node"
+      (org-roam-node-file (org-roam-node-from-title-or-alias "people")))
+    (add-to-list 'org-capture-templates
+                 '("r" "Roam Templates"))
+    (add-to-list 'org-capture-templates
+                 '("ra" "Acronyms"
+                   entry  ; type
+                   (file +boy/org-roam-find-acronyms) ; target
+                   "* %?\n:PROPERTIES:\n:ID: %(format-time-string \"      id-%Y%m%d-%H%M%S\" (current-time) t)\n:END:" ; template
+                   :prepend t :kill-buffer t))
+    (add-to-list 'org-capture-templates
+                 '("rp" "People"
+                   entry  ; type
+                   (file +boy/org-roam-find-people) ; target
+                   "* %?\n:PROPERTIES:\n:ID: %(format-time-string \"      id-%Y%m%d-%H%M%S\" (current-time) t)\n:END:" ; template
+                   :prepend t :kill-buffer t))
+    ))
+
 ;; Office 2 Laptop
 (when (string= "DE-L089725" (system-name))
   ;; org directory of work env
