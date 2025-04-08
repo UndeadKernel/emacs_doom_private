@@ -30,7 +30,10 @@
         org-babel-default-header-args:sh '((:results . "verbatim"))
         org-todo-repeat-to-state t
         pdf-annot-activate-created-annotations nil ; do not open annotations after creating them
-        org-duration-format (quote h:mm)) ; display clock times as hours only
+        org-duration-format (quote h:mm) ; display clock times as hours only
+        org-id-method 'ts ; create IDs using time
+        org-id-ts-format "id-%Y%m%d-%H%M%S" ; the format of created IDs
+        )
 
   ;; Open PDF files in emacs
   (if (assoc "\\.pdf\\'" org-file-apps)
@@ -53,14 +56,14 @@
   (add-to-list 'org-capture-templates
                '("wn" "Notes"
                  entry
-                 (file "refile.org")
-                 "* %? :NOTE:\n%U"
+                 (file+headline "refile.org" "Notes")
+                 "* %? %(org-set-tags '(\"NOTE\" \"REFILE\"))\n%U"
                  :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
-               '("wt" "Todo"
+               '("wt" "Tasks"
                  entry  ; type
-                 (file "refile.org") ; target
-                 "* TODO %?\n%U" ; template
+                 (file+headline "refile.org" "Tasks") ; target
+                 "* TODO %? %(org-set-tags \"REFILE\")\n%U" ; template
                  :prepend t :kill-buffer t)) ; properties
 
   ;; Agenda configuration
@@ -87,23 +90,35 @@
         org-refile-target-verify-function '+boy/verify-refile-target
         org-agenda-dim-blocked-tasks nil)
 
+  (defun +boy/remove-refile-tag ()
+    "Remove the REFILE tag of the headline with the current point."
+    (org-set-tags (seq-filter (lambda (elt) (not (string= elt "REFILE"))) (org-get-tags))))
+  (add-hook! 'org-after-refile-insert-hook #'+boy/remove-refile-tag)
+
   ;; Agenda helper functions
 
-  (defun +boy/org-agenda-add-location-string ()
+  (defun +boy/org-agenda-get-proj-maybe ()
     "Gets the value of the LOCATION property"
-    (let ((loc (org-entry-get (point) "LOCATION")))
-      (if (> (length loc) 0)
-          (concat "{" loc "} ")
+    (let ((heading-found
+           (catch 'heading
+             (save-excursion
+               (while (org-up-heading-safe)
+                 (if (string= (org-get-todo-state) "PROJ")
+                     (progn
+                       (throw 'heading (org-get-heading t t t t)))))))))
+      (if heading-found
+          (let ((heading-size (length heading-found)))
+            (substring heading-found 0 (min heading-size 6)))
         "")))
 
   ;; Agenda block definitions
 
   (defvar +boy--agenda-display-settings
-    '((org-agenda-prefix-format '((agenda . "  %-12:c%?-12t %(+boy/org-agenda-add-location-string)% s")
+    '((org-agenda-prefix-format '((agenda . "  %-12c%?-12t%s %?-8(+boy/org-agenda-get-proj-maybe)")
                                   (timeline . "  % s")
-                                  (todo . "  %-12:c")
-                                  (tags . "  %-12:c")
-                                  (search . "  %i %-12:c"))))
+                                  (todo . "  %-12c")
+                                  (tags . "  %-12c")
+                                  (search . "  %i %-12c"))))
     "Display settings for agenda views.")
 
   (defvar +boy--agenda-block--two-weeks
@@ -120,15 +135,15 @@
 
   (defvar +boy--agenda-block--refile
     '(tags "REFILE"
-      ((org-agenda-overriding-header "Tasks to Refile")
-       (org-tags-match-list-sublevels nil)))
+      ((org-agenda-overriding-header "Items to Refile")
+       (org-tags-match-list-sublevels t)))
     "Headings needing refiling.")
 
   (defvar +boy--agenda-block--active-projects
     '(tags-todo "-HOLD-KILLED/!"
       ((org-agenda-overriding-header "Projects")
        (org-agenda-skip-function '+boy/skip-non-projects)
-       (org-tags-match-list-sublevels 'indented)
+       (org-tags-match-list-sublevels t)
        (org-agenda-sorting-strategy '(category-keep))))
     "All active projects.")
 
@@ -145,9 +160,9 @@
         (concat "Next Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
-       (org-agenda-prefix-format " %-10c %-10(car (last (org-get-outline-path)))")
+       (org-agenda-prefix-format "  %-12:c%-12(car (org-get-outline-path))")
        (org-agenda-skip-function '+boy/skip-projects-and-single-tasks)
-       (org-tags-match-list-sublevels 'indented)
+       (org-tags-match-list-sublevels t)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
@@ -160,9 +175,9 @@
         (concat "Project Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
-       (org-agenda-prefix-format " %-10c %-10(car (last (org-get-outline-path)))")
+       (org-agenda-prefix-format "  %-12c%-8(+boy/org-agenda-get-proj-maybe)")
        (org-agenda-skip-function '+boy/skip-non-project-tasks)
-       (org-tags-match-list-sublevels 'indented)
+       (org-tags-match-list-sublevels t)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
