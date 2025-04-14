@@ -112,6 +112,12 @@
    "t"       #'+boy/highlight-and-add-item
    "T"       #'+boy/highlight-and-annot-w-noter
    "C-x C-s" #'+boy/save-pdf-and-notes))
+;; org-roam
+ (:leader
+  :after org-roam
+   (:prefix-map ("n". "notes")
+     :desc "Find a Roam Node"    "g" #'org-roam-node-find
+     :desc "Insert a Roam Node"  "i" #'org-roam-node-insert))
 
  ;; switch-window
  (:after switch-window
