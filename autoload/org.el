@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/autoload/org.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload '+boy/org-babel-hydra/body "~/.doom.d/autoload/org.el" nil t)
+;;;###autoload (autoload '+boy/org-babel-hydra/body "~/.config/doom/autoload/org.el" nil t)
 (defhydra +boy/org-babel-hydra (:hint nil)
     "
 Org-Babel:
