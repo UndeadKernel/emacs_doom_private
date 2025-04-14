@@ -342,3 +342,14 @@ Skip project and sub-project tasks, and loose non-project tasks."
 (defun +boy/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
+;;;###autoload
+(defun +boy/run-on-explorer (path _)
+      "Open a \"explorer\" type link.
+PATH is the path to open in explorer, as a string."
+      (let ((command (concat "explorer.exe " (shell-quote-argument path)))
+            ;; explorer.exe always returns an error code, so we supress all messages.
+            (inhibit-message t) ;No messages in echo area.
+            (message-log-max nil)) ; No messages in *Messages* buffer.
+        (shell-command command))
+      t)

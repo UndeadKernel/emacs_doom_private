@@ -3,6 +3,10 @@
 ;; Office 3 Laptop
 (when (string= "LT05133" (system-name))
   (after! org
+    (org-link-set-parameters "explorer"
+                             :follow #'+boy/run-on-explorer)
+    (add-to-list 'org-file-apps '("\\.docx?\\'" . "explorer.exe %s"))
+    (add-to-list 'org-file-apps '("\\.xlsx?\\'" . "explorer.exe %s"))
     (defun +boy/org-roam-find-acronyms ()
       "Get the file path of the `acronyms' node"
       (org-roam-node-file (org-roam-node-from-title-or-alias "acronyms")))
