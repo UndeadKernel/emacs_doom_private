@@ -160,7 +160,7 @@
         (concat "Next Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
-       (org-agenda-prefix-format "  %-12:c%-12(car (org-get-outline-path))")
+       (org-agenda-prefix-format "  %-12c%-8(+boy/org-agenda-get-proj-maybe)")
        (org-agenda-skip-function '+boy/skip-projects-and-single-tasks)
        (org-tags-match-list-sublevels t)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
