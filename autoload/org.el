@@ -210,8 +210,8 @@ _g_:goto      _s_:split          _q_:cancel
     (let ((next-headline
            (save-excursion (or (outline-next-heading) (point-max)))))
       (if (+boy/is-project-p)
-          (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
-                 (has-next-or-todo ))
+          (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+                (has-next-or-todo nil))
             (save-excursion
               (forward-line 1)
               (while (and (not has-next-or-todo)
@@ -322,9 +322,6 @@ Skip project and sub-project tasks, and loose non-project tasks."
       (cond
        ((+boy/is-project-p)
         next-headline)
-       ((and (+boy/is-project-subtree-p)
-             (member (org-get-todo-state) (list "NEXT" "WAIT" "HOLD")))
-        subtree-end)
        ((not (+boy/is-project-subtree-p))
         subtree-end)
        ((and +boy/hide-scheduled-and-waiting-next-tasks
