@@ -1,5 +1,26 @@
 ;;; private/boy/autoload/boy.el -*- lexical-binding: t; -*-
 
+;; Show all non-printable characters in a buffer with overlays.
+;;;###autoload
+(defun +boy/show-nonascii (&optional all remove)
+  "Toggle display of zero-width non-ascii characters in current buffer.
+With prefix \\[universal-argument] REMOVE, remove displays.
+With prefix \\[universal-argument] \\[universal-argument] ALL show all non-ascii chars."
+  (interactive (list (eq 4 (prefix-numeric-value current-prefix-arg))
+                     (eq 16 (prefix-numeric-value current-prefix-arg))))
+  (if remove (remove-overlays (point-min) (point-max) 'nonascii t)
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "[[:nonascii:]]" nil t)
+        (when (or all (zerop (char-width (char-after (match-beginning 0)))))
+          (let ((ov (make-overlay (match-beginning 0) (match-end 0))))
+            (overlay-put ov 'display
+                         (buttonize (format "(%d)" (char-after (match-beginning 0)))
+                                    (let ((pos (match-beginning 0)))
+                                      (lambda (_) (describe-char pos)))))
+            (overlay-put ov 'face 'font-lock-warning-face)
+            (overlay-put ov 'nonascii t)))))))
+
 ;; Copy a paragraph and remove all extra spaces and line ends
 ;;;###autoload
 (defun +boy/copy-paragraph (&optional beg end)
