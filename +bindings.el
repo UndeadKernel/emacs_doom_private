@@ -15,6 +15,7 @@
  "C-M-q"         #'+boy/unfill-paragraph
  "S-<f1>"        #'+boy/macro-on
  "<f1>"          #'call-last-kbd-macro
+ "C-;"           #'completion-at-point
  ;; Buffer related bindings
  "s-<left>"      #'+boy/window-move-left
  "s-<right>"     #'+boy/window-move-right
@@ -118,6 +119,22 @@
    (:prefix-map ("n". "notes")
      :desc "Find a Roam Node"    "g" #'org-roam-node-find
      :desc "Insert a Roam Node"  "i" #'org-roam-node-insert))
+
+ ;; LLMs
+ (:when (modulep! :tools llm)
+   (:leader
+    (:prefix-map ("o" . "open")
+      (:prefix ("l" . "llm")
+       :desc "Add text to context"        "a" #'gptel-add
+       :desc "Explain"                    "e" #'gptel-quick
+       :desc "Add file to context"        "f" #'gptel-add-file
+       :desc "Open gptel"                 "l" #'gptel
+       :desc "Send to gptel"              "s" #'gptel-send
+       :desc "Open gptel menu"            "m" #'gptel-menu
+       :desc "Rewrite"                    "r" #'gptel-rewrite
+       :desc "Org: set topic"             "o" #'gptel-org-set-topic
+       :desc "Org: set properties"        "O" #'gptel-org-set-properties
+       :desc "Send to gptel with options" "S" #'+boy/gptel-menu-send ))))
 
  ;; switch-window
  (:after switch-window
