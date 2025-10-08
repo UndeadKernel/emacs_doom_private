@@ -85,3 +85,11 @@ windows from all frames. Call `other-window' otherwise."
         highlight-indent-guides-auto-stack-odd-face-perc 60
         highlight-indent-guides-auto-stack-even-face-perc 60
         highlight-indent-guides-auto-stack-character-face-perc 40))
+
+;; Org UI prettiness
+(defun +boy/prettify-org-setup ()
+  ;; Drawers
+  (push '(":PROPERTIES:" . "") prettify-symbols-alist)
+  (prettify-symbols-mode))
+
+(add-hook! '(org-mode-hook org-agenda-mode-hook) #'+boy/prettify-org-setup)
