@@ -106,3 +106,9 @@ the line."
            (erase-buffer)
            (insert-buffer-substring src-buffer)))
      (cdr (window-list)))))
+
+  (defun +boy/eval-in-place ()
+    (interactive)
+    (let ((value (eval (elisp--preceding-sexp))))
+      (kill-sexp -1)
+      (insert (format "%S" value))))
