@@ -15,24 +15,28 @@
 ;; Org configuration
 (after! org
   (setq org-startup-folded nil ; do not start folded
-        org-tags-column 80 ; the column to the right to align tags
+        ;;org-tags-column 120 ; the column to the right to align tags
         org-log-done 'time ; record the time when an element was marked done/checked
         ;;org-fontify-done-headline nil ; do not change the font of DONE items
         org-fold-catch-invisible-edits 'show-and-error
         org-list-demote-modify-bullet '(("+" . "-") ("-" . "+"))
-        org-ellipsis " ▼ "
+        ;; org-ellipsis "  "
+        org-ellipsis " "
         org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷")
         org-babel-min-lines-for-block-output 5 ; when to wrap results in #begin_example
         org-return-follows-link nil  ; RET doesn't follow links
-        org-hide-emphasis-markers nil ; do show format markers
+        ;; org-hide-emphasis-markers nil ; do show format markers
         org-startup-with-inline-images t ; open buffers show inline images
         ;; visual-fill-column-width 120 ; size for usage with visual fill column mode
         org-babel-default-header-args:sh '((:results . "verbatim"))
         org-todo-repeat-to-state t
         pdf-annot-activate-created-annotations nil ; do not open annotations after creating them
-        org-duration-format (quote h:mm) ; display clock times as hours only
         org-id-method 'ts ; create IDs using time
         org-id-ts-format "id-%Y%m%d-%H%M%S" ; the format of created IDs
+        org-cycle-separator-lines -1 ; leave empty lines between collapsed headlines
+        org-modern-table-vertical 1 ; pretty vertical lines in tables 1px in width
+        org-agenda-tags-todo-honor-ignore-options t ; don't show SCHEDULED items in agenda view
+        org-deadline-warning-days 0 ; don't inform me that a deadline is coming
         )
 
   ;; Open PDF files in emacs
@@ -136,6 +140,7 @@
   (defvar +boy--agenda-block--refile
     '(tags "REFILE"
       ((org-agenda-overriding-header "Items to Refile")
+       (org-agenda-prefix-format "  %-12c%-8(+boy/org-agenda-get-proj-maybe)")
        (org-tags-match-list-sublevels t)))
     "Headings needing refiling.")
 
@@ -161,16 +166,16 @@
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
        (org-agenda-prefix-format "  %-12c%-8(+boy/org-agenda-get-proj-maybe)")
-       (org-agenda-skip-function '+boy/skip-projects-and-single-tasks)
+       (org-agenda-skip-function '+boy/skip-non-tasks)
        (org-tags-match-list-sublevels t)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-with-date +boy/hide-scheduled-and-waiting-next-tasks)
-       (org-agenda-sorting-strategy '(todo-state-down effort-up category-keep))))
+       (org-agenda-sorting-strategy '(category-keep))))
     "All next tasks.")
 
   (defvar +boy--agenda-block--project-subtasks
-    '(tags-todo "-REFILE-KILLED-WAIT-HOLD/!"
+    '(tags-todo "-REFILE-KILLED-WAIT-HOLD/!-NEXT"
       ((org-agenda-overriding-header
         (concat "Project Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
@@ -185,11 +190,12 @@
     "Tasks that belong to a project.")
 
   (defvar +boy--agenda-block--standalone-tasks
-    '(tags-todo "-REFILE-KILLED-WAIT-HOLD/!"
+    '(tags-todo "-REFILE-KILLED/!-NEXT"
       ((org-agenda-overriding-header
         (concat "Standalone Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
+       (org-agenda-prefix-format "  %-12c%-8(+boy/org-agenda-get-proj-maybe)")
        (org-agenda-skip-function '+boy/skip-project-tasks)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
        (org-agenda-todo-ignore-deadlines +boy/hide-scheduled-and-waiting-next-tasks)
@@ -198,11 +204,12 @@
     "All tasks that don't belong to a project.")
 
   (defvar +boy--agenda-block--inactive-tasks
-    '(tags-todo "-KILLED+WAIT|HOLD/!"
+    '(tags-todo "-KILLED/!+HOLD|+WAIT"
       ((org-agenda-overriding-header
-        (concat "Waiting and Postponed Tasks"
+        (concat "Inactive Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
                   " (w/ WAIT and SCHEDULED tasks)")))
+       (org-agenda-prefix-format "  %-12c%-8(+boy/org-agenda-get-proj-maybe)")
        (org-agenda-skip-function '+boy/skip-non-tasks)
        (org-tags-match-list-sublevels nil)
        (org-agenda-todo-ignore-scheduled +boy/hide-scheduled-and-waiting-next-tasks)
@@ -218,14 +225,14 @@
             ,+boy--agenda-block--refile
             ,+boy--agenda-block--project-subtasks
             ,+boy--agenda-block--standalone-tasks
+            ,+boy--agenda-block--inactive-tasks
             ,+boy--agenda-block--active-projects
-            ,+boy--agenda-block--inactive-projects
-            ,+boy--agenda-block--inactive-tasks)
+            ,+boy--agenda-block--inactive-projects)
            ,+boy--agenda-display-settings)
           ("t" "Today's Agenda"
            (,+boy--agenda-block--today-schedule
-            ,+boy--agenda-block--refile
             ,+boy--agenda-block--next-tasks
+            ,+boy--agenda-block--refile
             ,+boy--agenda-block--active-projects)
            ,+boy--agenda-display-settings)))
 
@@ -281,8 +288,8 @@
     ;; (setq-local org-image-actual-width '(300))
     )
 
-  ;; Custom hack: Hide source blocks that have the attribute `:hidden'.
-  (add-hook! 'org-mode-hook (+boy/hide-source-blocks-maybe))
+  ;; Hide source blocks with the attribute `:hidden' and with property `:HIDDEN: t'.
+  (add-hook! 'org-mode-hook '(+boy/hide-source-blocks-maybe +boy/hide-headings-maybe))
 
   ;; Enable flyspell
   (add-hook 'org-mode-hook #'flyspell-mode)
@@ -294,3 +301,12 @@
   (setq jupyter-eval-use-overlays t)
 
   ) ;; end of (after! org)
+
+;; Configure things related to tables in org.
+(after! org-table
+  ;; Disable prettifying tables with org-modern if showing the coordinates overlay.
+  (advice-add #'org-table-toggle-coordinate-overlays
+              :after (lambda ()
+                       (if org-table-overlay-coordinates
+                           (font-lock-unfontify-region (org-table-begin) (org-table-end))
+                         (font-lock-fontify-region (org-table-begin) (org-table-end))))))
