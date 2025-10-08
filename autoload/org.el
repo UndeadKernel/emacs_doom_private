@@ -34,6 +34,13 @@ _g_:goto      _s_:split          _q_:cancel
        (when (cl-assoc ':hidden (cl-third (org-babel-get-src-block-info)))
          (org-hide-block-toggle))))))
 
+(defun +boy/hide-headings-maybe ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-fold-hide-entry))
+   "+HIDDEN=\"t\""))
+
 ;; ORG PDF Annot functions
 
 ;;;###autoload
