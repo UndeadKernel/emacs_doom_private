@@ -1,5 +1,9 @@
 ;;; +tools.el --- description -*- lexical-binding: t; -*-
 
+;; LLM tools configuration
+(after! gptel
+  (setq! gptel-default-mode #'org-mode))
+
 ;; ssh-deploy config
 (after! ssh-deploy
   (setq ssh-deploy-on-explicit-save nil))
