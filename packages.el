@@ -17,3 +17,5 @@
 (package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
 
 (unpin! web-mode)
+
+(package! org-modern-indent :recipe (:host github :repo "jdtsmith/org-modern-indent"))

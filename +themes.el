@@ -66,3 +66,10 @@
   (set-face-attribute 'org-ellipsis nil :foreground "#c678dd")
   ;; Face of the entire headline of a DONE line
   (set-face-attribute 'org-headline-done nil :foreground 'unspecified))
+
+(after! org-modern
+    ;; Face for org-modern timestamps and dates
+  (set-face-attribute 'org-modern-date-inactive nil :height (face-attribute 'default :height))
+  (set-face-attribute 'org-modern-date-active nil :height (face-attribute 'default :height))
+  (set-face-attribute 'org-modern-time-inactive nil :height (face-attribute 'default :height))
+  (set-face-attribute 'org-modern-time-active nil :height (face-attribute 'default :height)))

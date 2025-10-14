@@ -164,3 +164,7 @@
   (advice-add #'lsp-tailwindcss-rustywind :around #'+rustywind-with-local-bin))
 
 (set-docsets! '(web-mode css-mode rjsx-mode typescript-tsx-mode) :add "Tailwind_CSS")
+
+(use-package! org-modern-indent
+  :config
+  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
