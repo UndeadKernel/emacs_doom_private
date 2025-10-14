@@ -112,3 +112,8 @@ the line."
     (let ((value (eval (elisp--preceding-sexp))))
       (kill-sexp -1)
       (insert (format "%S" value))))
+(defun +boy/insert-current-week-number (&optional ask-time)
+  "Insert the current ISO week number where the point is."
+  (interactive "P")
+  (let ((date (if ask-time (org-read-date nil t) (current-time))))
+    (insert (format-time-string "%V" date))))
