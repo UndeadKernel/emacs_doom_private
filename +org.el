@@ -53,21 +53,21 @@
                '("e" "Emacs Config Notes"
                  entry
                  (file+headline "emacs.org" "Notes")
-                 "* %u %?\n %i\n %a"
+                 "* %? (org-set-property \"DATE\" \"%U\")\n %i\n %a"
                  :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
                '("w" "Work Templates"))
   (add-to-list 'org-capture-templates
-               '("wn" "Notes"
+               '("wm" "Meeting"
                  entry
-                 (file+headline "refile.org" "Notes")
-                 "* %? %(org-set-tags '(\"NOTE\" \"REFILE\"))\n%U"
-                 :prepend t :kill-buffer t))
+                 (file+headline "refile.org" "Meetings")
+                 "*** %? %(org-set-property \"DATE\" \"%U\")\n**** Participants\n**** Notes\n**** Actions\n***** No actions\n" ; template
+                 :prepend t :clock-in t :clock-keep t :jump-to-captured t))
   (add-to-list 'org-capture-templates
                '("wt" "Tasks"
                  entry  ; type
                  (file+headline "refile.org" "Tasks") ; target
-                 "* TODO %? %(org-set-tags \"REFILE\")\n%U" ; template
+                 "* TODO %?  %(org-set-tags \"REFILE\") %(org-set-property \"DATE\" \"%U\")\n" ; template
                  :prepend t :kill-buffer t)) ; properties
 
   ;; Agenda configuration
