@@ -37,6 +37,7 @@
         org-modern-table-vertical 1 ; pretty vertical lines in tables 1px in width
         org-agenda-tags-todo-honor-ignore-options t ; don't show SCHEDULED items in agenda view
         org-deadline-warning-days 0 ; don't inform me that a deadline is coming
+        org-reverse-note-order t ; add captured notes to the beginning (and not the end)
         )
 
   ;; Open PDF files in emacs
@@ -61,7 +62,7 @@
                '("wm" "Meeting"
                  entry
                  (file+headline "refile.org" "Meetings")
-                 "*** %? %(org-set-property \"DATE\" \"%U\")\n**** Participants\n**** Notes\n**** Actions\n***** No actions\n" ; template
+                 "*** %? %(org-set-property \"DATE\" \"%U\")\n**** Participants\n**** Notes\n**** Actions [/]\n***** No actions\n" ; template
                  :prepend t :clock-in t :clock-keep t :jump-to-captured t))
   (add-to-list 'org-capture-templates
                '("wt" "Tasks"
