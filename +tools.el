@@ -37,6 +37,8 @@
 
 ;; Magit config
 (add-hook! magit-mode (visual-line-mode +1))
+;; search for Magit passwords in `auth-sources'
+(add-hook 'magit-process-find-password-functions 'magit-process-password-auth-source)
 
 ;; EIN config
 (setq +ein-notebook-dir "~")
