@@ -40,3 +40,42 @@ at bottom if LINE is nil."
                         (/ (window-height) 2)))
             (el-patch-remove (TeX-pop-to-buffer old-buffer nil t)))
         (message "No process for this document.")))))
+
+(el-patch-feature org-modern)
+(after! org-modern
+  (el-patch-defun org-indent-set-line-properties (level indentation &optional heading)
+    "Set prefix properties on current line an move to next one.
+
+LEVEL is the current level of heading.  INDENTATION is the
+expected indentation when wrapping line.
+
+When optional argument HEADING is non-nil, assume line is at
+a heading.  Moreover, if it is `inlinetask', the first star will
+have `org-warning' face."
+    (let* ((line (aref (pcase heading
+                         (`nil org-indent--text-line-prefixes)
+                         (`inlinetask org-indent--inlinetask-line-prefixes)
+                         (_ org-indent--heading-line-prefixes))
+                       level))
+           (wrap
+            (org-add-props
+                (concat line
+                        (if heading (concat (make-string level ?*) " ")
+                          (make-string indentation ?\s)))
+                nil 'face 'org-indent)))
+      (el-patch-add
+        ;; If we are in an hline of a table, change the line and wrap prefix to
+        ;; ... match the width of the string with the indent.
+        (when (+boy/org-table-hline-p)
+          (setq line (+boy/match-strings-widths
+                      line
+                      (+boy/append-font-prop line :height org-modern-table-horizontal)
+                      ?\s))
+          (setq wrap (+boy/match-strings-widths
+                      wrap
+                      (+boy/append-font-prop wrap :height org-modern-table-horizontal)
+                      ?\s))))
+      ;; Add properties down to the next line to indent empty lines.
+      (add-text-properties (line-beginning-position) (line-beginning-position 2)
+                           `(line-prefix ,line wrap-prefix ,wrap)))
+    (forward-line)))

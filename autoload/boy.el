@@ -73,3 +73,38 @@ Try the repeated popping up to 10 times."
     (dotimes (_i 10)
       (when (= p (point))
         (apply orig-fun args)))))
+
+;;;###autoload
+(defun +boy/append-font-prop (str prop value)
+  "Return a copy of STR with the font property PROP with VALUE appended."
+  ;; Get the string's face property
+  (let ((current-face (get-text-property 0 'face str)))
+    ;; Create a new ring that includes the existing face with the new prop.
+    (propertize str 'face (append (if (listp current-face)
+                                      current-face
+                                    (list current-face))
+                                  `(,prop ,value)))))
+
+;;;###autoload
+(defun +boy/get-char-pixel-width (str)
+  "Return the size of the first character in pixels contained in STR."
+  (let ((str-font (font-at 0 nil str)))
+    (aref (aref (font-get-glyphs str-font 0 1 str) 0) 4)))
+
+;;;###autoload
+(defun +boy/match-strings-widths (str1 str2 pad_char)
+  ;; Return STR2 with PAD_CHAR as passing to match the width in pixels of STR1.
+  (let ((str2_clone (copy-sequence str2))
+        (str1_len (length str1))
+        (str2_len (length str2))
+        (str1_char_px_width (+boy/get-char-pixel-width str1))
+        (str2_char_px_width (+boy/get-char-pixel-width str2))
+        (str2_props (get-text-property 0 'face str2)))
+    ;; Remove font properties of the second string's clone (do not affect the original string).
+    (remove-text-properties 0 str2_len '(face) str2_clone)
+    ;; Calculate how many characters extra are needed and add the rest as
+    ;; ... padding. Add the face of STR2 to the result.
+    (propertize
+     (concat str2_clone
+             (make-string (- (* (/ str1_char_px_width str2_char_px_width) str1_len ) str2_len) pad_char))
+     'face str2_props)))

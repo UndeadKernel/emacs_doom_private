@@ -357,3 +357,9 @@ PATH is the path to open in explorer, as a string."
             (message-log-max nil)) ; No messages in *Messages* buffer.
         (shell-command command))
       t)
+
+;;;###autoload
+(defun +boy/org-table-hline-p ()
+  "Check if the point is on a horizontal line in an Org table."
+  (and (org-at-table-p)
+       (org-match-line "^[[:space:]]*|-")))
