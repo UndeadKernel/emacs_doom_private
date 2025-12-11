@@ -32,14 +32,11 @@ _g_:goto      _s_:split          _q_:cancel
    (lambda ()
      (let ((case-fold-search t))
        (when (cl-assoc ':hidden (cl-third (org-babel-get-src-block-info)))
-         (org-hide-block-toggle))))))
+         (org-fold-hide-block-toggle t))))))
 
 (defun +boy/hide-headings-maybe ()
   (interactive)
-  (org-map-entries
-   (lambda ()
-     (org-fold-hide-entry))
-   "+HIDDEN=\"t\""))
+  (org-map-entries #'org-fold-hide-subtree "HIDDEN=\"t\""))
 
 ;; ORG PDF Annot functions
 

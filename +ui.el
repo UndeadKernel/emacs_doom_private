@@ -90,6 +90,8 @@ windows from all frames. Call `other-window' otherwise."
 (defun +boy/prettify-org-setup ()
   ;; Drawers
   (push '(":PROPERTIES:" . "") prettify-symbols-alist)
+  (push '(":LOGBOOK:" . "⏳") prettify-symbols-alist)
+  (push '(":END:" . "󱊔") prettify-symbols-alist)
   (prettify-symbols-mode))
 
 (add-hook! '(org-mode-hook org-agenda-mode-hook) #'+boy/prettify-org-setup)

@@ -28,6 +28,8 @@
                    "* %?\n:PROPERTIES:\n:ID: %(format-time-string \"      id-%Y%m%d-%H%M%S\" (current-time) t)\n:END:" ; template
                    :prepend t :kill-buffer t))
     ))
+  (after! org-download
+    (setq! org-download-screenshot-method "powershell.exe -Command \"(Get-Clipboard -Format image).Save('$(wslpath -w %s)')\"")))
 
 ;; Office 2 Laptop
 (when (string= "DE-L089725" (system-name))

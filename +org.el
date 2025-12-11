@@ -35,9 +35,9 @@
         org-id-ts-format "id-%Y%m%d-%H%M%S" ; the format of created IDs
         org-cycle-separator-lines -1 ; leave empty lines between collapsed headlines
         org-modern-table-vertical 1 ; pretty vertical lines in tables 1px in width
-        org-agenda-tags-todo-honor-ignore-options t ; don't show SCHEDULED items in agenda view
         org-deadline-warning-days 0 ; don't inform me that a deadline is coming
         org-reverse-note-order t ; add captured notes to the beginning (and not the end)
+        org-duration-format 'h:mm ; report clocks only in hours and minutes (ignore days)
         )
 
   ;; Open PDF files in emacs
@@ -93,7 +93,9 @@
         org-agenda-start-day "" ;; show entries starting today
         org-agenda-span 15 ;; display from today, two weeks
         org-refile-target-verify-function '+boy/verify-refile-target
-        org-agenda-dim-blocked-tasks nil)
+        org-agenda-dim-blocked-tasks nil
+        org-agenda-tags-todo-honor-ignore-options t ; don't show SCHEDULED items in agenda view
+        )
 
   (defun +boy/remove-refile-tag ()
     "Remove the REFILE tag of the headline with the current point."
@@ -222,11 +224,11 @@
   (setq org-agenda-custom-commands
         `(("a" "Agenda Review (all)"
            (,+boy--agenda-block--two-weeks
-            ,+boy--agenda-block--next-tasks
             ,+boy--agenda-block--refile
+            ,+boy--agenda-block--next-tasks
+            ,+boy--agenda-block--inactive-tasks
             ,+boy--agenda-block--project-subtasks
             ,+boy--agenda-block--standalone-tasks
-            ,+boy--agenda-block--inactive-tasks
             ,+boy--agenda-block--active-projects
             ,+boy--agenda-block--inactive-projects)
            ,+boy--agenda-display-settings)
