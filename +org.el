@@ -278,3 +278,39 @@
                        (if org-table-overlay-coordinates
                            (font-lock-unfontify-region (org-table-begin) (org-table-end))
                          (font-lock-fontify-region (org-table-begin) (org-table-end))))))
+
+(after! org-tree-slide
+  (defun +boy/add-slide-number ()
+  (add-to-list 'global-mode-string
+               '(:eval (concat "" (org-tree-slide--update-modeline) " "))))
+(defun +boy/remove-slide-number ()
+  (setq global-mode-string
+        (remove '(:eval (concat "" (org-tree-slide--update-modeline) " "))
+                global-mode-string)))
+(add-hook 'org-tree-slide-play-hook #'+boy/add-slide-number)
+(add-hook 'org-tree-slide-stop-hook #'+boy/remove-slide-number)
+
+(defadvice! +org-present--hide-first-heading-maybe-a (fn &rest args)
+                "Omit the first heading if `+org-present-hide-first-heading' is non-nil."
+                :around #'org-tree-slide--display-tree-with-narrow
+                (letf!
+                 (defun org-narrow-to-subtree (&optional element)
+                   "Narrow buffer to the current subtree."
+                   (interactive)
+                   (save-excursion
+                     (save-match-data
+                       (org-with-limited-levels
+                        (narrow-to-region
+                         (progn
+                           (when (org-before-first-heading-p)
+                             (org-next-visible-heading 1))
+                           (org-back-to-heading t)
+                           (when +org-present-hide-first-heading
+                             (forward-line 1))
+                           (point))
+                         (progn
+                           (org-end-of-subtree t t)
+                           (when (and (org-at-heading-p) (not (eobp)))
+                             (backward-char 1))
+                           (point)))))))
+                 (apply fn args))))
