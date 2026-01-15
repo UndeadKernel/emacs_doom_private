@@ -150,7 +150,7 @@
 ;; This variable should go inside of :init, but doesn't get called at the right time.
 (setq lsp-tailwindcss-add-on-mode t)
 (use-package! lsp-tailwindcss
-  :when (featurep! +lsp)
+  :when (modulep! +lsp)
   :after lsp-mode
   :config
   (setq lsp-tailwindcss-emmet-completions (featurep 'emmet-mode))
