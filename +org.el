@@ -84,7 +84,8 @@
 
   (setq org-todo-keywords
         '((sequence "PROJ(p)" "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "KILLED(k@/!)")))
+          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "KILLED(k@/!)")
+          (sequence "MEETING(m)" "|" "MET(M)")))
 
   (setq org-agenda-compact-blocks nil ;; show separator lines between sections
         org-agenda-block-separator 8411 ;; emoji of dots on top of the line
@@ -96,27 +97,6 @@
         org-agenda-dim-blocked-tasks nil
         org-agenda-tags-todo-honor-ignore-options t ; don't show SCHEDULED items in agenda view
         )
-
-  (defun +boy/remove-refile-tag ()
-    "Remove the REFILE tag of the headline with the current point."
-    (org-set-tags (seq-filter (lambda (elt) (not (string= elt "REFILE"))) (org-get-tags))))
-  (add-hook! 'org-after-refile-insert-hook #'+boy/remove-refile-tag)
-
-  ;; Agenda helper functions
-
-  (defun +boy/org-agenda-get-proj-maybe ()
-    "Gets the value of the LOCATION property"
-    (let ((heading-found
-           (catch 'heading
-             (save-excursion
-               (while (org-up-heading-safe)
-                 (if (string= (org-get-todo-state) "PROJ")
-                     (progn
-                       (throw 'heading (org-get-heading t t t t)))))))))
-      (if heading-found
-          (let ((heading-size (length heading-found)))
-            (substring heading-found 0 (min heading-size 6)))
-        "")))
 
   ;; Agenda block definitions
 
@@ -178,7 +158,7 @@
     "All next tasks.")
 
   (defvar +boy--agenda-block--project-subtasks
-    '(tags-todo "-REFILE-KILLED-WAIT-HOLD/!-NEXT"
+    '(tags-todo "-REFILE-KILLED-WAIT-HOLD/!-NEXT-MEETING"
       ((org-agenda-overriding-header
         (concat "Project Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
@@ -193,7 +173,7 @@
     "Tasks that belong to a project.")
 
   (defvar +boy--agenda-block--standalone-tasks
-    '(tags-todo "-REFILE-KILLED/!-NEXT"
+    '(tags-todo "-REFILE-KILLED/!-NEXT-MEETING"
       ((org-agenda-overriding-header
         (concat "Standalone Tasks"
                 (unless +boy/hide-scheduled-and-waiting-next-tasks
@@ -221,7 +201,7 @@
 
   ;; Agenda definitions
 
-  (setq org-agenda-custom-commands
+  (setq! org-agenda-custom-commands
         `(("a" "Agenda Review (all)"
            (,+boy--agenda-block--two-weeks
             ,+boy--agenda-block--refile
@@ -237,39 +217,11 @@
             ,+boy--agenda-block--next-tasks
             ,+boy--agenda-block--refile
             ,+boy--agenda-block--active-projects)
-           ,+boy--agenda-display-settings)))
+           ,+boy--agenda-display-settings)
+          ("o" "OCAI Tickets" ((tags-todo "OCAITicket"))
+           ((org-agenda-prefix-format "%-8(+boy/org-agenda-get-proj-maybe)")))))
 
-  ;; Agenda navigation
-
-  (defun +boy/org-agenda-next-section ()
-    "Go to the next section in an org agenda buffer."
-    (interactive)
-    (if (search-forward (char-to-string org-agenda-block-separator) nil t 1)
-        (forward-line 1)
-      (goto-char (point-max)))
-    (beginning-of-line))
-
-  (defun +boy/org-agenda-prev-section ()
-    "Go to the next section in an org agenda buffer."
-    (interactive)
-    (forward-line -2)
-    (if (search-forward (char-to-string org-agenda-block-separator) nil t -1)
-        (forward-line 1)
-      (goto-char (point-min))))
-
-  ;; Agenda block removal
-
-  (defun +boy/remove-agenda-regions ()
-    (save-excursion
-      (goto-char (point-min))
-      (let ((region-large t))
-        (while (and (< (point) (point-max)) region-large)
-          (set-mark (point))
-          (+boy/org-agenda-next-section)
-          (if (< (- (region-end) (region-beginning)) 5) (setq region-large nil)
-            (if (< (count-lines (region-beginning) (region-end)) 4)
-                (delete-region (region-beginning) (region-end)))
-            )))))
+  ;; Remove empty regions from the main agenda (i.e., the one named "Agenda Review (all)")
   (add-hook 'org-agenda-finalize-hook '+boy/remove-agenda-regions)
 
   ;; Noter config

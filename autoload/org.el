@@ -130,6 +130,59 @@ _g_:goto      _s_:split          _q_:cancel
 ;; ORG Agenda functions
 
 ;;;###autoload
+(defun +boy/org-agenda-next-section ()
+  "Go to the next section in an org agenda buffer."
+  (interactive)
+  (if (search-forward (char-to-string org-agenda-block-separator) nil t 1)
+      (forward-line 1)
+    (goto-char (point-max)))
+  (beginning-of-line))
+
+;;;###autoload
+(defun +boy/org-agenda-prev-section ()
+  "Go to the previous section in an org agenda buffer."
+  (interactive)
+  (forward-line -2)
+  (if (search-forward (char-to-string org-agenda-block-separator) nil t -1)
+      (forward-line 1)
+    (goto-char (point-min))))
+
+;;;###autoload
+(defun +boy/remove-agenda-regions ()
+  "Go through the main agenda regions, deleting them if it they are small enough."
+  (when (string= org-agenda-name "Agenda Review (all)")
+    (save-excursion
+      (goto-char (point-min))
+      (let ((region-large t))
+        (while (and (< (point) (point-max)) region-large)
+          (set-mark (point))
+          (+boy/org-agenda-next-section)
+          (if (< (- (region-end) (region-beginning)) 5) (setq region-large nil)
+            (if (< (count-lines (region-beginning) (region-end)) 4)
+                (delete-region (region-beginning) (region-end)))))))))
+
+;;;###autoload
+(defun +boy/remove-refile-tag ()
+  "Remove the REFILE tag of the headline with the current point."
+  (org-set-tags (seq-filter (lambda (elt) (not (string= elt "REFILE"))) (org-get-tags))))
+(add-hook! 'org-after-refile-insert-hook #'+boy/remove-refile-tag)
+
+;;;###autoload
+(defun +boy/org-agenda-get-proj-maybe ()
+  "Gets the value of the LOCATION property"
+  (let ((heading-found
+         (catch 'heading
+           (save-excursion
+             (while (org-up-heading-safe)
+               (if (string= (org-get-todo-state) "PROJ")
+                   (progn
+                     (throw 'heading (org-get-heading t t t t)))))))))
+    (if heading-found
+        (let ((heading-size (length heading-found)))
+          (substring heading-found 0 (min heading-size 6)))
+      "")))
+
+;;;###autoload
 (defun +boy/is-project-p ()
   "Any task with a `PROJ' state"
   (member (org-get-todo-state) '("PROJ")))
@@ -360,3 +413,68 @@ PATH is the path to open in explorer, as a string."
   "Check if the point is on a horizontal line in an Org table."
   (and (org-at-table-p)
        (org-match-line "^[[:space:]]*|-")))
+
+;;;###autoload
+(defun +boy/update-meeting-actions-count ()
+  "Check if a Meeting headline child has pending actions."
+  (interactive)
+  (org-with-wide-buffer
+   (save-excursion
+     (goto-char (point-min))
+     (let ((meeting-found nil))
+       ;; Iterate over all "Meetings" headlines
+       (while (re-search-forward (format org-complex-heading-regexp-format "Meetings") nil t)
+         (setq meeting-found (org-goto-first-child)) ; go to the first meeting headline
+         ;; Iterate each meeting (child of the Meetings headline).
+         (while meeting-found
+           (let ((meeting-element (org-element-at-point))
+                 (meeting-todo (org-entry-is-todo-p)) ; track if the meeting itself has an active todo
+                 (actions-count (length (org-map-entries t "/!-DONE" 'tree))))
+             ;; Change the ACTIONS property to `todo-count'. Because `org-map-entries' counts the
+             ;; ... todo of the parent headline, if one is found in the parent, substract it.
+             (org-entry-put meeting-element "ACTIONS"
+                            (format "%d" (- actions-count (if meeting-todo 1 0)))))
+           (setq meeting-found (org-goto-sibling))))))))
+
+;;;###autoload
+(defun +boy/color-completion (&optional _)
+  "Provide completion candidates for the `color' link type."
+  (let ((color-data (progn
+                      (save-selected-window
+                        (list-colors-display))
+                      (append
+                       (mapcar (lambda (cell)
+                                 (cons (propertize (car cell) 'face (cdr cell))
+                                       (list (car cell))))
+                               +boy--org-link-colors)
+                       (prog1
+                           (with-current-buffer (get-buffer "*Colors*")
+                             (mapcar (lambda (line)
+                                       (append (list line) (s-split " " line t)))
+                                     (s-split "\n" (buffer-string))))
+                         (kill-buffer "*Colors*"))))))
+    (format "color:%s"
+            (s-trim (cadr (assoc (completing-read "Color: " color-data) color-data))))))
+
+;;;###autoload
+(defun +boy/color-link-face (path)
+  "Return a color face, prioritizing faces from `+boy--org-link-colors'."
+  (or (cdr (assoc path +boy--org-link-colors))
+      `(:foreground ,path)))
+
+;;;###autoload
+(defun +boy/color-link-export (path description backend)
+  "Export colo red links by creating a <span> with the desired color."
+  (cond
+   ((eq backend 'html)
+    (let ((rgb (assoc (downcase path) color-name-rgb-alist))
+          r g b)
+      (if rgb
+          (progn
+            (setq r (* 255 (/ (nth 1 rgb) 65535.0))
+                  g (* 255 (/ (nth 2 rgb) 65535.0))
+                  b (* 255 (/ (nth 3 rgb) 65535.0)))
+            (format "<span style=\"color: rgb(%s,%s,%s)\">%s</span>"
+                    (truncate r) (truncate g) (truncate b)
+                    (or description path)))
+        (format "No Color RGB for %s" path))))))
