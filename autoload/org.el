@@ -478,3 +478,13 @@ PATH is the path to open in explorer, as a string."
                     (truncate r) (truncate g) (truncate b)
                     (or description path)))
         (format "No Color RGB for %s" path))))))
+
+;;;###autoload
+(defun +boy/org-roam-find-acronyms ()
+  "Get the file path of the `acronyms' node using roam."
+  (org-roam-node-file (org-roam-node-from-title-or-alias "acronyms")))
+
+;;;###autoload
+(defun +boy/org-roam-find-people ()
+  "Get the file path of the `people' node using roam."
+  (org-roam-node-file (org-roam-node-from-title-or-alias "people")))

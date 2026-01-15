@@ -50,6 +50,7 @@
 
   ;; Capture templates
 
+  ;; Standard templates
   (add-to-list 'org-capture-templates
                '("e" "Emacs Config Notes"
                  entry
@@ -70,6 +71,22 @@
                  (file+headline "refile.org" "Tasks") ; target
                  "* TODO %?  %(org-set-tags \"REFILE\") %(org-set-property \"DATE\" \"%U\")\n" ; template
                  :prepend t :kill-buffer t)) ; properties
+
+  ;; Roam templates
+  (add-to-list 'org-capture-templates
+               '("r" "Roam Templates"))
+  (add-to-list 'org-capture-templates
+               '("ra" "Acronyms"
+                 entry  ; type
+                 (file +boy/org-roam-find-acronyms) ; target
+                 "* %?\n:PROPERTIES:\n:ID: %(format-time-string \"      id-%Y%m%d-%H%M%S\" (current-time) t)\n:END:" ; template
+                 :prepend t :kill-buffer t))
+  (add-to-list 'org-capture-templates
+               '("rp" "People"
+                 entry  ; type
+                 (file +boy/org-roam-find-people) ; target
+                 "* %?\n:PROPERTIES:\n:ID: %(format-time-string \"      id-%Y%m%d-%H%M%S\" (current-time) t)\n:END:" ; template
+                 :prepend t :kill-buffer t))
 
   ;; Agenda configuration
 
