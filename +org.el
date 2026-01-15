@@ -255,6 +255,19 @@
   ;; Jupyter config
   (setq jupyter-eval-use-overlays t)
 
+  ;; Custom colors for colorizing with org links.
+  (defvar +boy--org-link-colors
+    '(("todo" . '(:inverse-video t :inherit org-todo))
+      ("done" . '(:inverse-video t :inherit org-done))
+      ("waiting" . '(:inverse-video t :inherit +org-todo-onhold))
+      ("active" . '(:inverse-video t :inherit +org-todo-active))
+      ("canceled" . '(:inverse-video t :inherit +org-todo-cancel))))
+
+  ;; Colorize text with links (hack) using this format [[color:red][Text with Color]]
+  (org-link-set-parameters "color"
+                           :face #'+boy/color-link-face
+                           :complete #'+boy/color-completion
+                           :export #'+boy/color-link-export)
   ) ;; end of (after! org)
 
 ;; Configure things related to tables in org.
