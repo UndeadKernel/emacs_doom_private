@@ -2,7 +2,10 @@
 
 ;; LLM tools configuration
 (after! gptel
-  (setq! gptel-default-mode #'org-mode))
+  (setq! gptel-default-mode #'org-mode
+         gptel-prompt-prefix-alist '((markdown-mode . "# ") (org-mode . "* ") (text-mode . "# "))
+         gptel-response-prefix-alist '((markdown-mode . "## /n") (org-mode . "** \n") (text-mode . "## /n"))))
+
 
 ;; ssh-deploy config
 (after! ssh-deploy
