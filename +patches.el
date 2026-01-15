@@ -1,5 +1,28 @@
 ;;; patches.el -*- lexical-binding: t; -*-
 
+;; Patch to center the screen after using `objed-next-identifier' or `objed-prev-identifier'.
+(el-patch-feature objed)
+(after! objed
+
+  (el-patch-defun objed-next-identifier ()
+    "Activate object with identifier at point."
+    (interactive)
+    (if (and objed--buffer
+             (eq objed--object 'identifier))
+          (objed--next-identifier)
+          (el-patch-add (recenter-top-bottom '(4)))
+      (unless (thing-at-point 'symbol)
+        (re-search-forward  "\\_<" nil t))
+      (when (objed--init 'identifier)
+        (goto-char (objed--beg)))
+      (el-patch-add (recenter-top-bottom '(4)))))
+
+  (el-patch-defun objed-prev-identifier ()
+    "Activate object with identifier at point."
+    (interactive)
+    (objed--prev-identifier)
+    (el-patch-add (recenter-top-bottom '(4)))))
+
 ;; Patch to make the command-log-window respect the variable `command-log-mode-window-font-size'.
 ;; The original command-log-mode completely ignores this variable (i.e., the variable is never used)
 (el-patch-feature command-log-mode)
