@@ -76,7 +76,7 @@ Try the repeated popping up to 10 times."
 
 ;;;###autoload
 (defun +boy/append-font-prop (str prop value)
-  "Return a copy of STR with the font property PROP with VALUE appended."
+  "Append font property PROP with VALUE to a copy of STR."
   ;; Get the string's face property
   (let ((current-face (get-text-property 0 'face str)))
     ;; Create a new ring that includes the existing face with the new prop.
@@ -87,13 +87,13 @@ Try the repeated popping up to 10 times."
 
 ;;;###autoload
 (defun +boy/get-char-pixel-width (str)
-  "Return the size of the first character in pixels contained in STR."
+  "Return the size in pixelds of the first character in STR."
   (let ((str-font (font-at 0 nil str)))
     (aref (aref (font-get-glyphs str-font 0 1 str) 0) 4)))
 
 ;;;###autoload
 (defun +boy/match-strings-widths (str1 str2 pad_char)
-  ;; Return STR2 with PAD_CHAR as passing to match the width in pixels of STR1.
+  ;; Return STR2 with PAD_CHAR as padding to match the width in pixels of STR1.
   (let ((str2_clone (copy-sequence str2))
         (str1_len (length str1))
         (str2_len (length str2))
