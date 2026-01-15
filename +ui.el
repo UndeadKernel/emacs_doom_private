@@ -8,7 +8,8 @@
       doom-modeline-checker-simple-format t
       doom-modeline-persp-name t
       doom-modeline-persp-name-icon t
-      doom-modeline-lsp t)
+      doom-modeline-lsp t
+      doom-modeline-buffer-file-name-style 'auto)
 
 ;; Smaller icons so the modeline shows fully
 (setq all-the-icons-scale-factor 1.0)
