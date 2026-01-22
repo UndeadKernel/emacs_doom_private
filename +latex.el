@@ -2,7 +2,7 @@
 
   ;; Choose pdf-tools as the first viewer to choose if available
 (setq +latex-viewers '(pdf-tools okular))
-(setq +latex-bibtex-file "/home/boy/Documents/CASED/Papers/bib/TK.bib")
+(setq +latex-bibtex-file "~/org/bib/all.bib")
 
 (after! latex
   ;; Save without asking when invoking TeX commands
