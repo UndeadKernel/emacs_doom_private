@@ -24,7 +24,7 @@ With prefix \\[universal-argument] \\[universal-argument] ALL show all non-ascii
 ;; Copy a paragraph and remove all extra spaces and line ends
 ;;;###autoload
 (defun +boy/copy-paragraph (&optional beg end)
-  "Save the current region (or line) to the `kill-ring' after stripping extra whitespace and new lines"
+  "Save region (or line) in `kill-ring', strip whitespace and new lines"
   (interactive
    (if (region-active-p)
        (list (region-beginning) (region-end))
