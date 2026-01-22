@@ -100,6 +100,9 @@
 ;; Do not start auto start comments in new lines.
 (setq +default-want-RET-continue-comments nil)
 
+(after! re-builder
+  (setq! reb-re-syntax 'string))
+
 ;; ---------------------------------------------------------------------------------
 ;; Additional Packages
 ;; ---------------------------------------------------------------------------------
