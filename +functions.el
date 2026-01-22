@@ -1,4 +1,4 @@
-;;; +functions.el --- My Own Awesome™ Functions
+;;; +functions.el --- my awesome functions -*- lexical-binding: t; -*-
 
 (defun +boy/up-scroll (n)
   "Scroll up marker and line N times."

@@ -1,4 +1,4 @@
-;;; ~/.doom.d/+systems.el -*- lexical-binding: t; -*-
+;;; +systems.el -*- lexical-binding: t; -*-
 
 ;; Office 3 Laptop
 (when (string= "LT05133" (system-name))

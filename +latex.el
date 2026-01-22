@@ -1,4 +1,4 @@
-;;; modules/private/boy/+latex.el -*- lexical-binding: t; -*-
+;;; +latex.el -*- lexical-binding: t; -*-
 
   ;; Choose pdf-tools as the first viewer to choose if available
 (setq +latex-viewers '(pdf-tools okular))

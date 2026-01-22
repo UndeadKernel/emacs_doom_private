@@ -1,4 +1,4 @@
-;;; ~/.doom.d/+lang.el -*- lexical-binding: t; -*-
+;;; +lang.el -*- lexical-binding: t; -*-
 
 ;; we like lsp-ui-sideline now :D
 (setq lsp-ui-sideline-enable t

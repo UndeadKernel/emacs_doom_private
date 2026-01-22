@@ -1,4 +1,4 @@
-;;; ../../../doom_private/autoload/latex.el -*- lexical-binding: t; -*-
+;;; autoload/latex.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun +boy/print-table-send-cmd ()

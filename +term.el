@@ -1,4 +1,4 @@
-;;; ~/emacs/doom_private/+term.el -*- lexical-binding: t; -*-
+;;; +term.el -*- lexical-binding: t; -*-
 
 ;; Use bash for internal commands, fish for terminals.
 (setq shell-file-name (executable-find "bash"))

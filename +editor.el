@@ -1,4 +1,4 @@
-;;; ~/emacs/doom_private/+editor.el -*- lexical-binding: t; -*-
+;;; +editor.el -*- lexical-binding: t; -*-
 
 (after! tramp
   ;; Disable backups when editing files through Tramp.

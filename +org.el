@@ -1,4 +1,4 @@
-;;; private/boy/+org.el -*- lexical-binding: t; -*-
+;;; +org.el -*- lexical-binding: t; -*-
 
 (defvar +boy/hide-scheduled-and-waiting-next-tasks t)
 

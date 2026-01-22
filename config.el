@@ -1,4 +1,4 @@
-;;; config.el --- The Configuration of the Boy
+;;; config.el --- The Configuration of the Boy -*- lexical-binding: t; -*-
 
 (defvar boy--synonyms-key ""
   "API key from http://thesaurus.altervista.org that gives us synonyms.")

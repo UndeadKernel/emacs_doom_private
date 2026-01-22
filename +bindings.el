@@ -1,4 +1,4 @@
-;;; private/boy/+bindings.el -*- lexical-binding: t; -*-
+;;; +bindings.el -*- lexical-binding: t; -*-
 
 ;; Set the "localleader" binding to C-z
 (map! "C-z" nil)

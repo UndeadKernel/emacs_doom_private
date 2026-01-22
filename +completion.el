@@ -1,4 +1,4 @@
-;;; ~/.doom.d/+completion.el -*- lexical-binding: t; -*-
+;;; +completion.el -*- lexical-binding: t; -*-
 
 (after! company
   (setq company-idle-delay nil))

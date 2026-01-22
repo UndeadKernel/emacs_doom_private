@@ -1,4 +1,4 @@
-;;; ~/emacs/doom_private/+themes.el -*- lexical-binding: t; -*-
+;;; +themes.el -*- lexical-binding: t; -*-
 
 ;; Main theme
 (setq doom-theme 'doom-dracula)

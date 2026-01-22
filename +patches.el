@@ -1,4 +1,4 @@
-;;; patches.el -*- lexical-binding: t; -*-
+;;; +patches.el -*- lexical-binding: t; -*-
 
 ;; Patch to center the screen after using `objed-next-identifier' or `objed-prev-identifier'.
 (el-patch-feature objed)
