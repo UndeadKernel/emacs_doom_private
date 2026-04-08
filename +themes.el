@@ -1,5 +1,9 @@
 ;;; +themes.el -*- lexical-binding: t; -*-
 
+;; Font setup
+(setq doom-font (font-spec :family "Iosevka" :size 18)
+      doom-big-font (font-spec :family "Iosevka" :size 28))
+
 ;; Main theme
 (setq doom-theme 'doom-dracula)
 

@@ -1,5 +1,11 @@
 ;;; +vanilla.el -*- lexical-binding: t; -*-
 
+;; Start emacs maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; Select and raise the frame, always
+(select-frame-set-input-focus (selected-frame))
+
+
 ;; Smooth mouse scrolling
 (setopt mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
       mouse-wheel-progressive-speed nil             ; don't accelerate scrolling
