@@ -7,7 +7,7 @@
 (setq custom-safe-themes t)
 
 ;; Splash image
-(setq +doom-dashboard-banner-dir (concat doom-private-dir "banners/")
+(setq +doom-dashboard-banner-dir (concat doom-user-dir "banners/")
       +doom-dashboard-banner-file "black-hole-dracula.png"
       +doom-dashboard-banner-padding '(0 . 1))
 

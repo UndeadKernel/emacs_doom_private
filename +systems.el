@@ -8,7 +8,8 @@
     (add-to-list 'org-file-apps '("\\.docx?\\'" . "explorer.exe %s"))
     (add-to-list 'org-file-apps '("\\.xlsx?\\'" . "explorer.exe %s"))
   (after! org-download
-    (setq! org-download-screenshot-method "powershell.exe -Command \"(Get-Clipboard -Format image).Save('$(wslpath -w %s)')\""))))
+    (setopt org-download-screenshot-method
+            "powershell.exe -Command \"(Get-Clipboard -Format image).Save('$(wslpath -w %s)')\""))))
 
 ;; Office 2 Laptop
 (when (string= "DE-L089725" (system-name))

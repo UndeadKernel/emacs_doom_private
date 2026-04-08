@@ -218,25 +218,25 @@
 
   ;; Agenda definitions
 
-  (setq! org-agenda-custom-commands
-        `(("a" "Agenda Review (all)"
-           (,+boy--agenda-block--two-weeks
-            ,+boy--agenda-block--refile
-            ,+boy--agenda-block--next-tasks
-            ,+boy--agenda-block--inactive-tasks
-            ,+boy--agenda-block--project-subtasks
-            ,+boy--agenda-block--standalone-tasks
-            ,+boy--agenda-block--active-projects
-            ,+boy--agenda-block--inactive-projects)
-           ,+boy--agenda-display-settings)
-          ("t" "Today's Agenda"
-           (,+boy--agenda-block--today-schedule
-            ,+boy--agenda-block--next-tasks
-            ,+boy--agenda-block--refile
-            ,+boy--agenda-block--active-projects)
-           ,+boy--agenda-display-settings)
-          ("o" "OCAI Tickets" ((tags-todo "OCAITicket"))
-           ((org-agenda-prefix-format "%-8(+boy/org-agenda-get-proj-maybe)")))))
+  (setopt org-agenda-custom-commands
+          `(("a" "Agenda Review (all)"
+             (,+boy--agenda-block--two-weeks
+              ,+boy--agenda-block--refile
+              ,+boy--agenda-block--next-tasks
+              ,+boy--agenda-block--inactive-tasks
+              ,+boy--agenda-block--project-subtasks
+              ,+boy--agenda-block--standalone-tasks
+              ,+boy--agenda-block--active-projects
+              ,+boy--agenda-block--inactive-projects)
+             ,+boy--agenda-display-settings)
+            ("t" "Today's Agenda"
+             (,+boy--agenda-block--today-schedule
+              ,+boy--agenda-block--next-tasks
+              ,+boy--agenda-block--refile
+              ,+boy--agenda-block--active-projects)
+             ,+boy--agenda-display-settings)
+            ("o" "OCAI Tickets" ((tags-todo "OCAITicket"))
+             ((org-agenda-prefix-format "%-8(+boy/org-agenda-get-proj-maybe)")))))
 
   ;; Remove empty regions from the main agenda (i.e., the one named "Agenda Review (all)")
   (add-hook 'org-agenda-finalize-hook '+boy/remove-agenda-regions)
