@@ -168,8 +168,6 @@
      "M-i"   #'flyspell-auto-correct-previous-word))
  ;; latex
  (:after latex
-   (:when (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
-     ("C-c y" #'www-synonyms-insert-synonym))
    (:map LaTeX-mode-map
      ;; Do not overwrite my goto-last-change
      "C-c ."   nil
