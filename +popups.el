@@ -1,8 +1,10 @@
 ;;; +popups.el -*- lexical-binding: t; -*-
 
-;; Popup settings
 ;; Set flycheck errors on the bottom
 (set-popup-rule! "\\*Project errors\\*" :side 'bottom :size 20)
+
+;; Select the messages buffer when opened
+(set-popup-rule! "\\*Messages\\*" :select t :height 15)
 
 ;; Select the IList buffer when it is shown
 (after! imenu-list
