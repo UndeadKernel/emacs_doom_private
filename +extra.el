@@ -14,7 +14,6 @@
 ;;   :init
 ;;   (setq jupyter-eval-use-overlays t))
 
-
 (use-package! pacfiles-mode
   :commands (pacfiles pacfiles-start)
   :config
@@ -120,3 +119,6 @@
        :env (:MCP_AUTHOR "Carlos G. Cordero" :MCP_AUTHOR_INITIALS "CGC")))))
   :config
   (require 'mcp-hub))
+
+(use-package! flycheck-projectile
+  :commands flycheck-projectile-list-errors)

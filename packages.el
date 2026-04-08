@@ -20,3 +20,5 @@
 (package! ragmacs :recipe (:host github :repo "positron-solutions/ragmacs"))
 
 (package! mcp)
+
+(package! flycheck-projectile :recipe (:host github :repo "nbfalcon/flycheck-projectile"))
