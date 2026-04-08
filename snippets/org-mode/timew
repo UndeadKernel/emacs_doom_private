@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Timesheet Week
+# key: timew
+# --
+#+BEGIN: clocktable :scope ("projects.org" "proposals.org" "tasks.org" "refile.org") :block 20${1:26}-W${2:`(format-time-string "%V" (current-time))`} :link t :hidefiles t :maxlevel 5 :step day :narrow 80! :fileskip0 t :stepskip0 t
+
+#+END:
