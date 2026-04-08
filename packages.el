@@ -8,12 +8,15 @@
 
 (package! command-log-mode)
 
-;; Current version is broken with Org 9.7
 ;;(package! jupyter :pin "16cbda79167b4e2f2c6b61b218658f0f660d97f9")
-(package! jupyter :pin "053a78da252b19cf59cefe6b83f9c4531a38d6b2")
+;;(package! jupyter :pin "053a78da252b19cf59cefe6b83f9c4531a38d6b2")
 
 (package! lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
 
 (unpin! web-mode)
 
 (package! org-modern-indent :recipe (:host github :repo "jdtsmith/org-modern-indent"))
+
+(package! ragmacs :recipe (:host github :repo "positron-solutions/ragmacs"))
+
+(package! mcp)

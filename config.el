@@ -1,12 +1,10 @@
 ;;; config.el --- The Configuration of the Boy -*- lexical-binding: t; -*-
 
-(defvar boy--synonyms-key ""
-  "API key from http://thesaurus.altervista.org that gives us synonyms.")
-
+;; ---------------------------------------------------------------------------------
+;; Personal Configuration
+;; ---------------------------------------------------------------------------------
 ;; Private things others should not see ;D
 (load! "+private" nil t) ; do not complain if file does not exist
-;; Load personalized bindings
-(load! "+bindings")
 ;; Personalized functions
 (load! "+functions")
 ;; Anything that modifies the way popups spawn
@@ -17,157 +15,56 @@
 (load! "+systems")
 ;; Patches of functions to fix other packages
 (load! "+patches")
+;; Configuration of vanilla emacs features
+(load! "+vanilla")
 
-;; Configuration of DOOM lang
+;; ---------------------------------------------------------------------------------
+;; Tools Modules Configuration
+;; ---------------------------------------------------------------------------------
+(load! "+tools")
+
+;; ---------------------------------------------------------------------------------
+;; Lang Modules Configuration
+;; ---------------------------------------------------------------------------------
+(load! "+lang")
 (load! "+latex")
 (load! "+org")
-(load! "+lang")
-
-;; Configuration of DOOM checkers
 (load! "+checkers")
-;; Configuration of DOOM tools
-(load! "+tools")
-;; Configuration of DOOM ui
-(load! "+ui")
-;; Config of DOOM feature
-(load! "+feature")
-;; Config of DOOM completion
+
+;; ---------------------------------------------------------------------------------
+;; Config Modules Configuration
+;; ---------------------------------------------------------------------------------
+(load! "+default")
+
+;; ---------------------------------------------------------------------------------
+;; Completion Modules Configuration
+;; ---------------------------------------------------------------------------------
 (load! "+completion")
-;; Config of DOOM editor
+
+;; ---------------------------------------------------------------------------------
+;; UI Modules Configuration
+;; ---------------------------------------------------------------------------------
+(load! "+ui")
+
+;; ---------------------------------------------------------------------------------
+;; Editor Modules Configuration
+;; ---------------------------------------------------------------------------------
 (load! "+editor")
-;; Config of DOOM term
+
+;; ---------------------------------------------------------------------------------
+;; Emacs Modules Configuration
+;; ---------------------------------------------------------------------------------
+(load! "+emacs")
+;; Load personalized bindings
+(load! "+bindings")
+
+;; ---------------------------------------------------------------------------------
+;; Term Modules Configuration
+;; ---------------------------------------------------------------------------------
 (load! "+term")
 
-;; Smooth mouse scrolling
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 1))  ; scroll two lines at a time
-      mouse-wheel-progressive-speed nil             ; don't accelerate scrolling
-      mouse-wheel-follow-mouse t                    ; scroll window under mouse
-      scroll-step 1)
-
-;; Backups
-(setq make-backup-files t
-      backup-by-copying t
-      delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 2
-      version-control t)
-
-;; Favor visual line wrapping
-(remove-hook 'text-mode-hook #'auto-fill-mode)
-(add-hook 'text-mode-hook #'visual-line-mode)
-
-;; Visual fill column mode by default
-;;(setq visual-fill-column-width 120)
-;;(add-hook! '(text-mode-hook prog-mode-hook) #'visual-fill-column-mode)
-
-;; Window splitting logic
-(setq window-combination-resize t ; after splitting, rebalance windows
-      window-combination-limit nil)
-;; Custom split: always vertical except if average window column < 80
-;(setq split-window-preferred-function #'+boy/split-window-sensibly)
-
-;; Scrolling commands do not cancel isearch
-(setq isearch-allow-scroll t)
-
-;; Don't save undo history
-(remove-hook 'undo-fu-mode-hook #'global-undo-fu-session-mode)
-(after! undo-tree
-  (setq undo-tree-auto-save-history nil))
-
-(after! ibuffer
-  ;; nearly all of this is the default layout
-  (setq ibuffer-formats
-        '((mark modified read-only " "
-                (name 50 50 :left :elide) ; changed
-                " "
-                (size 9 -1 :right)
-                " "
-                (mode 16 16 :left :elide)
-                " " filename-and-process)
-          (mark " "
-                (name 16 -1)
-                " " filename))))
-
-;; Pop mark improvements (http://endlessparentheses.com/faster-pop-to-mark-command.html)
-;; pop mark as in C-u C-SPC C-SPC C-SPC ...
-(setq set-mark-command-repeat-pop t)
-;; Pop until marker actually moves
-(advice-add 'pop-to-mark-command :around #'+boy/multi-pop-to-mark)
-
-;; Enable narrow to region
-(put 'narrow-to-region 'disabled nil)
-
-;; Do not start auto start comments in new lines.
-(setq +default-want-RET-continue-comments nil)
-
-(after! re-builder
-  (setq! reb-re-syntax 'string))
-
 ;; ---------------------------------------------------------------------------------
-;; Additional Packages
+;; Custom Package Configuration
 ;; ---------------------------------------------------------------------------------
-
-;; Show me where I made the last change in a document.
-(use-package! goto-last-change
-  :commands goto-last-change)
-
-;; Resize windows interactively.
-(use-package! resize-window
-  :commands (resize-window))
-
-;; Latex synonyms
-(use-package! www-synonyms
-  :if (not (or (null boy--synonyms-key) (string= "" boy--synonyms-key)))
-  :commands (www-synonyms-insert-synonym www-synonyms-change-language)
-  :config
-  (setq www-synonyms-key boy--synonyms-key))
-
-;; (use-package! jupyter
-;;   ;; :load-path ("~/src/emacs-jupyter" "~/src/emacs-zmq")
-;;   :after org
-;;   :init
-;;   (setq jupyter-eval-use-overlays t))
-
-
-(use-package! pacfiles-mode
-  :commands (pacfiles pacfiles-start)
-  :config
-  (set-popup-rule! "^\\*pacfiles.*" :ignore t))
-
-(when (not (boundp '+bibliography-notes-dir))
-  (setq +bibliography-notes-dir "~/documents/bib/"))
-
-(use-package! command-log-mode
-  :commands global-command-log-mode
-  :init
-  (setq command-log-mode-auto-show t
-        command-log-mode-open-log-turns-on-mode t
-        command-log-mode-window-font-size 0
-        command-log-mode-window-size 80)
-  :config
-  (setq clm/log-command-exceptions*
-        (append clm/log-command-exceptions*
-                '(+boy/up-scroll
-                  +boy/down-scroll))))
-
-;; This variable should go inside of :init, but doesn't get called at the right time.
-(setq lsp-tailwindcss-add-on-mode t)
-(use-package! lsp-tailwindcss
-  :when (modulep! +lsp)
-  :after lsp-mode
-  :config
-  (setq lsp-tailwindcss-emmet-completions (featurep 'emmet-mode))
-
-  ;; Advice that uses a locally installed rustywind binary.
-  (defun +rustywind-with-local-bin (orig-fun &rest args)
-    (let ((lsp-tailwindcss-rustywind-command
-           (concat (projectile-project-root)
-                   "node_modules/.bin/rustywind")))
-      (apply orig-fun args)))
-  (advice-add #'lsp-tailwindcss-rustywind :around #'+rustywind-with-local-bin))
-
-(set-docsets! '(web-mode css-mode rjsx-mode typescript-tsx-mode) :add "Tailwind_CSS")
-
-(use-package! org-modern-indent
-  :config
-  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
+;; Configure all extra custom packages
+(load! "+extra")
