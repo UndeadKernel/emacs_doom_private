@@ -35,6 +35,7 @@
         org-id-ts-format "id-%Y%m%d-%H%M%S" ; the format of created IDs
         org-cycle-separator-lines -1 ; leave empty lines between collapsed headlines
         org-modern-table-vertical 1 ; pretty vertical lines in tables 1px in width
+        org-modern-progress 7 ; smaller progress indicators
         org-deadline-warning-days 0 ; don't inform me that a deadline is coming
         org-reverse-note-order t ; add captured notes to the beginning (and not the end)
         org-duration-format 'h:mm ; report clocks only in hours and minutes (ignore days)
