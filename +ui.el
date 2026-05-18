@@ -91,7 +91,7 @@ windows from all frames. Call `other-window' otherwise."
 (defun +boy/prettify-org-setup ()
   ;; Drawers
   (push '(":PROPERTIES:" . "") prettify-symbols-alist)
-  (push '(":LOGBOOK:" . "⏳") prettify-symbols-alist)
+  (push '(":LOGBOOK:" . "") prettify-symbols-alist)
   (push '(":END:" . "󱊔") prettify-symbols-alist)
   (prettify-symbols-mode))
 
