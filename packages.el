@@ -19,6 +19,8 @@
 
 (package! ragmacs :recipe (:host github :repo "positron-solutions/ragmacs"))
 
+(package! gptel-agent :recipe (:host github :repo "karthink/gptel-agent"))
+
 (package! mcp)
 
 (package! flycheck-projectile :recipe (:host github :repo "nbfalcon/flycheck-projectile"))

@@ -104,6 +104,11 @@
   ;;               ragmacs-variable-source))
   )
 
+(use-package! gptel-agent
+  :after gptel
+  :config
+  (gptel-agent-update))
+
 (use-package! mcp
   :after gptel
   :custom
