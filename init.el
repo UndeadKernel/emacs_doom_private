@@ -225,5 +225,8 @@
        :app
        ;;bibliography
 
+       :lang
+       org-hermes
+
        :ui
        center-window)
