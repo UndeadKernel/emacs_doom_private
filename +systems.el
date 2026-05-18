@@ -1,5 +1,20 @@
 ;;; +systems.el -*- lexical-binding: t; -*-
 
+(when (string= "go-vm99d8264d" (system-name))
+  ;; Set default dict to GB
+  (after! flyspell
+    (setopt ispell-dictionary "en_GB"))
+  ;; Enable org-hermes-mode when opening an org file
+  (when (modulep! :lang org-hermes)
+    (add-hook! org-mode #'org-hermes-mode))
+  ;; Custom org configuration
+  (after! org
+    (setq org-directory "~/documents/org/"
+        org-agenda-files (list org-directory)
+        org-archive-location (concat org-directory ".archive/%s::")
+        org-roam-directory (concat org-directory "roam/")
+        +bibliography-notes-dir (concat org-directory "bib/"))))
+
 ;; Office 3 Laptop
 (when (string= "LT05133" (system-name))
   (after! org
